@@ -1,6 +1,3 @@
-#ifndef Location_H
-#define Location_H
-
 #include <iostream>
 #include <string>
 
@@ -50,6 +47,4 @@ public:
 	string getLonDirection();
 
 };
-
-#endif
 

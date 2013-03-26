@@ -5,16 +5,15 @@
  *      Author: bourgein
  */
 
-#include "ReaderWriter.h"
+ #include "ReaderWriter.h"
 
 using namespace std;
 
-//Constructor
 ReaderWriter::ReaderWriter() {
 	};
 
-LocationTree ReaderWriter::createTreeFromFile(string fileName) {
-	LocationTree* locTree;
+/*LocationTree createTreeFromFile(string fileName) {
+	LocationTree* tree;
 	ifstream inf(fileName);
 
 	string name;
@@ -22,7 +21,7 @@ LocationTree ReaderWriter::createTreeFromFile(string fileName) {
 	/*note this is not istream.getline() but
 	 * part of the std namespace <string> stuff
 	 */
-	while (!getline(inf, name, '|').eof()) {
+/*	while (!getline(inf, name, '|').eof()) {
 		Location* tempLoc;
 
 		string country = getline(inf, country, '|');
@@ -56,9 +55,9 @@ LocationTree ReaderWriter::createTreeFromFile(string fileName) {
 	inf.close();
 	return tree;
 }
+*/
 
-
-void ReaderWriter::saveFile(string fileName, LocationTree LocTree){
+void saveFile(string fileName, LocationTree tree){
 	ofstream saveFile(fileName); //ofstream should clear file
 
 	if (saveFile.is_open()){

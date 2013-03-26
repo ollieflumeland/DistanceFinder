@@ -93,6 +93,12 @@
             <BuildOrder>4</BuildOrder>
         </None>
         <None Include="locations.txt"/>
+        <CppCompile Include="LocationTree.cpp">
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
+        <None Include="LocationTree.h">
+            <BuildOrder>15</BuildOrder>
+        </None>
         <CppCompile Include="main.cpp">
             <BuildOrder>1</BuildOrder>
         </CppCompile>
