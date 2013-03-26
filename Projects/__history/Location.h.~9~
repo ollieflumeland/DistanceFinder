@@ -1,6 +1,3 @@
-#ifndef Location_H
-#define Location_H
-
 #include <iostream>
 #include <string>
 
@@ -20,14 +17,11 @@ private:
 	string cityLonDirection;
 
 public:
-
-
-	//Constructor for class Location
-	Location(string name, string country, int latDeg, int latMin, string latDir, int lonDeg, int lonMin, string lonDir);
-	Location(); // default constructor
+	 //Constructor for class Location
+	Location() {}
 
 	//Destructor
-	~Location();
+	~Location() {}
 
 	//  Function Prototypes
 	void setCityName(string name);
@@ -49,7 +43,6 @@ public:
 	int getLonMin();
 	string getLonDirection();
 
-};
 
-#endif
+};
 

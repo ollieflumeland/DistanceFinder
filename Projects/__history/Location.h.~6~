@@ -1,6 +1,3 @@
-#ifndef Location_H
-#define Location_H
-
 #include <iostream>
 #include <string>
 
@@ -8,7 +5,6 @@ using namespace std;
 
 class Location {
 private:
-	//Variables
 	string cityName;
 	string countryName;
 	int region;
@@ -20,22 +16,15 @@ private:
 	string cityLonDirection;
 
 public:
-
-
-	//Constructor for class Location
 	Location(string name, string country, int latDeg, int latMin, string latDir, int lonDeg, int lonMin, string lonDir);
-	Location(); // default constructor
-
-	//Destructor
-	~Location();
-
-	//  Function Prototypes
 	void setCityName(string name);
 	string getCityName();
 	void setCountryName(string country);
 	string getCountryName();
 	void setRegion(int region);
 	int getRegion();
+	void setRefNumber(int ref);
+	int getRefNumber();
 	void setLatDeg(int deg);
 	void setLatMin(int min);
 	void setLatDirection(string dir);
@@ -48,8 +37,5 @@ public:
 	int getLonDeg();
 	int getLonMin();
 	string getLonDirection();
-
 };
-
-#endif
 

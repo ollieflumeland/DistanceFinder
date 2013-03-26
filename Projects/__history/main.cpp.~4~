@@ -9,7 +9,7 @@ using namespace std;
 /*NOT SURE IF THIS IS WORKING**/
 int main() {
 	Menu men;
-	//LocationTree locTree;
+	LocationTree locTree;
 	int choice = -1;
 
 	men.menuOptions(choice);

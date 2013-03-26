@@ -12,7 +12,6 @@ using namespace std;
 
 // Constructor
 LocationTree::Tree() {
-	cout << LocationTree object created with name: << cityName << endl;
 	root = NULL;
 }
 

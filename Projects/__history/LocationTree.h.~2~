@@ -1,0 +1,35 @@
+//============================================================================
+// Name        : LocationTree.h
+// Author      : Ollie
+// Date        : Created on: 26 Feb 2013
+// Version     :
+// Copyright   : copyright reserved
+// Description : A Node Class for insertion into binary tree
+//============================================================================/*
+
+
+#ifndef LocationTree_H_
+#define LocationTree_H_
+
+#include "Location.h"
+#include "Node.h"
+
+using namespace std;
+
+class LocationTree {
+public:
+	void addNode (string key);
+	Node* findNode(string key, Node* parent);
+	void walk(Node* node);
+	void deleteNode(string key);
+	Node* min(Node* node);
+	Node* max(Node* node);
+	Node* successor(string key, Node* parent);
+	Node* predecessor(string key, Node* parent);
+private:
+	void addNode(string key, Node* leaf);
+	void freeNode(Node* leaf);
+};
+
+#endif /* NODE_H_ */
+

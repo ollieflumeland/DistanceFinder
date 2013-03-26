@@ -15,9 +15,9 @@
 
 using namespace std;
 
-class Node {
+class LocationTree {
 public:
-	string ident;
+	string key;
 	int counter;
 	Location location;
 	Node* dups;
@@ -30,7 +30,7 @@ public:
 	void setRight(Node* right);
 	void setParent(Node* parent);
 	void setDuplicate(Node* dups);
-	string getIdent();
+	string getKey();
 	Node* getLeft();
 	Node* getRight();
 	Node* getParent();

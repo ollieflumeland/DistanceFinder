@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : Node.h
+// Name        : LocationTree.h
 // Author      : Ollie
 // Date        : Created on: 26 Feb 2013
 // Version     :
@@ -8,32 +8,29 @@
 //============================================================================/*
 
 
-#ifndef NODE_H_
-#define NODE_H_
+#ifndef LocationTree_H_
+#define LocationTree_H_
 
 #include "Location.h"
+#include "Node.h"
 
 using namespace std;
 
-class Node {
+class LocationTree {
+private:
+	Node* root;
 public:
-	string ident;
-	int counter;
-	Location location;
-	Node* dups;
-	Node* left;
-	Node* right;
-	Node* parent;
-	Node(Location location);
-	virtual ~Node();
-	void setLeft(Node* left);
-	void setRight(Node* right);
-	void setParent(Node* parent);
-	void setDuplicate(Node* dups);
-	string getIdent();
-	Node* getLeft();
-	Node* getRight();
-	Node* getParent();
+	Node* getRoot;
+	Node* getNode(string ident, Node* parent);
+	void addNode (string ident); // To add first node
+	void addNode(string ident, Node* leaf);
+	void deleteNode (string ident);
+	void freeNode(Node* leaf);
+
+// Constructor
+	Tree();
+// Destructor
+	~Tree();
 
 };
 
