@@ -25,7 +25,7 @@ public:
 	Node* right;
 	Node* parent;
 	Node(Location *location);
-
+	virtual ~Node();
 	void setLeft(Node* left);
 	void setRight(Node* right);
 	void setParent(Node* parent);

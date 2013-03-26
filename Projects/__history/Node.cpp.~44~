@@ -17,12 +17,13 @@ using namespace std;
 	Node::Node(Location *location) {
 		counter = 0;
 		ident=location->getCityName();
+		string tester = location->getCountryName();s
 		left=NULL;
 		right=NULL;
 		parent=NULL;
 		dups=NULL;
 		counter++;
-		cout << "Node object created with name: " << ident << endl;
+		cout << "Node object created with name: " << tester << endl;
 		};
 
 	// Function to set left node

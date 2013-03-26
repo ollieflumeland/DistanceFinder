@@ -11,7 +11,7 @@ private:
 	//Variables
 	string cityName;
 	string countryName;
-	string region;
+	int region;
 	int cityLatDeg;
 	int cityLatMin;
 	string cityLatDirection;
@@ -34,8 +34,8 @@ public:
 	string getCityName();
 	void setCountryName(string country);
 	string getCountryName();
-	void setRegion(string region);
-	string getRegion();
+	void setRegion(int region);
+	int getRegion();
 	void setLatDeg(int deg);
 	void setLatMin(int min);
 	void setLatDirection(string dir);

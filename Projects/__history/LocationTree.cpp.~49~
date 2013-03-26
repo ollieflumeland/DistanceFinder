@@ -12,7 +12,7 @@ using namespace std;
 
 // Constructor
 LocationTree::LocationTree() {
-	cout << "LocationTree object created" << endl;
+	//cout << "LocationTree object created with name:" << endl;
 	root = NULL;
 }
 

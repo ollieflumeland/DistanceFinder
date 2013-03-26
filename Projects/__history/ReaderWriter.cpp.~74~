@@ -16,16 +16,21 @@ ReaderWriter::ReaderWriter() {
 LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 	LocationTree* locTree = new LocationTree();
 	fstream inf;
-	inf.open(fileName.c_str(),ios::in);
+	inf.open("newloc.txt",ios::in);
 
 	/*note this is not istream.getline() but
 	 * part of the std namespace <string> stuff
 	 */
 	while (!inf.eof()) {
-
+	 if(inf.is_open()){
+			cout << "inf open" << endl;
+		  }
+		  else{
+              cout << "inf not open" << endl;
+          }
 		char name[100];
 		inf.getline(name,100,'|');
-	   //	cout << "name: " << name << endl;
+		cout << "name: " << name << endl;
 		Location *tempLoc;
 
 		string country;

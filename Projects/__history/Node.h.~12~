@@ -24,14 +24,13 @@ public:
 	Node* left;
 	Node* right;
 	Node* parent;
-	Node(Location *location);
-
+	Node(Location &location);
+	virtual ~Node();
 	void setLeft(Node* left);
 	void setRight(Node* right);
 	void setParent(Node* parent);
 	void setDuplicate(Node* dups);
 	string getIdent();
-	void setIdent(string id);
 	Node* getLeft();
 	Node* getRight();
 	Node* getParent();

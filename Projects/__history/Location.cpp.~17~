@@ -15,8 +15,8 @@ using namespace std;
 // Standard Contructor
 Location::Location(string name, string country, string region, int latDeg, int latMin,
 		string latDir, int lonDeg, int lonMin, string lonDir) {
-	//cout << "Location object created with name: " << name << endl;
-    setRegion(region);
+	cout << "Location object created with name: " << cityName << endl;
+    this->region = region;
 	setCityName(name);
 	setCountryName(country);
 	setLatDeg(latDeg);
@@ -46,11 +46,11 @@ string Location::getCountryName() {
 	return countryName;
 }
 
-void Location::setRegion(string region) {
+void Location::setRegion(int region) {
 	this->region = region;
 }
 
-string Location::getRegion() {
+int Location::getRegion() {
 	return region;
 }
 

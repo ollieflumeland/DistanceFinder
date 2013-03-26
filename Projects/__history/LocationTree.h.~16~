@@ -17,8 +17,9 @@
 using namespace std;
 
 class LocationTree {
-private:
 	Node* root;
+private:
+
 public:
 	Node* getRoot();
 	Node* getNode(string ident, Node* parent);

@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class LocationTree {
+static class LocationTree {
 private:
 	Node* root;
 public:

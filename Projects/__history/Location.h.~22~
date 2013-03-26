@@ -35,7 +35,7 @@ public:
 	void setCountryName(string country);
 	string getCountryName();
 	void setRegion(string region);
-	string getRegion();
+	int getRegion();
 	void setLatDeg(int deg);
 	void setLatMin(int min);
 	void setLatDirection(string dir);

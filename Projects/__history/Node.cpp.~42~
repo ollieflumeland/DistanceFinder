@@ -15,6 +15,7 @@ using namespace std;
 
 	// Constructor creates an instance
 	Node::Node(Location *location) {
+		cout << "Node object created with name: " << ident << endl;
 		counter = 0;
 		ident=location->getCityName();
 		left=NULL;
@@ -22,7 +23,6 @@ using namespace std;
 		parent=NULL;
 		dups=NULL;
 		counter++;
-		cout << "Node object created with name: " << ident << endl;
 		};
 
 	// Function to set left node

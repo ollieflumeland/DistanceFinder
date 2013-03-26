@@ -12,7 +12,7 @@ using namespace std;
 
 // Constructor
 LocationTree::LocationTree() {
-	cout << "LocationTree object created" << endl;
+	//cout << "LocationTree object created with name:" << endl;
 	root = NULL;
 }
 
@@ -35,7 +35,7 @@ void LocationTree::addNode (Location *loc) {
 		root = n;
     }
 	else {
-		cout << "adding a new node"<< endl;
+		cout << "adding a new node, City = "<< endl;
 		addNode(loc, root);
 	}
 }

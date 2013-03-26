@@ -11,8 +11,8 @@ using namespace std;
 int main() {
 	Menu men;
 	ReaderWriter rw;
-	string filename = "newloc.txt";
-    LocationTree* locT = rw.createTreeFromFile(filename);
+	string filename = "locations.txt";
+    rw.createTreeFromFile(filename);
 	int choice = -1;
 
 	men.menuOptions(choice);
