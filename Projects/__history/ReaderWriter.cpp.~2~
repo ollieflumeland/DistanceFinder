@@ -5,16 +5,15 @@
  *      Author: bourgein
  */
 
-#include "ReaderWriter.h"
+ #include "ReaderWriter.h"
 
 using namespace std;
 
-//Constructor
 ReaderWriter::ReaderWriter() {
 	};
 
-LocationTree ReaderWriter::createTreeFromFile(string fileName) {
-	LocationTree* locTree;
+LocationTree createTreeFromFile(string fileName) {
+	LocationTree* tree;
 	ifstream inf(fileName);
 
 	string name;
@@ -27,7 +26,7 @@ LocationTree ReaderWriter::createTreeFromFile(string fileName) {
 
 		string country = getline(inf, country, '|');
 
-		//get lat stuff
+		/*get lat stuff*/
 		string latDegString = getline(inf, latDegString, '|');
 		int latDeg;
 		stringstream convert(latDegString);
@@ -38,7 +37,7 @@ LocationTree ReaderWriter::createTreeFromFile(string fileName) {
 		convert >> latMin;
 		string latDirection = getline(inf, latDirection, '|');
 
-		//get lon stuff
+		/*get lon stuff*/
 		string lonDegString = getline(inf, lonDegString, '|');
 		int lonDeg;
 		stringstream convert(lonDegString);
@@ -57,8 +56,7 @@ LocationTree ReaderWriter::createTreeFromFile(string fileName) {
 	return tree;
 }
 
-
-void ReaderWriter::saveFile(string fileName, LocationTree LocTree){
+void saveFile(string fileName, LocationTree tree){
 	ofstream saveFile(fileName); //ofstream should clear file
 
 	if (saveFile.is_open()){

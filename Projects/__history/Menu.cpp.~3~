@@ -53,8 +53,7 @@ void Menu::menuOptions(int &choice) {
 
 void Menu::addRecord() {
 
-	//*location = new Location;
-	char city[10], country[10], region[10], latitude[10], longitude[10];
+	char city[10], country[10], continent[10], latitude[10], longitude[10];
 
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t- World Distance Calculator -" << endl;
@@ -62,9 +61,9 @@ void Menu::addRecord() {
 
     cout << "\tAdd Record" << endl << endl;
 
-	cout << "\tEnter City: "; cin >> city;
+	cout << "\tEnter City: "; cin >> Location->setCityName();
 	cout << "\tEnter Country: "; cin >> country;
-	cout << "\tEnter Region: "; cin >> region;
+    cout << "\tEnter Continent: "; cin >> continent;
     cout << "\tEnter Latitude: "; cin >> latitude;
     cout << "\tEnter Longitude: "; cin >> longitude;
     cout << endl;
@@ -83,8 +82,8 @@ void Menu::administerRecord() {
 
     cout << "\t1. City" << endl;
     cout << "\t2. Country" << endl;
-	cout << "\t3. Region" << endl;
-	cout << "\t4. Show All" << endl;
+    cout << "\t3. Continent" << endl;
+    cout << "\t4. Show All" << endl;
     cout << "\t5. Quit to Main Menu" << endl;
 
     cout << endl << "\tChoose an Option: ";

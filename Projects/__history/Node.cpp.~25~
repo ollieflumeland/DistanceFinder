@@ -14,10 +14,9 @@
 using namespace std;
 
 	// Constructor creates an instance
-	Node::Node(Location) {
-		cout << "Node object created with name: " << ident << endl;
+	Node::Node(Location location) {
 		counter = 0;
-		ident=location.getCityName();
+		key=location.getCityName();
 		left=NULL;
 		right=NULL;
 		parent=NULL;
@@ -44,9 +43,9 @@ using namespace std;
 		this->dups = dups;
 	}
 
-	// Function to return nodes name
-	string Node::getIdent() {
-		return this->ident;
+	// Function to return nodes key
+	string Node::getKey() {
+		return this->key;
 	}
 	// Function to return left node
 	Node* Node::getLeft() {

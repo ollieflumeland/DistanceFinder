@@ -13,7 +13,7 @@ using namespace std;
 class ReaderWriter {
 public:
 	ReaderWriter();
-	LocationTree createTreeFromFile(string fileName);
+	//LocationTree createTreeFromFile(string fileName);
 	void saveFile(string fileName, LocationTree locTree);
 
 private:

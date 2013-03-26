@@ -11,11 +11,8 @@
 
 using namespace std;
 
-// Default Constructor
-// Standard Contructor
 Location::Location(string name, string country, int latDeg, int latMin,
 		string latDir, int lonDeg, int lonMin, string lonDir) {
-	cout << "Location object created with name: " << cityName << endl;
 	setCityName(name);
 	setCountryName(country);
 	setLatDeg(latDeg);
