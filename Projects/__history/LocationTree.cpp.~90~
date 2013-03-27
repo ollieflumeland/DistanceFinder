@@ -14,6 +14,7 @@ using namespace std;
 LocationTree::LocationTree() {
 	cout << "LocationTree object created" << endl;
 	root = NULL;
+	nullNode = NULL;
 }
 
 // Destructor
@@ -74,20 +75,19 @@ void LocationTree::freeNode(Node* leaf) {
 	}
 }
 
-Node* getCity(string ident, Node* node)  {
+Node* getCity(Node* node, string ident)  {
 	if (node == NULL) {
 		return NULL;
+	} else if (ident == node->getIdent()) {
+		return node;
+	} else if (ident < node->getIdent()) {
+		getCity(node->getLeft(), ident);
+	} else if (ident > node->getIdent()) {
+		getCity(node->getRight(), ident);
+	} else { return nullNode;
 	}
-	else if (ident == node->getIdent()) {
-		  return node;
-		 }
-	else if (ident <= node->getIdent()) {
-		getCity(ident, node->getLeft());
-		 }
-	else if (ident > node->getIdent()) {
-		getCity(ident, node->getRight());
-		 }
-		 else return NULL;
 }
+
+
 
 

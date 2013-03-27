@@ -17,6 +17,7 @@ using namespace std;
 	Node::Node(Location *location) {
 		counter = 0;
 		ident=location->getCityName();
+		this->location = location;
 		left=NULL;
 		right=NULL;
 		parent=NULL;
