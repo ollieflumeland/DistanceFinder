@@ -19,9 +19,10 @@ using namespace std;
 class LocationTree {
 private:
 	Node* root;
+	Node* nullNode;
 public:
 	Node* getRoot();
-	Node* getCity(string ident, Node* node);
+	Node* getCity(Node* node, string ident);
 	void addNode (Location *loc); // To add first node
 	void addNode(Location *loc, Node* leaf);
 	void deleteNode (string ident);

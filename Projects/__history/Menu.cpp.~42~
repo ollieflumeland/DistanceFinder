@@ -43,7 +43,7 @@ void Menu::menuOptions(int &choice) {
             case 4:
                 cout << "Quit";
                 exit(EXIT_SUCCESS);
-                break;
+				break;
             default:
                 cout << endl << "Invalid Choice" <<endl << endl;
                 break;
@@ -90,16 +90,18 @@ void Menu::addRecord() {
 
 void Menu::administerRecord() {
 
-    int choice;
-    char city[10];
+	int choice;
+	string city;
+	Node* rootNode;
+	Node* foundNode;
 
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t- World Distance Calculator -" << endl;
     cout << "\t\t\t-----------------------------" << endl << endl;
 
-	cout << "\tAdminister Record - Find by:" << endl << endl;
+	cout << "\tAdminister Record:" << endl << endl;
 
-	cout << "\t1. City" << endl;
+	/*cout << "\t1. City" << endl;
     cout << "\t2. Country" << endl;
 	cout << "\t3. Region" << endl;
 	cout << "\t4. Show All" << endl;
@@ -109,13 +111,22 @@ void Menu::administerRecord() {
     cin >> choice;
 
     do {
-        switch(choice){
-            case 1:
-                cout << "Enter City Name: "; cin >> city;
-                cout << endl << "Cities found matching "; city;
+		switch(choice){
+			case 1:
+				cout << "Enter City Name: "; cin >> city;
+				cout << endl << "Cities found matching "; city;
             }
     } while (choice != 5);
-
+   */
+		cout << "Enter City Name: "; cin >> city;
+		rootNode = locT->getRoot();
+		foundNode = locT->getCity(rootNode, city);
+		if (foundNode == NULL) {
+			cout << endl << "This city is not in the database." << endl;
+		}
+		else {
+			cout << endl << "Cities found matching : " << foundNode->location->getCityName()  << endl;
+        }
 }
 
 void Menu::findDistance() {
