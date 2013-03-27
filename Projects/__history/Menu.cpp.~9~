@@ -24,7 +24,7 @@ void Menu::menuOptions(int &choice) {
     cout << "\t1. Add Record" << endl;
     cout << "\t2. Administer Record" << endl;
     cout << "\t3. Find Distance" << endl << endl;
-	cout << "\t4. Quit" << endl << endl;
+    cout << "\t5. Quit" << endl << endl;
 
     cout << "\tChoose an Option: ";
     cin >> choice;
@@ -63,7 +63,6 @@ void Menu::addRecord() {
 	string lonDegString;
 	string lonMinString;
 	string lonDirection;
-	string region
 
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t- World Distance Calculator -" << endl;
@@ -79,13 +78,6 @@ void Menu::addRecord() {
 	cout << "\tEnter Latitude Direction: "; cin >> latDirection;
 	cout << "\tEnter Longitude Degrees: "; cin >> lonDegString;
 	cout << "\tEnter Longitude Minutes: "; cin >> lonMinString;
-	cout << "\tEnter Longitude Direction: "; cin >> latMinString;
-
-
-	newLoc = new Location(city, country, region, latDeg, latMin, latDirection,
-				lonDeg, lonMin, lonDirection);
-		locTree->addNode(newLoc);
-
     cout << endl;
 }
 
@@ -98,9 +90,9 @@ void Menu::administerRecord() {
     cout << "\t\t\t- World Distance Calculator -" << endl;
     cout << "\t\t\t-----------------------------" << endl << endl;
 
-	cout << "\tAdminister Record - Find by:" << endl << endl;
+    cout << "\tAdminister Record - Find by:" << endl << endl;
 
-	cout << "\t1. City" << endl;
+    cout << "\t1. City" << endl;
     cout << "\t2. Country" << endl;
 	cout << "\t3. Region" << endl;
 	cout << "\t4. Show All" << endl;
@@ -120,10 +112,6 @@ void Menu::administerRecord() {
 }
 
 void Menu::findDistance() {
-	string cityOne;
-	string cityTwo;
-	cout << "Enter the first City's Name: "; cin >> cityOne; << endl;
-	cout << "Enter the second City's Name: "; cin >> cityTwo; << endl;
 }
 
 

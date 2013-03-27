@@ -121,9 +121,11 @@ void Menu::administerRecord() {
 
 void Menu::findDistance() {
 	string cityOne;
-	string cityTwo;
-	cout << "Enter the first City's Name: "; cin >> cityOne; << endl;
-	cout << "Enter the second City's Name: "; cin >> cityTwo; << endl;
+	string cityOne;
+	cout << "Enter the first City Name: "; cin >> cityOne; << endl;
+
+
+
 }
 
 
