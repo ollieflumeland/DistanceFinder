@@ -7,12 +7,13 @@
 
 using namespace std;
 
-/*NOT SURE IF THIS IS WORKING**/
+LocationTree* locT;
+
 int main() {
 	Menu men;
-	ReaderWriter rw = new ReaderWriter();
-	string filename = "locations.txt";
-    rw.createTreeFromFile(filename);
+	ReaderWriter rw;
+	string filename = "newloc.txt";
+	locT = rw.createTreeFromFile(filename);
 	int choice = -1;
 
 	men.menuOptions(choice);

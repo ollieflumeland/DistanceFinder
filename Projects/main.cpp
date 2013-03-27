@@ -4,17 +4,16 @@
 #include "Location.h"
 #include "Menu.h"
 #include "ReaderWriter.h"
+#include "Calculator.h"
+#include "Node.h"
+
+
 
 using namespace std;
 
-/*NOT SURE IF THIS IS WORKING**/
 int main() {
 	Menu men;
-	ReaderWriter rw;
-	string filename = "newloc.txt";
-    LocationTree* locT = rw.createTreeFromFile(filename);
-	int choice = -1;
-
+	int choice =-1;
 	men.menuOptions(choice);
 
 
