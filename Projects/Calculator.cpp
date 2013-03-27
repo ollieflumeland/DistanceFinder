@@ -39,11 +39,9 @@ double Calculator::convertToDec(int deg, int min, string isNeg) {
 void Calculator::calcDistBetween() {
 	double dLat = loc2DecLat - loc1DecLat;
 	double dLon = loc2DecLon - loc1DecLon;
-	int R = 6371;
-	double a = 50;
-	// double a = ((sin(dLat / 2)) ^ 2) + (cos(loc1DecLat) * cos(loc2DecLat) * ((sin(dLon / 2)) ^ 2));
+	double a = (pow((sin(dLat / 2)), 2)) + (cos(loc1DecLat) * cos(loc2DecLat) * (pow((sin(dLon / 2)), 2)));
 	double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-	double d = R * c;
+	double d = EARTH_RAD * c;
 
 	distanceBetween = d;
 }

@@ -23,8 +23,8 @@ LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 	 */
 	while (!inf.eof()) {
 
-		char name[100];
-		inf.getline(name,100,'|');
+		string name;
+		getline(inf,name,'|');
 	   //	cout << "name: " << name << endl;
 		Location *tempLoc;
 
