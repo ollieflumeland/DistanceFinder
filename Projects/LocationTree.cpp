@@ -40,7 +40,7 @@ void LocationTree::addNode (Location *loc) {
 }
 
 void LocationTree::addNode(Location *loc, Node* leaf) {
-    string ident = loc->getCityName();
+	string ident = loc->getCityName();
 	if ( ident <= leaf->getIdent() )
 	{
 		if ( leaf->getLeft() != NULL )
@@ -73,3 +73,21 @@ void LocationTree::freeNode(Node* leaf) {
 		delete leaf;
 	}
 }
+
+Node* getCity(string ident, Node* parent);  {
+	if (node == NULL) {
+		return NULL;
+	}
+	else if (ident == node->getIdent) {
+		  return node;
+		 }
+	else if (ident <= node->getIdent) {
+		getCity(string ident, node->getLeft;
+		 }
+	else if (ident > node->getIdent) {
+		getCity(string ident, node->getRight;
+		 }
+		 else return NULL;
+}
+
+

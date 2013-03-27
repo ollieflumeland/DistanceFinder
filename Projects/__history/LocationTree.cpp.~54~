@@ -12,7 +12,7 @@ using namespace std;
 
 // Constructor
 LocationTree::LocationTree() {
-	cout << "LocationTree object created with name:" << endl;
+	cout << "LocationTree object created" << endl;
 	root = NULL;
 }
 
@@ -28,20 +28,19 @@ Node* LocationTree::getRoot() {
 
 // Function that adds nodes to the tree
 void LocationTree::addNode (Location *loc) {
-   if ( *root) == NULL ) {
-		cout << "creating the root node, City = " << endl;
+   if ( root != NULL ) {
+		cout << "adding a new node"<< endl;
+		addNode(loc, root);
+	} else {
+		cout << "creating the root node" << endl;
 		Node* n = new Node(loc);
 		n->setIdent(loc->getCityName());
 		root = n;
-    }
-	else {
-		cout << "adding a new node, City = "<< endl;
-		addNode(loc, root);
 	}
 }
 
 void LocationTree::addNode(Location *loc, Node* leaf) {
-    string ident = loc->getCityName();
+	string ident = loc->getCityName();
 	if ( ident <= leaf->getIdent() )
 	{
 		if ( leaf->getLeft() != NULL )
@@ -74,3 +73,20 @@ void LocationTree::freeNode(Node* leaf) {
 		delete leaf;
 	}
 }
+
+Node* getCity(string ident, Node* parent);  {
+	if (node == NULL) {
+		return NULL;
+	}
+	else if (ident == node->getIdent) {
+		  return node;
+		 }
+	else if (ident <= node->getIdent) {
+		getCity(string ident, node->getLeft;
+		 }
+	else if (ident > node->getIdent) {
+		getCity(string ident, node->getRight;
+		 }
+}
+
+
