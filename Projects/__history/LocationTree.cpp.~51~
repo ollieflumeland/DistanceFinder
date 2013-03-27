@@ -12,8 +12,8 @@ using namespace std;
 
 // Constructor
 LocationTree::LocationTree() {
-	cout << "LocationTree object created with name:" << endl;
-	*root = NULL;
+	cout << "LocationTree object created" << endl;
+	root = NULL;
 }
 
 // Destructor
@@ -23,19 +23,19 @@ LocationTree::~LocationTree() {
 
 // Function to find root
 Node* LocationTree::getRoot() {
-	return *root;
+	return root;
 	}
 
 // Function that adds nodes to the tree
 void LocationTree::addNode (Location *loc) {
-   if ( this->getRoot() == NULL ) {
-		cout << "creating the root node, City = " << endl;
+   if ( root == NULL ) {
+		cout << "creating the root node" << endl;
 		Node* n = new Node(loc);
 		n->setIdent(loc->getCityName());
 		root = n;
     }
 	else {
-		cout << "adding a new node, City = "<< endl;
+		cout << "adding a new node"<< endl;
 		addNode(loc, root);
 	}
 }

@@ -1,14 +1,15 @@
 #include <string>
 #include <iostream>
-
 #include "Menu.h"
 
 using namespace std;
 
 //Constructor
-Menu::Menu()
-{
-// Nothing to do, wait till next week
+Menu::Menu() {
+	ReaderWriter rw;
+	string filename = "newloc.txt";
+	locT = rw.createTreeFromFile(filename);
+	//int choice = -1;
 }
 
 void Menu::menuOptions(int &choice) {
@@ -82,9 +83,9 @@ void Menu::addRecord() {
 
 	newLoc = new Location(city, country, region, latDeg, latMin, latDir,
 				lonDeg, lonMin, lonDir);
-		locTree->addNode(newLoc);
+		locT->addNode(newLoc);
 
-    cout << endl;
+	cout << endl;
 }
 
 void Menu::administerRecord() {
@@ -120,8 +121,8 @@ void Menu::administerRecord() {
 void Menu::findDistance() {
 	string cityOne;
 	string cityTwo;
-	cout << "Enter the first City's Name: "; cin >> cityOne; << endl;
-	cout << "Enter the second City's Name: "; cin >> cityTwo; << endl;
+	cout << "Enter the first City's Name: "; cin >> cityOne;
+	cout << "Enter the second City's Name: "; cin >> cityTwo;
 }
 
 

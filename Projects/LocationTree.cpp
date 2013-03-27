@@ -28,15 +28,14 @@ Node* LocationTree::getRoot() {
 
 // Function that adds nodes to the tree
 void LocationTree::addNode (Location *loc) {
-   if ( root == NULL ) {
+   if ( root != NULL ) {
+		cout << "adding a new node"<< endl;
+		addNode(loc, root);
+	} else {
 		cout << "creating the root node" << endl;
 		Node* n = new Node(loc);
 		n->setIdent(loc->getCityName());
 		root = n;
-    }
-	else {
-		cout << "adding a new node"<< endl;
-		addNode(loc, root);
 	}
 }
 

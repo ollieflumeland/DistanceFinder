@@ -19,19 +19,18 @@ using namespace std;
 class LocationTree {
 private:
 	Node* root;
-public:
-	Node* getRoot();
-	Node* getNode(string ident, Node* parent);
-	void addNode (int ident); // To add first node
-	void addNode(string ident, Node* leaf);
-	void deleteNode (string ident);
-	void freeNode(Node* leaf);
-
 	// Default Constructor
 	LocationTree();
 
 	// Destructor
 	~LocationTree();
+public:
+	Node* getRoot();
+	Node* getNode(string ident, Node* parent);
+	void addNode (Location *loc); // To add first node
+	void addNode(Location *loc, Node* leaf);
+	void deleteNode (string ident);
+	void freeNode(Node* leaf);
 };
 
 #endif /* NODE_H_ */

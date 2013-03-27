@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
-//#include "Location.h"
-//#include "Node.h"
+
 #include "Menu.h"
 
 using namespace std;
@@ -57,13 +56,12 @@ void Menu::addRecord() {
 	string city;
 	string country;
 	string region;
-	string latDegString;
-	string latMinString;
-	string latDirection;
-	string lonDegString;
-	string lonMinString;
-	string lonDirection;
-	string region
+	int latDeg;
+	int latMin;
+	string latDir;
+	int lonDeg;
+	int lonMin;
+	string lonDir;
 
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t- World Distance Calculator -" << endl;
@@ -74,19 +72,19 @@ void Menu::addRecord() {
 	cout << "\tEnter City: "; cin >> city;
 	cout << "\tEnter Country: "; cin >> country;
 	cout << "\tEnter Region: "; cin >> region;
-	cout << "\tEnter Latitude Degrees: "; cin >> latDegString;
-	cout << "\tEnter Latitude Minutes: "; cin >> latMinString;
-	cout << "\tEnter Latitude Direction: "; cin >> latDirection;
-	cout << "\tEnter Longitude Degrees: "; cin >> lonDegString;
-	cout << "\tEnter Longitude Minutes: "; cin >> lonMinString;
-	cout << "\tEnter Longitude Direction: "; cin >> latMinString;
+	cout << "\tEnter Latitude Degrees: "; cin >> latDeg;
+	cout << "\tEnter Latitude Minutes: "; cin >> latMin;
+	cout << "\tEnter Latitude Direction: "; cin >> latDir;
+	cout << "\tEnter Longitude Degrees: "; cin >> lonDeg;
+	cout << "\tEnter Longitude Minutes: "; cin >> lonMin;
+	cout << "\tEnter Longitude Direction: "; cin >> lonDir;
 
 
-	newLoc = new Location(city, country, region, latDeg, latMin, latDirection,
-				lonDeg, lonMin, lonDirection);
-		locTree->addNode(newLoc);
+	newLoc = new Location(city, country, region, latDeg, latMin, latDir,
+				lonDeg, lonMin, lonDir);
+		locT->addNode(newLoc);
 
-    cout << endl;
+	cout << endl;
 }
 
 void Menu::administerRecord() {
@@ -121,11 +119,9 @@ void Menu::administerRecord() {
 
 void Menu::findDistance() {
 	string cityOne;
-	string cityOne;
-	cout << "Enter the first City Name: "; cin >> cityOne; << endl;
-
-
-
+	string cityTwo;
+	cout << "Enter the first City's Name: "; cin >> cityOne;
+	cout << "Enter the second City's Name: "; cin >> cityTwo;
 }
 
 
