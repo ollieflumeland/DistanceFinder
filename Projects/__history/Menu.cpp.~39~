@@ -43,7 +43,7 @@ void Menu::menuOptions(int &choice) {
             case 4:
                 cout << "Quit";
                 exit(EXIT_SUCCESS);
-                break;
+				break;
             default:
                 cout << endl << "Invalid Choice" <<endl << endl;
                 break;
@@ -90,8 +90,10 @@ void Menu::addRecord() {
 
 void Menu::administerRecord() {
 
-    int choice;
+	int choice;
 	string city;
+	Node* rootNode;
+	Node* foundNode;
 
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t- World Distance Calculator -" << endl;
@@ -117,8 +119,10 @@ void Menu::administerRecord() {
     } while (choice != 5);
    */
 		cout << "Enter City Name: "; cin >> city;
-		LocationTree::getCity(city, root);
-		cout << endl << "Cities found matching "; city;
+		rootNode = locT->getRoot();
+		foundNode = locT->getCity(rootNode, city);
+
+		cout << endl << "Cities found matching :" << foundNode->; city;
 }
 
 void Menu::findDistance() {

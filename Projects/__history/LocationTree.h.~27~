@@ -21,7 +21,7 @@ private:
 	Node* root;
 public:
 	Node* getRoot();
-	Node* getNode(string ident, Node* parent);
+	Node* getCity(string ident, Node* node);
 	void addNode (Location *loc); // To add first node
 	void addNode(Location *loc, Node* leaf);
 	void deleteNode (string ident);

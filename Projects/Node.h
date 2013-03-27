@@ -24,6 +24,7 @@ public:
 	Node* left;
 	Node* right;
 	Node* parent;
+	Location* location;
 	Node(Location *location);
 
 	void setLeft(Node* left);

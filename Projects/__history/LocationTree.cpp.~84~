@@ -74,20 +74,21 @@ void LocationTree::freeNode(Node* leaf) {
 	}
 }
 
-Node* getCity(string ident, Node* node)  {
+Node* getCity(Node* node, string ident)  {
 	if (node == NULL) {
 		return NULL;
-	}
-	else if (ident == node->getIdent()) {
-		  return node;
-		 }
-	else if (ident <= node->getIdent()) {
-		getCity(string ident, node->getLeft;
-		 }
-	else if (ident > node->getIdent()) {
-		getCity(string ident, node->getRight;
-		 }
-		 else return NULL;
+	} else if (ident == node->getIdent()) {
+		return node;
+	} else if (ident < node->getIdent()) {
+		return getCity(ident, node->getLeft());
+	} else if (ident > node->getIdent()) {
+		return getCity(ident, node->getRight());
+	} else {
+		return NULL;
+    }
+
 }
+
+
 
 
