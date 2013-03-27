@@ -4,7 +4,6 @@
 #include "Location.h"
 
 using namespace std;
-const int EARTH_RAD = 6371;
 
 class Calculator {
 public:
