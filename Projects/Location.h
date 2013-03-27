@@ -11,7 +11,7 @@ private:
 	//Variables
 	string cityName;
 	string countryName;
-	int region;
+	string region;
 	int cityLatDeg;
 	int cityLatMin;
 	string cityLatDirection;
@@ -23,7 +23,7 @@ public:
 
 
 	//Constructor for class Location
-	Location(string name, string country, int latDeg, int latMin, string latDir, int lonDeg, int lonMin, string lonDir);
+	Location(string name, string country,string region, int latDeg, int latMin, string latDir, int lonDeg, int lonMin, string lonDir);
 	Location(); // default constructor
 
 	//Destructor
@@ -34,8 +34,8 @@ public:
 	string getCityName();
 	void setCountryName(string country);
 	string getCountryName();
-	void setRegion(int region);
-	int getRegion();
+	void setRegion(string region);
+	string getRegion();
 	void setLatDeg(int deg);
 	void setLatMin(int min);
 	void setLatDirection(string dir);

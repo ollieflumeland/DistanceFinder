@@ -11,13 +11,13 @@
 using namespace std;
 
 // Constructor
-LocationTree::Tree() {
-	cout << LocationTree object created with name: << cityName << endl;
+LocationTree::LocationTree() {
+	cout << "LocationTree object created" << endl;
 	root = NULL;
 }
 
 // Destructor
-LocationTree::~Tree() {
+LocationTree::~LocationTree() {
 	freeNode(root);
 }
 
@@ -27,38 +27,39 @@ Node* LocationTree::getRoot() {
 	}
 
 // Function that adds nodes to the tree
-void LocationTree::addNode (int ident) {
+void LocationTree::addNode (Location *loc) {
    if ( root == NULL ) {
-		cout << "creating the root node, City = " << ident << endl;
-		Node* n = new Node();
-		n->setIdent(ident);
+		cout << "creating the root node" << endl;
+		Node* n = new Node(loc);
+		n->setIdent(loc->getCityName());
 		root = n;
     }
-    else {
-		cout << "adding a new node, City = " << ident << endl;
-		addNode(ident, root);
+	else {
+		cout << "adding a new node"<< endl;
+		addNode(loc, root);
 	}
 }
 
-void LocationTree::addNode(int key, Node* leaf) {
-    if ( key <= leaf->Key() )
-    {
-        if ( leaf->Left() != NULL )
-            addNode(key, leaf->Left());
-        else {
-            Node* n = new Node();
-            n->setKey(key);
+void LocationTree::addNode(Location *loc, Node* leaf) {
+    string ident = loc->getCityName();
+	if ( ident <= leaf->getIdent() )
+	{
+		if ( leaf->getLeft() != NULL )
+			addNode(loc, leaf->getLeft());
+		else {
+			Node* n = new Node(loc);
+			n->setIdent(ident);
             n->setParent(leaf);
             leaf->setLeft(n);
         }
     }
     else
     {
-        if ( leaf->Right() != NULL )
-            addNode(key, leaf->Right());
-        else {
-            Node* n = new Node();
-            n->setKey(key);
+		if ( leaf->getRight() != NULL )
+			addNode(loc, leaf->getRight());
+		else {
+			Node* n = new Node(loc);
+            n->setIdent(ident);
             n->setParent(leaf);
             leaf->setRight(n);
         }
@@ -68,8 +69,8 @@ void LocationTree::addNode(int key, Node* leaf) {
 // Remove node
 void LocationTree::freeNode(Node* leaf) {
 	if (leaf != NULL) {
-		freeNode(leaf->Left());
-		freeNode(leaf->Right());
+		freeNode(leaf->getLeft());
+		freeNode(leaf->getRight());
 		delete leaf;
 	}
 }

@@ -13,53 +13,58 @@ using namespace std;
 ReaderWriter::ReaderWriter() {
 	};
 
-LocationTree ReaderWriter::createTreeFromFile(string fileName) {
-	LocationTree* locTree;
-	ifstream inf(fileName);
-
-	string name;
+LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
+	LocationTree* locTree = new LocationTree();
+	fstream inf;
+	inf.open(fileName.c_str(),ios::in);
 
 	/*note this is not istream.getline() but
 	 * part of the std namespace <string> stuff
 	 */
-	while (!getline(inf, name, '|').eof()) {
-		Location* tempLoc;
+	while (!inf.eof()) {
 
-		string country = getline(inf, country, '|');
+		char name[100];
+		inf.getline(name,100,'|');
+	   //	cout << "name: " << name << endl;
+		Location *tempLoc;
 
+		string country;
+		string region;
+		string latDegString;
+		string latMinString;
+		string latDirection;
+
+		getline(inf, country, '|');
+		getline(inf,region,'|');
 		//get lat stuff
-		string latDegString = getline(inf, latDegString, '|');
-		int latDeg;
-		stringstream convert(latDegString);
-		convert >> latDeg;
-		string latMinString = getline(inf, latMinString, '|');
-		int latMin;
-		convert(latMinString);
-		convert >> latMin;
-		string latDirection = getline(inf, latDirection, '|');
+		getline(inf, latDegString, '|');
+		int latDeg = atoi(latDegString.c_str());
+		getline(inf, latMinString, '|');
+		int latMin = atoi(latMinString.c_str());
+		getline(inf, latDirection, '|');
+
+		string lonDegString;
+		string lonMinString;
+		string lonDirection;
 
 		//get lon stuff
-		string lonDegString = getline(inf, lonDegString, '|');
-		int lonDeg;
-		stringstream convert(lonDegString);
-		convert >> lonDeg;
-		string lonMinString = getline(inf, lonMinString, '|');
-		int lonMin;
-		convert(lonMinString);
-		convert >> lonMin;
-		string lonDirection = getline(inf, lonDirection, '|');
+		getline(inf, lonDegString, '|');
+		int lonDeg = atoi(lonDegString.c_str());
+		getline(inf, lonMinString, '|');
+		int lonMin = atoi(lonMinString.c_str());
+		getline(inf, lonDirection, '|');
 
-		tempLoc = new Location(name, country, latDeg, latMin, latDirection,
+		tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
 				lonDeg, lonMin, lonDirection);
-		tree->addNode(tempLoc->getCityName());
+		locTree->addNode(tempLoc);
 	}
 	inf.close();
-	return tree;
+	return locTree;
 }
 
 
 void ReaderWriter::saveFile(string fileName, LocationTree LocTree){
-	ofstream saveFile(fileName); //ofstream should clear file
+	ofstream saveFile(fileName.c_str()); //ofstream should clear file
 
 	if (saveFile.is_open()){
 		//for each node of the tree

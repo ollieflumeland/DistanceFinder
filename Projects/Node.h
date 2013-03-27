@@ -19,18 +19,19 @@ class Node {
 public:
 	string ident;
 	int counter;
-	Location location;
+	//Location location;
 	Node* dups;
 	Node* left;
 	Node* right;
 	Node* parent;
-	Node(Location location);
-	virtual ~Node();
+	Node(Location *location);
+
 	void setLeft(Node* left);
 	void setRight(Node* right);
 	void setParent(Node* parent);
 	void setDuplicate(Node* dups);
 	string getIdent();
+	void setIdent(string id);
 	Node* getLeft();
 	Node* getRight();
 	Node* getParent();

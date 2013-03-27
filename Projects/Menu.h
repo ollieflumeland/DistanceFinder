@@ -1,6 +1,10 @@
 #ifndef Menu_H
 #define Menu_H
 
+#include "Location.h"
+#include "Node.h"
+#include "LocationTree.h"
+
 using namespace std;
 
 class Menu {

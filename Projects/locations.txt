@@ -1,5 +1,4 @@
-﻿THIS BETTER FUCKING WORK!!!!
-Aberdeen| Scotland |Europe|57|9|N|2|9|W
+﻿Aberdeen| Scotland |Europe|57|9|N|2|9|W|
 Adelaide| Australia |Australasia|34|55|S|138|36|E
 Algiers| Algeria|Africa|36|50|N|3|0|E
 Amsterdam| Netherlands|Europe|52|22|N|4|53|E
@@ -117,5 +116,5 @@ Veracruz| Mexico |North America|19|10|N|96|10|W
 Vienna| Austria|Europe|48|14|N|16|20|E
 Vladivostok| Russia |Europe|43|10|N|132|0|E
 Warsaw| Poland|Europe|52|14|N|21|0|E
-Wellington| New Zealand |Australasia|41|17|S|174|47|E
-ZŸrich| Switzerland|Europe|47|21|N|8|31|E
+Wellington| New Zealand |Australasia|41|17|S|174|47|E|
+ZŸrich| Switzerland|Europe|47|21|N|8|31|E|
