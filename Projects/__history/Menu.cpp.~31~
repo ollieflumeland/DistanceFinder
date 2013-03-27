@@ -1,14 +1,15 @@
 #include <string>
 #include <iostream>
-
 #include "Menu.h"
 
 using namespace std;
 
 //Constructor
-Menu::Menu()
-{
-// Nothing to do, wait till next week
+Menu::Menu() {
+	ReaderWriter rw;
+	string filename = "newloc.txt";
+	locT = rw.createTreeFromFile(filename);
+	//int choice = -1;
 }
 
 void Menu::menuOptions(int &choice) {
@@ -82,23 +83,23 @@ void Menu::addRecord() {
 
 	newLoc = new Location(city, country, region, latDeg, latMin, latDir,
 				lonDeg, lonMin, lonDir);
-		locTree->addNode(newLoc);
+		locT->addNode(newLoc);
 
-    cout << endl;
+	cout << endl;
 }
 
 void Menu::administerRecord() {
 
     int choice;
-    char city[10];
+	string city;
 
     cout << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t- World Distance Calculator -" << endl;
     cout << "\t\t\t-----------------------------" << endl << endl;
 
-	cout << "\tAdminister Record - Find by:" << endl << endl;
+	cout << "\tAdminister Record:" << endl << endl;
 
-	cout << "\t1. City" << endl;
+	/*cout << "\t1. City" << endl;
     cout << "\t2. Country" << endl;
 	cout << "\t3. Region" << endl;
 	cout << "\t4. Show All" << endl;
@@ -108,20 +109,23 @@ void Menu::administerRecord() {
     cin >> choice;
 
     do {
-        switch(choice){
-            case 1:
-                cout << "Enter City Name: "; cin >> city;
-                cout << endl << "Cities found matching "; city;
+		switch(choice){
+			case 1:
+				cout << "Enter City Name: "; cin >> city;
+				cout << endl << "Cities found matching "; city;
             }
     } while (choice != 5);
-
+   */
+		cout << "Enter City Name: "; cin >> city;
+		locT->getCity(city, locT->getRoot()) ;
+		cout << endl << "Cities found matching "; city;
 }
 
 void Menu::findDistance() {
 	string cityOne;
 	string cityTwo;
-	cout << "Enter the first City's Name: "; cin >> cityOne; << endl;
-	cout << "Enter the second City's Name: "; cin >> cityTwo; << endl;
+	cout << "Enter the first City's Name: "; cin >> cityOne;
+	cout << "Enter the second City's Name: "; cin >> cityTwo;
 }
 
 
