@@ -5,11 +5,9 @@
 using namespace std;
 
 //Constructor
-Menu::Menu() {
-	ReaderWriter rw;
-	string filename = "newloc.txt";
-	locT = rw.createTreeFromFile(filename);
-	//int choice = -1;
+Menu::Menu()
+{
+// Nothing to do, wait till next week
 }
 
 void Menu::menuOptions(int &choice) {
@@ -83,7 +81,7 @@ void Menu::addRecord() {
 
 	newLoc = new Location(city, country, region, latDeg, latMin, latDir,
 				lonDeg, lonMin, lonDir);
-		locT->addNode(newLoc);
+		//locT->addNode(newLoc);
 
 	cout << endl;
 }

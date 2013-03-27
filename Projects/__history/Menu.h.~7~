@@ -13,7 +13,7 @@ public:
 	//Constructor
 	Menu();
 
-	LocationTree* locT;
+	LocationTree* locT
 
 	//Function Prototypes
     void menuOptions(int &choice);

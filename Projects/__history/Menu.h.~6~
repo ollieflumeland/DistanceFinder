@@ -13,14 +13,11 @@ public:
 	//Constructor
 	Menu();
 
-	LocationTree* locT;
-
 	//Function Prototypes
     void menuOptions(int &choice);
     void addRecord();
     void administerRecord();
-	void findDistance();
-
+    void findDistance();
 
 };
 
