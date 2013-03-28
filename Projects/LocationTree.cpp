@@ -109,8 +109,32 @@ Node* LocationTree::getFarRight(Node* node, string ident) {
 	if (current->getRight() != NULL) {
 		return getLast(current->getRight());
 	} else {
-        return current;
-    }
+		return current;
+	}
+
+}
+
+/**
+*	Function that finds the closest smaller node to the defined node
+*/
+Node* LocationTree::getPrevious(Node* node, string ident) {
+	Node* current = getCity(node, ident);
+	if (current != NULL) {
+		return getLast(current->getLeft());
+	} else {
+		return current;
+	}
+}
+
+
+// Function that finds the closest larger node the current node
+Node* LocationTree::getNext(Node* node, string ident) {
+	Node* current = getCity(node, ident);
+	if (current != NULL) {
+		return getFirst(current->getRight());
+	} else {
+		return current;
+	}
 
 }
 
@@ -120,9 +144,8 @@ Node* LocationTree::getFarRight(Node* node, string ident) {
 *  Step 2:If it has a single child, replace leaf with child
 *  Step 3: If 2 children, find the closest replacement node
 *  remove replacement node, remove target node and insert replacement
-*
 */
-void LocationTree::deleteNode(string ident) {
+bool LocationTree::deleteNode(string ident) {
 	Node* current = getCity(root, ident);
 	// Step 1
 	if (current->getLeft() == NULL && current->getRight() == NULL) {
@@ -132,6 +155,7 @@ void LocationTree::deleteNode(string ident) {
 			current->getParent()->setLeft(NULL);
 		}
 		delete current;
+		return true;
 	}
 	// Step 2
 	else if (current->getLeft() == NULL && current->getRight() != NULL) { //if leaf right
@@ -141,6 +165,7 @@ void LocationTree::deleteNode(string ident) {
 			current->getParent()->setLeft(current->getRight());
 		}
 		delete current;
+		return true;
 	}
 	else if (current->getLeft() != NULL && current->getRight() == NULL) { //if leaf left
 		if (current->getIdent() > current->getParent()->getIdent()) {
@@ -149,13 +174,21 @@ void LocationTree::deleteNode(string ident) {
 			current->getParent()->setLeft(current->getLeft());
 		}
 		delete current;
+		return true;
 	}
 	// Step 3
 	else {
-        cout << "can't delete currently" << endl;
-    }
-
-
+		cout << "can't delete currently" << endl;
+		return false;
+		Node* previous = getPrevious(current, ident);
+		cout << "Previous: " << previous->getIdent() << endl;
+		Node* next = getNext(current, ident);
+		/*if ((current->getIdent() - previous->getIdent()) < ((next->getIdent() - current->getIdent())) {
+			cout << "previous is closer" << endl;
+		} else {
+			cout << "next is closer" << endl;
+		}*/
+	}
 }
 
 // Remove node

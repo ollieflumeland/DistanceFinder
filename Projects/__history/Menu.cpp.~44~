@@ -7,7 +7,7 @@ using namespace std;
 //Constructor
 Menu::Menu() {
 	ReaderWriter rw;
-	string filename = "locations.txt";
+	string filename = "newloc.txt";
 	locT = rw.createTreeFromFile(filename);
 	//int choice = -1;
 }
@@ -38,7 +38,7 @@ void Menu::menuOptions(int &choice) {
                 administerRecord();
                 break;
             case 3:
-                findDistance();
+                cout << "Find Distance";
                 break;
             case 4:
                 cout << "Quit"; // PLACEHOLDER - REMOVE
@@ -133,8 +133,6 @@ void Menu::administerRecord() {
 			cout << "In Region: " << foundNode->location->getRegion() << endl; // DITTO
 			cout << "Latitude Degrees: " << foundNode->location->getLatDeg() << endl; // DITTO
 			cout << "Latitude Minutes: " << foundNode->location->getLatMin() << endl; // DITTO
-			cout << "Longitude Degrees: " << foundNode->location->getLonDeg() << endl; // DITTO
-			cout << "Longitude Minutes: " << foundNode->location->getLonMin() << endl; // DITTO
 			system("PAUSE");
 
 			cout << endl << "Do you want to Modify or Delete a record?";
@@ -155,11 +153,10 @@ void Menu::administerRecord() {
 					cout << "Enter Longitude Degrees: "; cin >> intTemp; foundNode->location->setLonDeg(intTemp);
 					cout << "Enter Longitude Minutes: "; cin >> intTemp; foundNode->location->setLonMin(intTemp);
 					cout << "Enter Longitude Direction: "; cin >> strTemp; foundNode->location->setLonDirection(strTemp);
-					break;
 				case 2:
 					cout << endl << "UNDER CONSTRUCTION!!!" << endl << endl; // PLACEHOLDER TEXT
 					cout << "Enter City to be deleted: "; cin >> city;
-					if (locT->deleteNode(city)) {
+					if (locT->deleteNode(city == true) {
 						cout << "City has been removed" << endl;
 					} else {
 						cout << "WARNING! Deletion unsuccessful" << endl;
@@ -177,16 +174,6 @@ void Menu::findDistance() {
 	string cityTwo;
 	cout << "Enter the first City's Name: "; cin >> cityOne;
 	cout << "Enter the second City's Name: "; cin >> cityTwo;
-
-	Node* rootNode = locT->getRoot();
-	Node* foundNodeOne = locT->getCity(rootNode, cityOne);
-	Node* foundNodeTwo = locT->getCity(rootNode,cityTwo);
-	Location* locOne = foundNodeOne->location;
-	Location* locTwo = foundNodeTwo->location;
-
-	Calculator calc;
-	double dist = calc.getDistanceBetween(locOne,locTwo);
-	cout << "distance between is " << dist << "km" << endl;
 }
 
 

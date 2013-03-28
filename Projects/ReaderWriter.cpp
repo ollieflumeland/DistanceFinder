@@ -63,11 +63,12 @@ LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 }
 
 
-void ReaderWriter::saveFile(string fileName, LocationTree LocTree){
+void ReaderWriter::saveFile(string fileName, LocationTree* locTree){
 	ofstream saveFile(fileName.c_str()); //ofstream should clear file
 
 	if (saveFile.is_open()){
 		//for each node of the tree
+
 			//get location from node as tempLoc
 			Location tempLoc;
 			saveFile << tempLoc.getCityName();
