@@ -15,7 +15,7 @@ class ReaderWriter {
 public:
 	ReaderWriter();
 	LocationTree * createTreeFromFile(string fileName);
-	void saveFile(string fileName, LocationTree locTree);
+	void saveFile(string fileName, LocationTree* locTree);
 
 private:
 };
