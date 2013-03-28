@@ -93,68 +93,23 @@ Node* LocationTree::getLast(Node* node) {
 }
 
 // Function that finds the furthest left entry (min) from a defined node
-Node* LocationTree::getFarLeft(Node* node, string ident) {
+Node* LocationTree::getFarLeft(Node* node, ident) {
 	Node* current = getCity(node, ident);
-	if (current->getLeft() != NULL) {
-		return getFirst(current->getLeft());
-	} else {
-		return current;
+	if (current->getLeft != NULL) {
+		return getFirst(current->Left);
+	} else return node;
 	}
 }
-
 
 // Function that finds the furthest right entry (max) from the current node
 Node* LocationTree::getFarRight(Node* node, string ident) {
 	Node* current = getCity(node, ident);
-	if (current->getRight() != NULL) {
-		return getLast(current->getRight());
-	} else {
-        return current;
-    }
-
+	if (current) {
+		return getLast(current->Right);
+	}
 }
 
-/**
-*  Function to delete a node
-*  Step 1: If node is a leaf delete
-*  Step 2:If it has a single child, replace leaf with child
-*  Step 3: If 2 children, find the closest replacement node
-*  remove replacement node, remove target node and insert replacement
-*
-*/
-void LocationTree::deleteNode(string ident) {
-	Node* current = getCity(root, ident);
-	// Step 1
-	if (current->getLeft() == NULL && current->getRight() == NULL) {
-		if (current->getIdent() > current->getParent()->getIdent()) {
-			current->getParent()->setRight(NULL);
-		} else {
-			current->getParent()->setLeft(NULL);
-		}
-		delete current;
-	}
-	// Step 2
-	else if (current->getLeft() == NULL && current->getRight() != NULL) { //if leaf right
-		if (current->getIdent() > current->getParent()->getIdent()) {
-			current->getParent()->setRight(current->getRight());
-		} else {
-			current->getParent()->setLeft(current->getRight());
-		}
-		delete current;
-	}
-	else if (current->getLeft() != NULL && current->getRight() == NULL) { //if leaf left
-		if (current->getIdent() > current->getParent()->getIdent()) {
-			current->getParent()->setRight(current->getLeft());
-		} else {
-			current->getParent()->setLeft(current->getLeft());
-		}
-		delete current;
-	}
-	// Step 3
-	else {
-        cout << "can't delete currently" << endl;
-    }
-
+void LocationTree::deleteNode() {
 
 }
 

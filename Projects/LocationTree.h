@@ -19,7 +19,6 @@ using namespace std;
 class LocationTree {
 private:
 	Node* root;
-	Node* nullNode;
 public:
 	Node* getRoot();
 	Node* getCity(Node* node, string ident);
@@ -27,6 +26,11 @@ public:
 	void addNode(Location *loc, Node* leaf);
 	void deleteNode (string ident);
 	void freeNode(Node* leaf);
+	Node* getFirst(Node* node);
+	Node* getLast(Node* node);
+	Node* getFarLeft(Node* node, string ident);
+	Node* getFarRight(Node* node, string ident);
+
 
 	// Default Constructor
 	LocationTree();

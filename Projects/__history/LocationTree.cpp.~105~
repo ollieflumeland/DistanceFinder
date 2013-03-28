@@ -122,8 +122,8 @@ Node* LocationTree::getFarRight(Node* node, string ident) {
 *  remove replacement node, remove target node and insert replacement
 *
 */
-void LocationTree::deleteNode(string ident) {
-	Node* current = getCity(root, ident);
+void LocationTree::deleteNode(Node* node, string ident) {
+	Node* current = getCity(node, ident);
 	// Step 1
 	if (current->getLeft() == NULL && current->getRight() == NULL) {
 		if (current->getIdent() > current->getParent()->getIdent()) {
@@ -144,7 +144,7 @@ void LocationTree::deleteNode(string ident) {
 	}
 	else if (current->getLeft() != NULL && current->getRight() == NULL) { //if leaf left
 		if (current->getIdent() > current->getParent()->getIdent()) {
-			current->getParent()->setRight(current->getLeft());
+			current->getParent()->setRight(current->getLeft));
 		} else {
 			current->getParent()->setLeft(current->getLeft());
 		}
