@@ -24,8 +24,10 @@ public:
 	Node* getCity(Node* node, string ident);
 	void addNode (Location *loc); // To add first node
 	void addNode(Location *loc, Node* leaf);
-	void deleteNode (string ident);
+	bool deleteNode (string ident);
 	void freeNode(Node* leaf);
+	Node* getPrevious(Node* node, string ident);
+	Node* getNext(Node* node, string ident);
 	Node* getFirst(Node* node);
 	Node* getLast(Node* node);
 	Node* getFarLeft(Node* node, string ident);

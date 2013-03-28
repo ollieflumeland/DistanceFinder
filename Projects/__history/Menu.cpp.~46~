@@ -133,8 +133,6 @@ void Menu::administerRecord() {
 			cout << "In Region: " << foundNode->location->getRegion() << endl; // DITTO
 			cout << "Latitude Degrees: " << foundNode->location->getLatDeg() << endl; // DITTO
 			cout << "Latitude Minutes: " << foundNode->location->getLatMin() << endl; // DITTO
-			cout << "Longitude Degrees: " << foundNode->location->getLonDeg() << endl; // DITTO
-			cout << "Longitude Minutes: " << foundNode->location->getLonMin() << endl; // DITTO
 			system("PAUSE");
 
 			cout << endl << "Do you want to Modify or Delete a record?";
