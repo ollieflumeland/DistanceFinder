@@ -7,7 +7,7 @@ using namespace std;
 //Constructor
 Menu::Menu() {
 	ReaderWriter rw;
-	string filename = "newloc.txt";
+	string filename = "locations.txt";
 	locT = rw.createTreeFromFile(filename);
 	//int choice = -1;
 }
@@ -38,7 +38,7 @@ void Menu::menuOptions(int &choice) {
                 administerRecord();
                 break;
             case 3:
-                cout << "Find Distance";
+                findDistance();
                 break;
             case 4:
                 cout << "Quit"; // PLACEHOLDER - REMOVE
@@ -177,6 +177,16 @@ void Menu::findDistance() {
 	string cityTwo;
 	cout << "Enter the first City's Name: "; cin >> cityOne;
 	cout << "Enter the second City's Name: "; cin >> cityTwo;
+
+	Node* rootNode = locT->getRoot();
+	Node* foundNodeOne = locT->getCity(rootNode, cityOne);
+	Node* foundNodeTwo = locT->getCity(rootNode,cityTwo);
+	Location* locOne = foundNodeOne->location;
+	Location* locTwo = foundNodeTwo->location;
+
+	Calculator calc;
+	double dist = calc.getDistanceBetween(locOne,locTwo);
+	cout << "distance between is " << dist << "km" << endl;
 }
 
 

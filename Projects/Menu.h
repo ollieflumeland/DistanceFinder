@@ -5,6 +5,7 @@
 #include "Node.h"
 #include "LocationTree.h"
 #include "ReaderWriter.h"
+#include "Calculator.h"
 
 using namespace std;
 
