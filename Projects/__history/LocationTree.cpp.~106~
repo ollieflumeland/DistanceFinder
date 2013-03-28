@@ -144,7 +144,7 @@ void LocationTree::deleteNode(string ident) {
 	}
 	else if (current->getLeft() != NULL && current->getRight() == NULL) { //if leaf left
 		if (current->getIdent() > current->getParent()->getIdent()) {
-			current->getParent()->setRight(current->getLeft());
+			current->getParent()->setRight(current->getLeft));
 		} else {
 			current->getParent()->setLeft(current->getLeft());
 		}

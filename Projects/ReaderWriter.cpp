@@ -52,7 +52,7 @@ LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 		int lonDeg = atoi(lonDegString.c_str());
 		getline(inf, lonMinString, '|');
 		int lonMin = atoi(lonMinString.c_str());
-		getline(inf, lonDirection, '|');
+		getline(inf, lonDirection);
 
 		tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
 				lonDeg, lonMin, lonDirection);

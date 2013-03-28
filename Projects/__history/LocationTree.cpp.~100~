@@ -14,7 +14,6 @@ using namespace std;
 LocationTree::LocationTree() {
 	cout << "LocationTree object created" << endl;
 	root = NULL;
-	nullNode = NULL;
 }
 
 // Destructor
@@ -27,7 +26,7 @@ Node* LocationTree::getRoot() {
 	return root;
 	}
 
-// Function that adds nodes to the tree
+// Function that adds nodes to the tree, used on the new tree to install root
 void LocationTree::addNode (Location *loc) {
    if ( root != NULL ) {
 		cout << "adding a new node"<< endl;
@@ -40,6 +39,7 @@ void LocationTree::addNode (Location *loc) {
 	}
 }
 
+// Function that adds nodes to the tree, finding the right position
 void LocationTree::addNode(Location *loc, Node* leaf) {
 	string ident = loc->getCityName();
 	if ( ident <= leaf->getIdent() )
@@ -49,21 +49,73 @@ void LocationTree::addNode(Location *loc, Node* leaf) {
 		else {
 			Node* n = new Node(loc);
 			n->setIdent(ident);
-            n->setParent(leaf);
-            leaf->setLeft(n);
-        }
-    }
-    else
-    {
+			n->setParent(leaf);
+			leaf->setLeft(n);
+		}
+	}
+	else
+	{
 		if ( leaf->getRight() != NULL )
 			addNode(loc, leaf->getRight());
 		else {
 			Node* n = new Node(loc);
-            n->setIdent(ident);
-            n->setParent(leaf);
-            leaf->setRight(n);
-        }
+			n->setIdent(ident);
+			n->setParent(leaf);
+			leaf->setRight(n);
+		}
+	}
+}
+
+// Function that finds the furthest left entry
+Node* LocationTree::getFirst(Node* node) {
+	if (node == NULL) {
+		return NULL;
+	}
+	if (node->getLeft()) {
+		getFirst(node->getLeft());
+	}
+	else {
+		return node;
+	}
+}
+
+// Function that finds the furthest right entry
+Node* LocationTree::getLast(Node* node) {
+	if (node == NULL) {
+		return NULL;
+	}
+	if (node->getRight()) {
+		getLast(node->getRight());
+	}
+	else {
+		return node;
+	}
+}
+
+// Function that finds the furthest left entry (min) from a defined node
+Node* LocationTree::getFarLeft(Node* node, ident) {
+	Node* current = getCity(node, ident);
+	if (current->getLeft != NULL) {
+		return getFirst(current->Left);
+	} else {
+		return current;
+	}
+}
+
+
+// Function that finds the furthest right entry (max) from the current node
+Node* LocationTree::getFarRight(Node* node, string ident) {
+	Node* current = getCity(node, ident);
+	if (current->getRight != NULL) {
+		return getLast(current->Right);
+	} else {
+        return current;
     }
+
+}
+
+void LocationTree::deleteNode() {
+
 }
 
 // Remove node
@@ -75,7 +127,7 @@ void LocationTree::freeNode(Node* leaf) {
 	}
 }
 
-Node* getCity(Node* node, string ident)  {
+Node* LocationTree::getCity(Node* node, string ident)  {
 	if (node != NULL) {
 		if (ident == node->getIdent()) {
 		return node;
