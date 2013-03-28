@@ -15,18 +15,18 @@ Menu::Menu() {
 void Menu::menuOptions(int &choice) {
 
     do {
-    cout << "\t\t\t-----------------------------" << endl;
+    cout << endl << "\t\t\t-----------------------------" << endl;
     cout << "\t\t\t- World Distance Calculator -" << endl;
     cout << "\t\t\t-----------------------------" << endl;
 
-    cout << "\tMain Menu - Choose an Option below:" << endl << endl;
+    cout << endl << "Main Menu - Choose an Option below:" << endl << endl;
 
-    cout << "\t1. Add Record" << endl;
-    cout << "\t2. Administer Record" << endl;
-    cout << "\t3. Find Distance" << endl << endl;
-	cout << "\t4. Quit" << endl << endl;
+	cout << "1. Add Record" << endl;
+	cout << "2. Administer Record" << endl;
+	cout << "3. Find Distance" << endl << endl;
+	cout << "4. Quit" << endl << endl;
 
-    cout << "\tChoose an Option: ";
+	cout << "Choose an Option: ";
     cin >> choice;
 
 
@@ -41,7 +41,7 @@ void Menu::menuOptions(int &choice) {
                 cout << "Find Distance";
                 break;
             case 4:
-                cout << "Quit";
+                cout << "Quit"; // PLACEHOLDER - REMOVE
                 exit(EXIT_SUCCESS);
             default:
                 cout << endl << "Invalid Choice" <<endl << endl;
@@ -67,17 +67,17 @@ void Menu::addRecord() {
     cout << "\t\t\t- World Distance Calculator -" << endl;
     cout << "\t\t\t-----------------------------" << endl << endl;
 
-    cout << "\tAdd Record" << endl << endl;
+	cout << "Add Record" << endl << endl;
 
-	cout << "\tEnter City: "; cin >> city;
-	cout << "\tEnter Country: "; cin >> country;
-	cout << "\tEnter Region: "; cin >> region;
-	cout << "\tEnter Latitude Degrees: "; cin >> latDeg;
-	cout << "\tEnter Latitude Minutes: "; cin >> latMin;
-	cout << "\tEnter Latitude Direction: "; cin >> latDir;
-	cout << "\tEnter Longitude Degrees: "; cin >> lonDeg;
-	cout << "\tEnter Longitude Minutes: "; cin >> lonMin;
-	cout << "\tEnter Longitude Direction: "; cin >> lonDir;
+	cout << "Enter City: "; cin >> city;
+	cout << "Enter Country: "; cin >> country;
+	cout << "Enter Region: "; cin >> region;
+	cout << "Enter Latitude Degrees: "; cin >> latDeg;
+	cout << "Enter Latitude Minutes: "; cin >> latMin;
+	cout << "Enter Latitude Direction: "; cin >> latDir;
+	cout << "Enter Longitude Degrees: "; cin >> lonDeg;
+	cout << "Enter Longitude Minutes: "; cin >> lonMin;
+	cout << "Enter Longitude Direction: "; cin >> lonDir;
 
 
 	newLoc = new Location(city, country, region, latDeg, latMin, latDir,
@@ -91,6 +91,8 @@ void Menu::administerRecord() {
 
 	int choice;
 	string city;
+	string strTemp;
+	int intTemp;
 	Node* rootNode;
 	Node* foundNode;
 
@@ -98,7 +100,7 @@ void Menu::administerRecord() {
     cout << "\t\t\t- World Distance Calculator -" << endl;
     cout << "\t\t\t-----------------------------" << endl << endl;
 
-	cout << "\tAdminister Record:" << endl << endl;
+	cout << "Administer Record:" << endl << endl;
 
 	/*cout << "\t1. City" << endl;
     cout << "\t2. Country" << endl;
@@ -122,10 +124,43 @@ void Menu::administerRecord() {
 		foundNode = locT->getCity(rootNode, city);
 		if (foundNode == NULL) {
 			cout << endl << "This city is not in the database." << endl;
+			system("PAUSE"); // TESTING - REMOVE
+			Menu::menuOptions(choice);
 		}
 		else {
 			cout << endl << "Cities found matching : " << foundNode->location->getCityName()  << endl;
-        }
+			cout << "In Country: " << foundNode->location->getCountryName() << endl; // TESTING!
+			cout << "In Region: " << foundNode->location->getRegion() << endl; // DITTO
+			cout << "Latitude Degrees: " << foundNode->location->getLatDeg() << endl; // DITTO
+			cout << "Latitude Minutes: " << foundNode->location->getLatMin() << endl; // DITTO
+			system("PAUSE");
+
+			cout << endl << "Do you want to Modify or Delete a record?";
+			cout << endl << "1. Modify" << endl;
+			cout << "2. Delete" << endl << endl;
+			cout << "3. Quit to Main Menu" << endl << endl;
+
+			cout << "Modify/Delete a Record - Choose an option: ";
+			cin >> choice;
+
+			switch(choice){
+				case 1:
+					cout << endl << "Enter Country: "; cin >> strTemp; foundNode->location->setCountryName(strTemp);
+					cout << "Enter Region: "; cin >> strTemp; foundNode->location->setRegion(strTemp);
+					cout << "Enter Latitude Degrees: "; cin >> intTemp; foundNode->location->setLatDeg(intTemp);
+					cout << "Enter Latitude Minutes: "; cin >> intTemp; foundNode->location->setLatMin(intTemp);
+					cout << "Enter Latitude Direction: "; cin >> strTemp; foundNode->location->setLatDirection(strTemp);
+					cout << "Enter Longitude Degrees: "; cin >> intTemp; foundNode->location->setLonDeg(intTemp);
+					cout << "Enter Longitude Minutes: "; cin >> intTemp; foundNode->location->setLonMin(intTemp);
+					cout << "Enter Longitude Direction: "; cin >> strTemp; foundNode->location->setLonDirection(strTemp);
+				case 2:
+					cout << endl << "UNDER CONSTRUCTION!!!" << endl << endl; // PLACEHOLDER TEXT
+					system("PAUSE"); // TESTING - REMOVE
+					Menu::menuOptions(choice);
+				case 3:
+					Menu::menuOptions(choice);
+			}
+		 }
 }
 
 void Menu::findDistance() {
