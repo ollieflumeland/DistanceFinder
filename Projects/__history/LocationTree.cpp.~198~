@@ -232,14 +232,12 @@ bool LocationTree::deleteNode(string ident) {
 				if (previous->getIdent() > previous->getParent()->getIdent()) { // If parent left
 					if (previous->getLeft() == NULL) { // previous = leaf
 						previous->getParent()->setRight(NULL); // Reset parents right
-						cout << "Here we are 235" << endl;
 					} else {
 						previous->getParent()->setRight(previous->getLeft());
 					}
-				} else {  // Parent right
+				} else {
 					if (previous->getLeft() == NULL) { // previous = leaf
 						previous->getParent()->setLeft(NULL); // Reset parents right
-						cout << "Here we are 242" << endl;
 					} else {
 						previous->getParent()->setLeft(previous->getLeft());
 					}
@@ -267,9 +265,9 @@ bool LocationTree::deleteNode(string ident) {
 		// Replacement node is now 'selected'
 		// Link replacement to current's child nodes
 		selected->setLeft(current->getLeft());
-		cout << selected->getIdent() << " selected left now points to: " << endl;
+		cout << selected->getIdent() << " selected left now points to: " << selected->getLeft()->getIdent() << endl;
 		selected->setRight(current->getRight());
-		cout << selected->getIdent() << " selected right now points to: " << endl;
+		cout << selected->getIdent() << " selected right now points to: " << selected->getRight()->getIdent() << endl;
 		// Check if root
 		if (current->getParent() == NULL) {
 			cout << "Creating new root: " << endl;

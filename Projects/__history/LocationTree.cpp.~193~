@@ -26,6 +26,11 @@ Node* LocationTree::getRoot() {
 	return root;
 	}
 
+// Function to set root
+Node* LocationTree::setRoot(Node* node) {
+	root == node;
+	}
+
 // Function that adds nodes to the tree, used on the new tree to install root
 void LocationTree::addNode (Location *loc) {
    if ( root != NULL ) {
@@ -149,7 +154,13 @@ bool LocationTree::deleteNode(string ident) {
 	Node* current = getCity(root, ident);
 	// Step 1
 	if (current->getLeft() == NULL && current->getRight() == NULL) {
-		if (current->getIdent() > current->getParent()->getIdent()) {
+		// Check if root node
+		if (current->getParent() == NULL) {
+			cout << "This is the only entry in the tree" << endl;
+			cout << "It cannot be deleted" << endl;
+		}
+		// Delete node
+		else if (current->getIdent() > current->getParent()->getIdent()) {
 			current->getParent()->setRight(NULL);
 		} else {
 			current->getParent()->setLeft(NULL);
@@ -159,35 +170,112 @@ bool LocationTree::deleteNode(string ident) {
 	}
 	// Step 2
 	else if (current->getLeft() == NULL && current->getRight() != NULL) { //if leaf right
-		if (current->getIdent() > current->getParent()->getIdent()) {
-			current->getParent()->setRight(current->getRight());
+		// Check if root
+		if (current->getParent() == NULL) {
+			cout << "Creating new root" << endl;
+			root = current->getRight();
+			current->getRight()->setParent(NULL);
+		}
+		// Determine if node is on a right or left leaf
+		else if (current->getIdent() > current->getParent()->getIdent()) { // if on right
+			current->getParent()->setRight(current->getRight()); // Reset parents right
 		} else {
-			current->getParent()->setLeft(current->getRight());
+			current->getParent()->setLeft(current->getRight()); // Reset parents left
 		}
 		delete current;
 		return true;
 	}
 	else if (current->getLeft() != NULL && current->getRight() == NULL) { //if leaf left
-		if (current->getIdent() > current->getParent()->getIdent()) {
-			current->getParent()->setRight(current->getLeft());
+		 // Check if root
+		if (current->getParent() == NULL) {
+			cout << "Creating new root" << endl;
+			root = current->getLeft();
+			current->getLeft()->setParent(NULL);
+			}
+		// Determine if parent is on a right or left leaf
+		else if (current->getIdent() > current->getParent()->getIdent()) {
+			current->getParent()->setRight(current->getLeft()); // Reset parents right
 		} else {
-			current->getParent()->setLeft(current->getLeft());
+			current->getParent()->setLeft(current->getLeft()); // Reset parents left
 		}
 		delete current;
 		return true;
 	}
 	// Step 3
+	else if (current->getLeft() != NULL && current->getRight() != NULL) { //if two leaves
+		// Find nearest previous node
+		Node* previous = getPrevious(current, ident);
+		cout << "Previous: " << previous->getIdent() << endl;
+		// Find nearest next node
+		Node* next = getNext(current, ident);
+		cout << "Next: " << next->getIdent() << endl;
+		// create char arrays for comparison
+		char * cstrCurr = new char[current->getIdent().length()+1];
+		strcpy (cstrCurr, current->getIdent().c_str());
+		char * cstrPrev = new char[previous->getIdent().length()+1];
+		strcpy (cstrPrev, previous->getIdent().c_str());
+		char * cstrNext = new char[next->getIdent().length()+1];
+		strcpy (cstrNext, next->getIdent().c_str());
+		// char[] copies of names made
+		// find the nearest previous or next
+		int prevDist, nextDist;
+		int totPrev, totNext;
+		int comLngth = ((current->getIdent().length() < previous->getIdent().length()) ? current->getIdent().length() : previous->getIdent().length());
+		comLngth = ((comLngth < next->getIdent().length()) ? comLngth : next->getIdent().length());
+		Node* selected = previous; // Pointer to the best replacement (default: previous)
+		for (int i = 0; i < comLngth; i++) {
+			totPrev = (cstrCurr[i]-cstrPrev[i]);
+			totNext = (cstrNext[i]-cstrCurr[i]);
+			if (totPrev < totNext || i == comLngth-1) {
+				selected = previous;
+				cout << "previous is closer: " << selected->getIdent() << endl;
+				if (previous->getLeft() == NULL) {
+					previous->getParent()->setRight(NULL);
+				} else {
+					previous->getParent()->setRight(previous->getLeft());
+				}
+				break;
+			} else {
+				selected = next;
+				cout << "next is closer: " << selected->getIdent() << endl;
+
+				if (next->getRight() == NULL) {
+					next->getParent()->setLeft(NULL);
+				} else {
+					next->getParent()->setLeft(next->getRight());
+				}
+				break;
+			}
+		}
+		// Replacement node is now 'selected'
+		// Link replacement to current's child nodes
+		selected->setLeft(current->getLeft());
+		cout << selected->getIdent() << " selected left now points to: " << selected->getLeft()->getIdent() << endl;
+		selected->setRight(current->getRight());
+		cout << selected->getIdent() << " selected right now points to: " << selected->getRight()->getIdent() << endl;
+		// Check if root
+		if (current->getParent() == NULL) {
+			cout << "Creating new root: " << endl;
+			selected->setParent(NULL);
+			//setRoot(selected);
+			root = selected;
+			cout << selected->getIdent() << " will be the root" << endl;
+			cout << root->getIdent() << " is the new root node" << endl;
+		}
+		// Determine if parent is on a right or left leaf
+		else if (current->getIdent() > current->getParent()->getIdent()) { // if on right
+			current->getParent()->setRight(selected); // Reset parents right
+		} else {
+			current->getParent()->setLeft(selected); // Reset parents left
+		}
+		delete current;
+		delete previous;
+		delete next;
+		return true;
+		}
 	else {
 		cout << "can't delete currently" << endl;
 		return false;
-		Node* previous = getPrevious(current, ident);
-		cout << "Previous: " << previous->getIdent() << endl;
-		Node* next = getNext(current, ident);
-		if ((current->getIdent() - previous->getIdent()) < ((next->getIdent() - current->getIdent())) {
-			cout << "previous is closer" << endl;
-		} else {
-			cout << "next is closer" << endl;
-		}
 	}
 }
 

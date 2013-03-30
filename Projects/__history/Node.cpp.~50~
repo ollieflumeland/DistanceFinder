@@ -15,14 +15,15 @@ using namespace std;
 
 	// Constructor creates an instance
 	Node::Node(Location *location) {
-		cout << "Node object created with name: " << ident << endl;
 		counter = 0;
 		ident=location->getCityName();
+		this->location = location;
 		left=NULL;
 		right=NULL;
 		parent=NULL;
 		dups=NULL;
 		counter++;
+		cout << "Node object created with name: " << ident << endl;
 		};
 
 	// Function to set left node
@@ -48,17 +49,25 @@ using namespace std;
 	string Node::getIdent() {
 		return this->ident;
 	}
+
 	// Function to return left node
 	Node* Node::getLeft() {
 		return this->left;
 	}
+
 	// Function to return right node
 	Node* Node::getRight() {
 		return this->right;
 	}
+
 	// Function to return parent node
 	Node* Node::getParent() {
 		return this->parent;
 	}
+
+	void Node::setIdent(string id){
+		this->ident = id;
+	}
+
 
 

@@ -232,34 +232,31 @@ bool LocationTree::deleteNode(string ident) {
 				if (previous->getIdent() > previous->getParent()->getIdent()) { // If parent left
 					if (previous->getLeft() == NULL) { // previous = leaf
 						previous->getParent()->setRight(NULL); // Reset parents right
-						cout << "Here we are 235" << endl;
 					} else {
-						previous->getParent()->setRight(previous->getLeft());
+						previous->getParent()->setRight(previous->getLeft()) == NULL)
 					}
-				} else {  // Parent right
+				} else {
 					if (previous->getLeft() == NULL) { // previous = leaf
 						previous->getParent()->setLeft(NULL); // Reset parents right
-						cout << "Here we are 242" << endl;
 					} else {
-						previous->getParent()->setLeft(previous->getLeft());
+						previous->getParent()->setLeft(previous->getLeft()) == NULL)
 					}
+		}
+				}
+				if (previous->getLeft() == NULL) {
+					previous->getParent()->setLeft(NULL);
+				} else {
+					previous->getParent()->setLeft(previous->getLeft());
 				}
 				break;
 			} else {
 				selected = next;
 				cout << "next is closer: " << selected->getIdent() << endl;
-				if (next->getIdent() > next->getParent()->getIdent()) { // If parent left
-					if (next->getRight() == NULL) { // next = leaf
-						next->getParent()->setRight(NULL); // Reset parent's right
-					} else {
-						next->getParent()->setRight(next->getRight());
-					}
+
+				if (next->getRight() == NULL) {
+					next->getParent()->setRight(NULL);
 				} else {
-					if (next->getRight() == NULL) {  // next = leaf
-						next->getParent()->setRight(NULL);
-					} else {
-						next->getParent()->setRight(next->getRight());
-					}
+					next->getParent()->setLeft(next->getRight());
 				}
 				break;
 			}
@@ -267,9 +264,9 @@ bool LocationTree::deleteNode(string ident) {
 		// Replacement node is now 'selected'
 		// Link replacement to current's child nodes
 		selected->setLeft(current->getLeft());
-		cout << selected->getIdent() << " selected left now points to: " << endl;
+		cout << selected->getIdent() << " selected left now points to: " << selected->getLeft()->getIdent() << endl;
 		selected->setRight(current->getRight());
-		cout << selected->getIdent() << " selected right now points to: " << endl;
+		cout << selected->getIdent() << " selected right now points to: " << selected->getRight()->getIdent() << endl;
 		// Check if root
 		if (current->getParent() == NULL) {
 			cout << "Creating new root: " << endl;

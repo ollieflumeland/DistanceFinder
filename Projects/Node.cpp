@@ -30,6 +30,7 @@ using namespace std;
 	void Node::setLeft(Node* left) {
 		this->left = left;
 	}
+
 	// Function to set right node
 	void Node::setRight(Node* right) {
 		this->right = right;
@@ -40,23 +41,21 @@ using namespace std;
 		this->parent = parent;
 	}
 
-	// Function to set duplicate node
-	void Node::setDuplicate(Node* dups) {
-		this->dups = dups;
-	}
-
 	// Function to return nodes name
 	string Node::getIdent() {
 		return this->ident;
 	}
+
 	// Function to return left node
 	Node* Node::getLeft() {
 		return this->left;
 	}
+
 	// Function to return right node
 	Node* Node::getRight() {
 		return this->right;
 	}
+
 	// Function to return parent node
 	Node* Node::getParent() {
 		return this->parent;

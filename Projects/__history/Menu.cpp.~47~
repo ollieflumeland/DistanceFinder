@@ -7,7 +7,7 @@ using namespace std;
 //Constructor
 Menu::Menu() {
 	ReaderWriter rw;
-	string filename = "newloc.txt";
+	string filename = "locations.txt";
 	locT = rw.createTreeFromFile(filename);
 	//int choice = -1;
 }
