@@ -1,12 +1,9 @@
-//============================================================================
-// Name        : LocationTree.cpp
-// Authors     : Bourgein, Oliver, Worth
-// Date        : Created on: 26 Feb 2013
-// Version     :
-// Copyright   : copyright reserved
-// Description : A Binary Tree Class to store Nodes
-//============================================================================/*
-
+/*
+ * A binary search tree for storing location nodes
+ *
+ *  Created on: 26 Feb 2013
+ *      Author: Ollie
+ */
 
 #include <string>
 #include "LocationTree.h"
@@ -41,15 +38,7 @@ bool LocationTree::addToTree(LocationTree* tree, Location* loc, Node* node, stri
 	Node* duptest = getCity(node, city);
 	if (duptest != NULL ) {
 		Location* newDup = duptest->getLocation();
-		while (newDup->getDups() != NULL) {
-			newDup = newDup->getDups();
-			loc->plusNum();
-		}
-		newDup->setDups(loc);
-		loc->plusNum();
-		duptest->plusDups();
-		cout << "Adding new duplicate, locNum: " << loc->getNum() << " noDups: " << duptest->getDupsNo() <<
-		endl;
+
 	} else {
 		tree->addNode(loc);
 	}
@@ -166,24 +155,6 @@ Node* LocationTree::getNext(Node* node, string ident) {
 	}
 
 }
-/**
-*   Function to delete a duplicate location
-*	if location is last in list delete
-*	if location is within list join before and after then delete
-*/
-bool LocationTree::deleteDupNode(Node* foundNode, int number) {
-    Location* foundLoc = foundNode->getLocation();
-	while (foundLoc->getNum() != number-1) { // find preceding loc
-		foundLoc = foundLoc->getDups();
-	}
-	if (number == foundNode->getDupsNo()+1) {  // if last
-		foundLoc->setDups(NULL);
-	} else {
-		foundLoc->setDups(foundLoc->getDups()->getDups()); // rejoin to following
-    }
-}
-
-
 
 /**
 *  Function to delete a node

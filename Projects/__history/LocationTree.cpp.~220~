@@ -166,24 +166,6 @@ Node* LocationTree::getNext(Node* node, string ident) {
 	}
 
 }
-/**
-*   Function to delete a duplicate location
-*	if location is last in list delete
-*	if location is within list join before and after then delete
-*/
-bool LocationTree::deleteDupNode(Node* foundNode, int number) {
-    Location* foundLoc = foundNode->getLocation();
-	while (foundLoc->getNum() != number-1) { // find preceding loc
-		foundLoc = foundLoc->getDups();
-	}
-	if (number == foundNode->getDupsNo()+1) {  // if last
-		foundLoc->setDups(NULL);
-	} else {
-		foundLoc->setDups(foundLoc->getDups()->getDups()); // rejoin to following
-    }
-}
-
-
 
 /**
 *  Function to delete a node

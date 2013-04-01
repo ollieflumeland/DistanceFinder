@@ -15,7 +15,7 @@ using namespace std;
 
 	// Constructor creates an instance
 	Node::Node(Location *location) {
-		noDups = 0;
+		noDups = 1;
 		ident=location->getCityName();
 		this->location = location;
 		left=NULL;

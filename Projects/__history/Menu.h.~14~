@@ -37,6 +37,7 @@ public:
 	void findDistance();
 	Location* getExactLocation(Node* node, string city);
 
+
 };
 
 #endif

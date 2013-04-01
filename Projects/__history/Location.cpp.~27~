@@ -25,7 +25,7 @@ Location::Location(string name, string country, string region, int latDeg, int l
 	setLonDeg(lonDeg);
 	setLonMin(lonMin);
 	setLonDirection(lonDir);
-	locNum = 1;
+	locCount = 1;
 	dups = NULL;
 }
 
@@ -104,11 +104,11 @@ string Location::getLonDirection() {
 	return cityLonDirection;
 }
 
-Location* Location::getDups() {
+Location* Location::getDup(cityName) {
 	return dups;
-}
+	}
 
-Location* Location::setDups(Location* dups) {
+Location* Location::setDups(Node* dups) {
 	this->dups = dups;
 }
 
@@ -116,12 +116,11 @@ int Location::getNum() {
 	return locNum;
 }
 
-void Location::plusNum() {
+void Location::plusCount() {
 	locNum++;
 }
 
-void Location::minusNum() {
+void Location::minusCount() {
     locNum--;
 }
-
 

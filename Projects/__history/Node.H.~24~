@@ -24,8 +24,6 @@ public:
 	Node* right;
 	Node* parent;
 	Location* location;
-
-    //Constructor
 	Node(Location *location);
 
 	//Function Prototypes
@@ -38,7 +36,6 @@ public:
 	Node* getLeft();
 	Node* getRight();
 	Node* getParent();
-	Location* getLocation();
 	int getDupsNo();
 	void plusDups();
 	void minusDups();

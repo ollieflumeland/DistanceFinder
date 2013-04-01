@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : Node.cpp
-// Authors     : Bourgein, Oliver, Worth
+// Author      : Ollie
 // Date        : Created on: 26 Feb 2013
 // Version     :
 // Copyright   : copyright reserved
@@ -58,11 +58,6 @@ using namespace std;
 	Node* Node::getParent() {
 		return this->parent;
 	}
-
-	// Function to return location pointer
-	Location* Node::getLocation() {
-		return this->location;
-    }
 
 	void Node::setIdent(string id){
 		this->ident = id;

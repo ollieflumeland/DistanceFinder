@@ -1,12 +1,9 @@
-//============================================================================
-// Name        : ReaderWriter.cpp
-// Authors     : Bourgein, Oliver, Worth
-// Date        : Created on: Mar 20, 2013
-// Version     :
-// Copyright   : copyright reserved
-// Description : A Read/Write Class to handle file  i/o
-//============================================================================/*
-
+/*
+ * ReaderWriter.cpp
+ *
+ *  Created on: Mar 20, 2013
+ *      Author: bourgein
+ */
 
 #include "ReaderWriter.h"
 

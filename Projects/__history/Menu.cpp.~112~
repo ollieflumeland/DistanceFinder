@@ -131,7 +131,7 @@ void Menu::administerRecord() {
    foundLoc = Menu::getExactLocation(rootNode, city);
 
    cout << endl;
-   cout << foundLoc->getCityName();
+
    cout << endl << "Do you want to Modify or Delete the record?";
    cout << endl << "1. Modify" << endl;
    cout << "2. Delete" << endl << endl;
@@ -223,7 +223,6 @@ Location* Menu::getExactLocation(Node* node, string city) {
 			}
 		}
 	}
-	return foundLoc;
 }
 
 void Menu::findDistance() {

@@ -223,7 +223,6 @@ Location* Menu::getExactLocation(Node* node, string city) {
 			}
 		}
 	}
-	return foundLoc;
 }
 
 void Menu::findDistance() {

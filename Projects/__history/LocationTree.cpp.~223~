@@ -173,10 +173,10 @@ Node* LocationTree::getNext(Node* node, string ident) {
 */
 bool LocationTree::deleteDupNode(Node* foundNode, int number) {
     Location* foundLoc = foundNode->getLocation();
-	while (foundLoc->getNum() != number-1) { // find preceding loc
+	while (foundLoc->getNum != number-1) { // find preceding loc
 		foundLoc = foundLoc->getDups();
 	}
-	if (number == foundNode->getDupsNo()+1) {  // if last
+	if (number == foundNode->getDupsNo+1) {  // if last
 		foundLoc->setDups(NULL);
 	} else {
 		foundLoc->setDups(foundLoc->getDups()->getDups()); // rejoin to following

@@ -104,11 +104,11 @@ string Location::getLonDirection() {
 	return cityLonDirection;
 }
 
-Location* Location::getDups() {
+Location* Location::getDups(string cityName) {
 	return dups;
-}
+	}
 
-Location* Location::setDups(Location* dups) {
+Location* Location::setDups(Node* dups) {
 	this->dups = dups;
 }
 
@@ -116,11 +116,11 @@ int Location::getNum() {
 	return locNum;
 }
 
-void Location::plusNum() {
+void Location::plusCount() {
 	locNum++;
 }
 
-void Location::minusNum() {
+void Location::minusCount() {
     locNum--;
 }
 

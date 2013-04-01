@@ -104,7 +104,7 @@ string Location::getLonDirection() {
 	return cityLonDirection;
 }
 
-Location* Location::getDups() {
+Location* Location::getDups(string cityName) {
 	return dups;
 }
 
@@ -116,11 +116,11 @@ int Location::getNum() {
 	return locNum;
 }
 
-void Location::plusNum() {
+void Location::plusCount() {
 	locNum++;
 }
 
-void Location::minusNum() {
+void Location::minusCount() {
     locNum--;
 }
 
