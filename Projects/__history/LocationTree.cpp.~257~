@@ -172,15 +172,49 @@ Node* LocationTree::getNext(Node* node, string ident) {
 *	if location is within list join before and after then delete
 */
 bool LocationTree::deleteDupNode(Node* foundNode, int number) {
-    Location* foundLoc = foundNode->getLocation();
-	while (foundLoc->getNum() != number-1) { // find preceding loc
+	cout << foundNode->getIdent() << foundNode->getDupsNo() << " " << number << endl;
+	Location* foundLoc = foundNode->getLocation();
+	Location* toRemove;
+	Location* preceding;
+	cout << foundLoc->getNum() << foundLoc->getCityName() << foundLoc->getCountryName() << endl;
+	if (number == 1) {
+		toRemove = foundLoc;
 		foundLoc = foundLoc->getDups();
-	}
-	if (number == foundNode->getDupsNo+1) {  // if last
-		foundLoc->setDups(NULL);
+		cout << "toRemove = " << toRemove->getCityName() << "foundLoc = " << foundLoc->getCityName() << endl;
+		foundNode->setLocation(foundLoc);
+		cout << foundNode->getLocation()->getCityName() << endl;
+		foundNode->minusDups();
+		while (foundLoc->getDups() != NULL) {
+			foundLoc->minusNum();
+			cout << foundLoc->getNum() << foundLoc->getCityName() << endl;
+			foundLoc = foundLoc->getDups();
+		}
+		delete toRemove;
 	} else {
-		foundLoc->setDups(foundLoc->getDups()->getDups()); // rejoin to following
-    }
+		preceding = foundLoc;
+		while (preceding->getNum() != number-1) { // find preceding loc
+		preceding = preceding->getDups();
+		cout << preceding->getNum() << preceding->getCityName() << preceding->getCountryName() << endl;
+		}
+		if (number == foundNode->getDupsNo()+1) {  // if last
+			toRemove = preceding->getDups();
+			foundLoc->setDups(NULL);
+			delete toRemove;
+			foundNode->minusDups();
+			return true;
+		} else {
+			toRemove = preceding->getDups();
+			preceding->setDups(toRemove->getDups()); // rejoin to following
+			foundNode->minusDups();
+			delete toRemove;
+			while (preceding->getDups() != NULL) {
+				preceding = preceding->getDups();
+				preceding->minusNum();
+			}
+			return true;
+		}
+	}
+	return false;
 }
 
 

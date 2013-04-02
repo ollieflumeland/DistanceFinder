@@ -171,14 +171,52 @@ Node* LocationTree::getNext(Node* node, string ident) {
 *	if location is last in list delete
 *	if location is within list join before and after then delete
 */
-bool Location::deleteDupNode(Node* foundNode, int number) {
-    Location* foundLoc = foundNode->getLocation();
-	if (number == foundNode->getDupsNo+1) {  // last
-		while (foundLoc->getNum != number-1) {
-			foundNode = foundNode->getDups();
+bool LocationTree::deleteDupNode(Node* foundNode, int number) {
+	cout << foundNode->getIdent() << foundNode->getDupsNo() << " " << number << endl;
+	Location* foundLoc = foundNode->getLocation();
+	Location* toRemove;
+	Location* preceding;
+	cout << foundLoc->getNum() << foundLoc->getCityName() << foundLoc->getCountryName() << endl;
+	if (number == 1) {
+		toRemove = foundLoc;
+		foundLoc = foundLoc->getDups();
+		cout << "toRemove = " << toRemove->getCountryName() << ". foundLoc = " << foundLoc->getCountryName() << endl;
+		foundNode->setLocation(foundLoc);
+		cout << foundNode->getLocation()->getCountryName() << endl;
+		foundNode->minusDups();
+		foundLoc->minusNum();
+		while (foundLoc->getDups() != NULL) {
+			foundLoc = foundLoc->getDups();
+			foundLoc->minusNum();
+			cout << foundLoc->getNum() << foundLoc->getCountryName() << endl;
 		}
-		foundNo
+		delete toRemove;
+		return true;
+	} else {
+		preceding = foundLoc;
+		while (preceding->getNum() != number-1) { // find preceding loc
+		preceding = preceding->getDups();
+		cout << preceding->getNum() << preceding->getCityName() << preceding->getCountryName() << endl;
+		}
+		if (number == foundNode->getDupsNo()+1) {  // if last
+			toRemove = preceding->getDups();
+			foundLoc->setDups(NULL);
+			delete toRemove;
+			foundNode->minusDups();
+			return true;
+		} else {
+			toRemove = preceding->getDups();
+			preceding->setDups(toRemove->getDups()); // rejoin to following
+			foundNode->minusDups();
+			delete toRemove;
+			while (preceding->getDups() != NULL) {
+				preceding = preceding->getDups();
+				preceding->minusNum();
+			}
+			return true;
+		}
 	}
+	return false;
 }
 
 

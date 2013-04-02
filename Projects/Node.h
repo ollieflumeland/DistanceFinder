@@ -39,6 +39,7 @@ public:
 	Node* getRight();
 	Node* getParent();
 	Location* getLocation();
+	void setLocation(Location* location);
 	int getDupsNo();
 	void plusDups();
 	void minusDups();

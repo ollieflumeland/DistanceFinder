@@ -1,9 +1,12 @@
-/*
- * A binary search tree for storing location nodes
- *
- *  Created on: 26 Feb 2013
- *      Author: Ollie
- */
+//============================================================================
+// Name        : LocationTree.cpp
+// Authors     : Bourgein, Oliver, Worth
+// Date        : Created on: 26 Feb 2013
+// Version     :
+// Copyright   : copyright reserved
+// Description : A Binary Tree Class to store Nodes
+//============================================================================/*
+
 
 #include <string>
 #include "LocationTree.h"
@@ -38,10 +41,15 @@ bool LocationTree::addToTree(LocationTree* tree, Location* loc, Node* node, stri
 	Node* duptest = getCity(node, city);
 	if (duptest != NULL ) {
 		Location* newDup = duptest->getLocation();
+		while (newDup->getDups() != NULL) {
+			newDup = newDup->getDups();
+			loc->plusNum();
+		}
 		newDup->setDups(loc);
 		loc->plusNum();
 		duptest->plusDups();
-		cout << "Adding new duplicate " << endl;
+		cout << "Adding new duplicate, locNum: " << loc->getNum() << " noDups: " << duptest->getDupsNo() <<
+		endl;
 	} else {
 		tree->addNode(loc);
 	}
@@ -158,6 +166,55 @@ Node* LocationTree::getNext(Node* node, string ident) {
 	}
 
 }
+/**
+*   Function to delete a duplicate location
+*	if location is last in list delete
+*	if location is within list join before and after then delete
+*/
+bool LocationTree::deleteDupNode(Node* foundNode, int number) {
+	cout << foundNode->getIdent() << foundNode->getDupsNo() << " " << number << endl;
+	Location* foundLoc = foundNode->getLocation();
+	Location* toRemove;
+	cout << foundLoc->getNum() << foundLoc->getCityName() << foundLoc->getCountryName() << endl;
+	while (foundLoc->getNum() != number-1) { // find preceding loc
+		foundLoc = foundLoc->getDups();
+		cout << foundLoc->getNum() << foundLoc->getCityName() << foundLoc->getCountryName() << endl;
+	}
+	if (foundLoc->getNum() == 1) {
+		toRemove = foundLoc;
+		foundLoc = foundLoc->getDups();
+		cout << "toRemove = " << toRemove->getCityName() << "foundLoc = " << foundLoc->getCityName() << endl;
+		foundNode->setLocation(foundLoc);
+		cout << foundNode->getLocation()->getCityName() << endl;
+		foundNode->minusDups();
+		while (foundLoc->getDups() != NULL) {
+			foundLoc->minusNum();
+			cout << foundLoc->getNum() << foundLoc->getCityName() << endl;
+			foundLoc = foundLoc->getDups();
+
+		}
+		delete toRemove;
+	} else if (number == foundNode->getDupsNo()+1) {  // if last
+		toRemove = foundLoc->getDups();
+		foundLoc->setDups(NULL);
+		delete toRemove;
+		foundNode->minusDups();
+		return true;
+	} else {
+		toRemove = foundLoc->getDups();
+		foundLoc->setDups(toRemove->getDups()); // rejoin to following
+		foundNode->minusDups();
+		delete toRemove;
+		while (foundLoc->getDups() != NULL) {
+			foundLoc = foundLoc->getDups();
+			foundLoc->minusNum();
+        }
+		return true;
+	}
+	return false;
+}
+
+
 
 /**
 *  Function to delete a node

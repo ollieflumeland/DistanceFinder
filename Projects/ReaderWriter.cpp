@@ -59,7 +59,7 @@ LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 
 		tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
 				lonDeg, lonMin, lonDirection);
-		locTree->addNode(tempLoc);
+		locTree->addToTree(locTree, tempLoc, locTree->getRoot(), name);
 	}
 	inf.close();
 	return locTree;
