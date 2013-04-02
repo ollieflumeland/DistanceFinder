@@ -65,7 +65,7 @@ using namespace std;
 	}
 
 	// Function to set location pointer
-	void Node::setLocation(Location* location) {
+	Location* Node::setLocation(Location* location) {
 		this->location = location;
 	}
 

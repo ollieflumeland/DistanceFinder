@@ -15,7 +15,7 @@ using namespace std;
 
 	// Constructor creates an instance
 	Node::Node(Location *location) {
-		noDups = 0;
+		noDups = 1;
 		ident=location->getCityName();
 		this->location = location;
 		left=NULL;
@@ -62,12 +62,7 @@ using namespace std;
 	// Function to return location pointer
 	Location* Node::getLocation() {
 		return this->location;
-	}
-
-	// Function to set location pointer
-	void Node::setLocation(Location* location) {
-		this->location = location;
-	}
+    }
 
 	void Node::setIdent(string id){
 		this->ident = id;

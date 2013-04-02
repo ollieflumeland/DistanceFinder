@@ -131,7 +131,7 @@ void Menu::administerRecord() {
    foundLoc = Menu::getExactLocation(rootNode, city);
 
    cout << endl;
-   //cout << foundLoc->getCityName();
+   cout << foundLoc->getCityName();
    cout << endl << "Do you want to Modify or Delete the record?";
    cout << endl << "1. Modify" << endl;
    cout << "2. Delete" << endl << endl;
@@ -157,15 +157,15 @@ void Menu::administerRecord() {
 		cout << endl << "DELETING ENTRY" << endl << endl;
 		if (foundNode->getDupsNo() == 0) {
 			if (locT->deleteNode(city)) {
-				cout << "City has been removed" << endl << endl;
+				cout << "City has been removed" << endl;
 			} else {
-				cout << "WARNING! Deletion unsuccessful" << endl << endl;
+				cout << "WARNING! Deletion unsuccessful" << endl;
 			}
 		} else {
 			if (locT->deleteDupNode(foundNode, foundLoc->getNum())) {
-				cout << "City has been removed" << endl << endl;
+				cout << "City has been removed" << endl;
 			} else {
-				cout << "WARNING! Location Deletion unsuccessful" << endl << endl;
+				cout << "WARNING! Deletion unsuccessful" << endl;
 			}
 		}
 		system("PAUSE");
@@ -223,7 +223,6 @@ Location* Menu::getExactLocation(Node* node, string city) {
 			}
 		}
 	}
-	return foundLoc;
 }
 
 void Menu::findDistance() {

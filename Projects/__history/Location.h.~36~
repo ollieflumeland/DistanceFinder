@@ -59,7 +59,7 @@ public:
 	int getLonDeg();
 	int getLonMin();
 	string getLonDirection();
-	Location* getDups();
+	Location* getDups(string cityName);
 	Location* setDups(Location* dups);
 	int getNum();
 	void plusNum();

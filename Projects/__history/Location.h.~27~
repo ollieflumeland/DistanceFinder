@@ -13,7 +13,6 @@
 #include <iostream>
 #include <string>
 
-
 using namespace std;
 
 class Location {
@@ -28,10 +27,11 @@ private:
 	int cityLonDeg;
 	int cityLonMin;
 	string cityLonDirection;
-	Location* dups;
-	int locNum;
+	Location* dups
+	int locCount
 
 public:
+
 
 	//Constructor for class Location
 	Location(string name, string country,string region, int latDeg, int latMin, string latDir, int lonDeg, int lonMin, string lonDir);
@@ -59,11 +59,11 @@ public:
 	int getLonDeg();
 	int getLonMin();
 	string getLonDirection();
-	Location* getDups();
-	Location* setDups(Location* dups);
-	int getNum();
-	void plusNum();
-	void minusNum();
+	Location* getDups(cityName);
+	Location* setDups(cityName);
+	int getCount();
+	void plusCount();
+	void minusCount();
 
 };
 

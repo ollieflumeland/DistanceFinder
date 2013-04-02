@@ -98,7 +98,7 @@ void Menu::addRecord() {
 
 void Menu::administerRecord() {
 
-	int choice2;
+	int choice;
 	string city;
 	string strTemp;
 	int intTemp;
@@ -131,41 +131,40 @@ void Menu::administerRecord() {
    foundLoc = Menu::getExactLocation(rootNode, city);
 
    cout << endl;
-   //cout << foundLoc->getCityName();
+
    cout << endl << "Do you want to Modify or Delete the record?";
    cout << endl << "1. Modify" << endl;
    cout << "2. Delete" << endl << endl;
    cout << "3. Quit to Main Menu" << endl << endl;
 
    cout << "Modify/Delete a Record - Choose an option: ";
-   cin >> choice2;
+   cin >> choice;
 
-   switch(choice2){
+   switch(choice){
 	case 1:
-		cout << "Editing " << foundLoc->getCityName() << ", in " << foundLoc->getCountryName();
-		cout << endl << "Edit Country: (currently " << foundLoc->getCountryName() << ") : ";
-		cin >> strTemp; foundLoc->setCountryName(strTemp);
-		cout << "Edit Region: "; cin >> strTemp; foundLoc->setRegion(strTemp);
-		cout << "Edit Latitude Degrees: "; cin >> intTemp; foundLoc->setLatDeg(intTemp);
-		cout << "Edit Latitude Minutes: "; cin >> intTemp; foundLoc->setLatMin(intTemp);
-		cout << "Edit Latitude Direction: "; cin >> strTemp; foundLoc->setLatDirection(strTemp);
-		cout << "Edit Longitude Degrees: "; cin >> intTemp; foundLoc->setLonDeg(intTemp);
-		cout << "Edit Longitude Minutes: "; cin >> intTemp; foundLoc->setLonMin(intTemp);
-		cout << "Edit Longitude Direction: "; cin >> strTemp; foundLoc->setLonDirection(strTemp);
+        cout << "Editing " << foundLoc->getCityName << ", in " << foundLoc->getCountryName;
+		cout << endl << "Enter Country: "; cin >> strTemp; foundLoc->setCountryName(strTemp);
+		cout << "Enter Region: "; cin >> strTemp; foundLoc->setRegion(strTemp);
+		cout << "Enter Latitude Degrees: "; cin >> intTemp; foundLoc->setLatDeg(intTemp);
+		cout << "Enter Latitude Minutes: "; cin >> intTemp; foundLoc->setLatMin(intTemp);
+		cout << "Enter Latitude Direction: "; cin >> strTemp; foundLoc->setLatDirection(strTemp);
+		cout << "Enter Longitude Degrees: "; cin >> intTemp; foundLoc->setLonDeg(intTemp);
+		cout << "Enter Longitude Minutes: "; cin >> intTemp; foundLoc->setLonMin(intTemp);
+		cout << "Enter Longitude Direction: "; cin >> strTemp; foundLoc->setLonDirection(strTemp);
 		break;
 	case 2:
 		cout << endl << "DELETING ENTRY" << endl << endl;
 		if (foundNode->getDupsNo() == 0) {
 			if (locT->deleteNode(city)) {
-				cout << "City has been removed" << endl << endl;
+				cout << "City has been removed" << endl;
 			} else {
-				cout << "WARNING! Deletion unsuccessful" << endl << endl;
+				cout << "WARNING! Deletion unsuccessful" << endl;
 			}
 		} else {
 			if (locT->deleteDupNode(foundNode, foundLoc->getNum())) {
-				cout << "City has been removed" << endl << endl;
+				cout << "City has been removed" << endl;
 			} else {
-				cout << "WARNING! Location Deletion unsuccessful" << endl << endl;
+				cout << "WARNING! Deletion unsuccessful" << endl;
 			}
 		}
 		system("PAUSE");
@@ -223,7 +222,6 @@ Location* Menu::getExactLocation(Node* node, string city) {
 			}
 		}
 	}
-	return foundLoc;
 }
 
 void Menu::findDistance() {
