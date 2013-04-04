@@ -16,6 +16,11 @@
 using namespace std;
 
 class Node {
+private:
+	int balance;
+	int childLeft;
+	int childRight;
+
 public:
 
 	string ident;
@@ -43,6 +48,13 @@ public:
 	int getDupsNo();
 	void plusDups();
 	void minusDups();
+	int getBalance();
+	int getCL();
+	int getCR();
+	void plusCL();
+	void minusCL();
+	void plusCR();
+	void minusCR();
 
 };
 

@@ -1,10 +1,10 @@
 //============================================================================
 // Name        : Node.h
-// Author      : Ollie
+// Authors     : Bourgein, Oliver, Worth
 // Date        : Created on: 26 Feb 2013
 // Version     :
 // Copyright   : copyright reserved
-// Description : A Node Class for insertion into binary tree
+// Description : A Node Class to store locations in a tree
 //============================================================================/*
 
 
@@ -16,17 +16,24 @@
 using namespace std;
 
 class Node {
+private:
+	int balance;
+	int childLeft;
+	int childRight;
+
 public:
+
 	string ident;
-	int counter;
-	//Location location;
-	Node* dups;
+	int noDups;
 	Node* left;
 	Node* right;
 	Node* parent;
 	Location* location;
+
+    //Constructor
 	Node(Location *location);
 
+	//Function Prototypes
 	void setLeft(Node* left);
 	void setRight(Node* right);
 	void setParent(Node* parent);
@@ -36,6 +43,18 @@ public:
 	Node* getLeft();
 	Node* getRight();
 	Node* getParent();
+	Location* getLocation();
+	void setLocation(Location* location);
+	int getDupsNo();
+	void plusDups();
+	void minusDups();
+	int getBalance();
+	int getChildLeft();
+	int getChildRight();
+	void plusCL();
+	void minusCL();
+	void plusCR();
+	void minusCR();
 
 };
 

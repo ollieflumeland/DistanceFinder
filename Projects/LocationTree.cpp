@@ -62,35 +62,81 @@ void LocationTree::addNode (Location *loc) {
 		addNode(loc, root);
 	} else {
 		cout << "creating the root node" << endl;
-		Node* n = new Node(loc);
-		n->setIdent(loc->getCityName());
-		root = n;
+		Node* node = new Node(loc);
+		node->setIdent(loc->getCityName());
+		root = node;
+		//node->childLeft = 0;
+		//node->childRight = 0;
+		//node->balance = childLeft + childRight;
 	}
 }
 
-// Function that adds nodes to the tree, finding the right position
-void LocationTree::addNode(Location *loc, Node* leaf) {
+// Function that adds nodes to the tree, finding the correct position
+void LocationTree::addNode(Location *loc, Node* test) {
 	string ident = loc->getCityName();
-	if ( ident <= leaf->getIdent() )
-	{
-		if ( leaf->getLeft() != NULL )
-			addNode(loc, leaf->getLeft());
-		else {
-			Node* n = new Node(loc);
-			n->setIdent(ident);
-			n->setParent(leaf);
-			leaf->setLeft(n);
+	if (ident < test->getIdent()) { // if left
+		test->plusCL(); // balancing info
+		cout << test->getIdent() << " Left Childs  = " << test->getCL() << endl;
+		cout << test->getIdent() << " Right Childs = " << test->getCR() << endl;
+		if (test->getBalance() < -1 || test->getBalance() > 1) {
+			balancePoint = test;
+			cout << "balancePoint created: " << balancePoint->getIdent() << endl;
+			childOne = L;
 		}
-	}
-	else
-	{
-		if ( leaf->getRight() != NULL )
-			addNode(loc, leaf->getRight());
+		if (test->getLeft() != NULL )
+			addNode(loc, test->getLeft());
 		else {
-			Node* n = new Node(loc);
-			n->setIdent(ident);
-			n->setParent(leaf);
-			leaf->setRight(n);
+			Node* node = new Node(loc);
+			node->setIdent(ident);
+			node->setParent(test);
+			test->setLeft(node);
+			if (balancePoint != NULL) {
+				cout << node->getIdent() << " created, now perform balancing at " << balancePoint->getIdent() << endl;
+				childTwo = L;
+				insertedNode = node;
+				cout << "childOne = " << childOne << ". childTwo = " << childTwo << endl;
+				if (childOne == childTwo) {  // Single rotation needed
+					LocationTree::rotateOne();
+				} else { // Two rotations required
+					cout << "Perform double rotation" << endl;
+					LocationTree::rotateTwo();
+					cout << "Begin second rotation" << endl;
+					LocationTree::rotateOne();
+				}
+			}
+
+		}
+	} else {
+		test->plusCR(); // balancing info
+		cout << test->getIdent() << " Left Childs  = " << test->getCL() << endl;
+		cout << test->getIdent() << " Right Childs = " << test->getCR() << endl;
+		if (test->getBalance() < -1 || test->getBalance() > 1) {
+			balancePoint = test;
+			cout << "balancePoint created: " << balancePoint->getIdent() << endl;
+			childOne = R;
+		}
+		if ( test->getRight() != NULL )
+			addNode(loc, test->getRight());
+		else {
+			Node* node = new Node(loc);
+			node->setIdent(ident);
+			node->setParent(test);
+			test->setRight(node);
+			if (balancePoint != NULL) {
+				cout << node->getIdent() << " created, now perform balancing at " << balancePoint->getIdent() << endl;
+				childTwo = R;
+				insertedNode = node;
+				cout << "childOne = " << childOne << ". childTwo = " << childTwo << endl;
+				if (childOne == childTwo) {  // Single rotation needed
+					cout << "Perform single rotation" << endl;
+					LocationTree::rotateOne();
+				} else { // Two rotations required
+					cout << "Perform double rotation" << endl;
+					LocationTree::rotateTwo();
+					cout << "Begin second rotation" << endl;
+					LocationTree::rotateOne();
+				}
+			}
 		}
 	}
 }
@@ -397,6 +443,53 @@ Node* LocationTree::getCity(Node* node, string ident)  {
 		return NULL;
 	}
 }
+
+void LocationTree::rotateOne() {
+	if (childOne == L) {
+		Node* newParent = balancePoint->getLeft();
+		newParent->setParent(balancePoint->getParent());
+		if (balancePoint->getIdent() < balancePoint->getParent()->getIdent()) {
+			balancePoint->getParent()->setLeft(newParent);
+		} else {
+			balancePoint->getParent()->setRight(newParent);
+		}
+		balancePoint->setParent(newParent);
+		balancePoint->setLeft(newParent->getRight());
+		newParent->setRight(balancePoint);
+		//newParent->plusCR();
+
+	} else {
+		Node* newParent = balancePoint->getRight();
+		newParent->setParent(balancePoint->getRight());
+		if (balancePoint->getIdent() < balancePoint->getParent()->getIdent()) {
+			balancePoint->getParent()->setLeft(newParent);
+		} else {
+			balancePoint->getParent()->setRight(newParent);
+		}
+		balancePoint->setParent(newParent);
+		balancePoint->setRight(newParent->getLeft());
+		newParent->setLeft(balancePoint);
+	}
+}
+
+void LocationTree::rotateTwo() {
+	if (childTwo == L) {
+		cout << "childTwo = L = " << childTwo << endl;
+		insertedNode->setParent(balancePoint);
+		balancePoint->getRight()->setLeft(insertedNode->getRight());
+		insertedNode->setRight(balancePoint->getRight());
+		insertedNode->getRight()->setParent(insertedNode);
+		balancePoint->setRight(insertedNode);
+	} else {
+	    cout << "childTwo = R = " << childTwo << endl;
+		insertedNode->setParent(balancePoint);
+		balancePoint->getLeft()->setRight(insertedNode->getLeft());
+		insertedNode->setLeft(balancePoint->getLeft());
+		insertedNode->getLeft()->setParent(insertedNode);
+		balancePoint->setLeft(insertedNode);
+    }
+}
+
 
 
 

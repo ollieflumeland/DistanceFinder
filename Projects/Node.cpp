@@ -85,6 +85,36 @@ using namespace std;
 		noDups--;
 	}
 
+	int Node::getBalance() {
+		return childLeft + childRight;
+	}
+
+	int Node::getCL() {
+		return childLeft;
+	}
+
+	int Node::getCR() {
+		return childRight;
+	}
+
+	void Node::plusCL() {
+		childLeft--;
+	}
+
+	void Node::minusCL() {
+		childLeft++;
+	}
+
+	void Node::plusCR() {
+		childRight++;
+	}
+
+	void Node::minusCR() {
+        childRight--;
+    }
+
+
+
 
 
 
