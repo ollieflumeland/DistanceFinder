@@ -20,7 +20,7 @@ private:
 	double loc2DecLat;
 	double loc2DecLon;
 
-	double convertToDec(int deg, int min, string isNeg);
+	double convertToDec(double deg, double min, string isNeg);
 	double calcDistBetween();
 };
 #endif
