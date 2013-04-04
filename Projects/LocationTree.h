@@ -7,17 +7,24 @@
 // Description : A Binary Tree Class to store Nodes
 //============================================================================/*
 
-#ifndef LocationTree_H_
-#define LocationTree_H_
+#ifndef LOCATIONTREE_H_
+#define LOCATIONTREE_H_
 
 #include "Location.h"
 #include "Node.h"
+
+# define L 0
+# define R 1
 
 using namespace std;
 
 class LocationTree {
 private:
 	Node* root;
+	Node* balancePoint;
+	Node* insertedNode;
+	int childOne;
+	int childTwo;
 
 public:
 
@@ -43,8 +50,10 @@ public:
 	Node* getLast(Node* node);
 	Node* getFarLeft(Node* node, string ident);
 	Node* getFarRight(Node* node, string ident);
+	void rotateOne();
+	void rotateTwo();
 
 };
 
-#endif /* NODE_H_ */
+#endif /* LOCATIONTREE_H_ */
 
