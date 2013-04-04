@@ -21,41 +21,51 @@ LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 	fstream inf;
 	inf.open(fileName.c_str(),ios::in);
 
+	Location *tempLoc;
+
+	stringstream ss;
+	string line;
+	string name;
+	string country;
+	string region;
+	string latDegString;
+	string latMinString;
+	string latDirection;
+	string lonDegString;
+	string lonMinString;
+	string lonDirection;
+	int latDeg;
+	int latMin;
+	int lonDeg;
+	int lonMin;
+
 	/*note this is not istream.getline() but
 	 * part of the std namespace <string> stuff
 	 */
 	while (!inf.eof()) {
-
-		string name;
-		getline(inf,name,'|');
+		getline(inf,line);
+		ss.clear();
+		ss.str(line);
+		
+		getline(ss,name,'|');
 	   //	cout << "name: " << name << endl;
-		Location *tempLoc;
 
-		string country;
-		string region;
-		string latDegString;
-		string latMinString;
-		string latDirection;
+		getline(ss, country, '|');
+		getline(ss,region,'|');
 
-		getline(inf, country, '|');
-		getline(inf,region,'|');
 		//get lat stuff
-		getline(inf, latDegString, '|');
-		int latDeg = atoi(latDegString.c_str());
-		getline(inf, latMinString, '|');
-		int latMin = atoi(latMinString.c_str());
-		getline(inf, latDirection, '|');
-
-		string lonDegString;
-		string lonMinString;
-		string lonDirection;
+		getline(ss, latDegString, '|');
+		latDeg = atoi(latDegString.c_str());
+		getline(ss, latMinString, '|');
+		latMin = atoi(latMinString.c_str());
+		getline(ss, latDirection, '|');
 
 		//get lon stuff
-		getline(inf, lonDegString, '|');
-		int lonDeg = atoi(lonDegString.c_str());
-		getline(inf, lonMinString, '|');
-		int lonMin = atoi(lonMinString.c_str());
-		getline(inf, lonDirection);
+		getline(ss, lonDegString, '|');
+		lonDeg = atoi(lonDegString.c_str());
+		getline(ss, lonMinString, '|');
+		lonMin = atoi(lonMinString.c_str());
+		getline(ss, lonDirection);
 
 		tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
 				lonDeg, lonMin, lonDirection);
@@ -75,7 +85,7 @@ if (saveFile.is_open()){
 		saveFile.close();
 	}
 	else{
-		cout << "Unable to open file";
+		cout << "Unable to open file to save";
 	}
 
 }
