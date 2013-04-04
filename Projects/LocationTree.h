@@ -12,6 +12,7 @@
 
 #include "Location.h"
 #include "Node.h"
+#include <string>
 
 using namespace std;
 
@@ -43,6 +44,7 @@ public:
 	Node* getLast(Node* node);
 	Node* getFarLeft(Node* node, string ident);
 	Node* getFarRight(Node* node, string ident);
+	string serialise(Node* node);
 
 };
 

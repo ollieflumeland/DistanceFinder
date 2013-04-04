@@ -12,7 +12,7 @@ const int EARTH_RAD = 6371;
 class Calculator {
 public:
 	Calculator();
-	double getDistanceBetween(Location* firstLoc, Location* secondLoc);
+	double getDistanceBetween(Location* firstLoc, Location* secondLoc, int inKm);
 private:
 	double loc1DecLon;
 	double loc1DecLat;
@@ -20,7 +20,7 @@ private:
 	double loc2DecLat;
 	double loc2DecLon;
 
-	double convertToDec(int deg, int min, string isNeg);
-	double calcDistBetween();
+	double convertToDec(double deg, double min, string isNeg);
+	double calcDistBetween(int inKm);
 };
 #endif

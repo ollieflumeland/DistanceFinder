@@ -33,7 +33,8 @@ void Menu::menuOptions(int &choice) {
 	cout << "1. Add Record" << endl;
 	cout << "2. Administer Record" << endl;
 	cout << "3. Find Distance" << endl << endl;
-	cout << "4. Quit" << endl << endl;
+	cout << "4. Save" << endl << endl;
+	cout << "5. Quit" << endl << endl;
 
 	cout << "Choose an Option: ";
     cin >> choice;
@@ -50,13 +51,16 @@ void Menu::menuOptions(int &choice) {
                 findDistance();
                 break;
             case 4:
-                cout << "Quit"; // PLACEHOLDER - REMOVE
-                exit(EXIT_SUCCESS);
+				saveFile();
+				break;
+			case 5:
+				cout << "Quit"; // PLACEHOLDER - REMOVE
+				exit(EXIT_SUCCESS);
 			default:
 				cout << endl << "Invalid Choice" <<endl << endl;
 				break;
         }
-    } while (choice != 4);
+    } while (choice != 5);
 }
 
 void Menu::addRecord() {
@@ -229,10 +233,12 @@ Location* Menu::getExactLocation(Node* node, string city) {
 void Menu::findDistance() {
 	string cityOne;
 	string cityTwo;
+	int inKm;
 	Node* rootNode = locT->getRoot();
 
 	cout << "Enter the first City's Name: "; cin >> cityOne;
 	cout << "Enter the second City's Name: "; cin >> cityTwo;
+	cout << "Result in miles (1) or km (2)?: "; cin >> inKm;
 
 	Node* foundNodeOne = locT->getCity(rootNode, cityOne);
 	Node* foundNodeTwo = locT->getCity(rootNode,cityTwo);
@@ -240,8 +246,20 @@ void Menu::findDistance() {
 	Location* locTwo = foundNodeTwo->location;
 
 	Calculator calc;
-	double dist = calc.getDistanceBetween(locOne,locTwo);
-	cout << "distance between is " << dist << "km" << endl;
+	if (inKm == 1) {
+		double dist = calc.getDistanceBetween(locOne,locTwo,0);
+		cout << "distance between is " << dist << "miles" << endl;
+	}
+	else {
+		double dist = calc.getDistanceBetween(locOne,locTwo,1);
+		cout << "distance between is " << dist << "km" << endl;
+    }
+	
+}
+
+void Menu::saveFile(){
+	ReaderWriter rw;
+	rw.saveFile("bugger.txt",locT);
 }
 
 
