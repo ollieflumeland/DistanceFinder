@@ -31,7 +31,7 @@ public:
 	LocationTree* locT;
 
 	//Function Prototypes
-    void menuOptions(int &choice);
+    void menuOptions();
     void addRecord();
     void administerRecord();
 	void findDistance();

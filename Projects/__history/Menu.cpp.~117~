@@ -165,7 +165,7 @@ void Menu::administerRecord() {
 			if (locT->deleteDupNode(foundNode, foundLoc->getNum())) {
 				cout << "City has been removed" << endl << endl;
 			} else {
-				cout << "WARNING! Location Deletion unsuccessful" << endl << endl;
+				cout << "WARNING! Deletion unsuccessful" << endl << endl;
 			}
 		}
 		system("PAUSE");

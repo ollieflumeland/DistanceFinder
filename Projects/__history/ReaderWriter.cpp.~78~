@@ -1,12 +1,9 @@
-//============================================================================
-// Name        : ReaderWriter.cpp
-// Authors     : Bourgein, Oliver, Worth
-// Date        : Created on: Mar 20, 2013
-// Version     :
-// Copyright   : copyright reserved
-// Description : A Read/Write Class to handle file  i/o
-//============================================================================/*
-
+/*
+ * ReaderWriter.cpp
+ *
+ *  Created on: Mar 20, 2013
+ *      Author: bourgein
+ */
 
 #include "ReaderWriter.h"
 
@@ -59,7 +56,7 @@ LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 
 		tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
 				lonDeg, lonMin, lonDirection);
-		locTree->addToTree(locTree, tempLoc, locTree->getRoot(), name);
+		locTree->addNode(tempLoc);
 	}
 	inf.close();
 	return locTree;

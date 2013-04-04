@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : Node.cpp
-// Authors     : Bourgein, Oliver, Worth
+// Author      : Ollie
 // Date        : Created on: 26 Feb 2013
 // Version     :
 // Copyright   : copyright reserved
@@ -62,12 +62,7 @@ using namespace std;
 	// Function to return location pointer
 	Location* Node::getLocation() {
 		return this->location;
-	}
-
-	// Function to set location pointer
-	void Node::setLocation(Location* location) {
-		this->location = location;
-	}
+    }
 
 	void Node::setIdent(string id){
 		this->ident = id;

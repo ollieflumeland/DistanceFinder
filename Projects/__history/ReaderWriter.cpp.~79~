@@ -4,7 +4,7 @@
 // Date        : Created on: Mar 20, 2013
 // Version     :
 // Copyright   : copyright reserved
-// Description : A Read/Write Class to handle file  i/o
+// Description : A Menu Class to handle command line interface
 //============================================================================/*
 
 
@@ -59,7 +59,7 @@ LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
 
 		tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
 				lonDeg, lonMin, lonDirection);
-		locTree->addToTree(locTree, tempLoc, locTree->getRoot(), name);
+		locTree->addNode(tempLoc);
 	}
 	inf.close();
 	return locTree;

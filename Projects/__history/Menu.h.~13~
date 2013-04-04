@@ -35,7 +35,8 @@ public:
     void addRecord();
     void administerRecord();
 	void findDistance();
-	Location* getExactLocation(Node* node, string city);
+	Location*  getExactLocation(Node* node, string city);
+
 
 };
 

@@ -12,7 +12,7 @@
 
 #include <iostream>
 #include <string>
-
+#include "Node.H"
 
 using namespace std;
 
@@ -59,8 +59,8 @@ public:
 	int getLonDeg();
 	int getLonMin();
 	string getLonDirection();
-	Location* getDups();
-	Location* setDups(Location* dups);
+	Location* getDups(string cityName);
+	Location* setDups(Node* dups);
 	int getNum();
 	void plusNum();
 	void minusNum();

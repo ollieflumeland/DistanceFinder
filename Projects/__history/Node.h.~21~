@@ -17,18 +17,16 @@ using namespace std;
 
 class Node {
 public:
-
 	string ident;
-	int noDups;
+	int counter;
+	//Location location;
+	Node* dups;
 	Node* left;
 	Node* right;
 	Node* parent;
 	Location* location;
-
-    //Constructor
 	Node(Location *location);
 
-	//Function Prototypes
 	void setLeft(Node* left);
 	void setRight(Node* right);
 	void setParent(Node* parent);
@@ -38,11 +36,6 @@ public:
 	Node* getLeft();
 	Node* getRight();
 	Node* getParent();
-	Location* getLocation();
-	void setLocation(Location* location);
-	int getDupsNo();
-	void plusDups();
-	void minusDups();
 
 };
 
