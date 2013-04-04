@@ -33,7 +33,8 @@ void Menu::menuOptions(int &choice) {
 	cout << "1. Add Record" << endl;
 	cout << "2. Administer Record" << endl;
 	cout << "3. Find Distance" << endl << endl;
-	cout << "4. Quit" << endl << endl;
+	cout << "4. Save" << endl << endl;
+	cout << "5. Quit" << endl << endl;
 
 	cout << "Choose an Option: ";
     cin >> choice;
@@ -50,13 +51,16 @@ void Menu::menuOptions(int &choice) {
                 findDistance();
                 break;
             case 4:
-                cout << "Quit"; // PLACEHOLDER - REMOVE
-                exit(EXIT_SUCCESS);
+				saveFile();
+				break;
+			case 5:
+				cout << "Quit"; // PLACEHOLDER - REMOVE
+				exit(EXIT_SUCCESS);
 			default:
 				cout << endl << "Invalid Choice" <<endl << endl;
 				break;
         }
-    } while (choice != 4);
+    } while (choice != 5);
 }
 
 void Menu::addRecord() {
@@ -242,6 +246,11 @@ void Menu::findDistance() {
 	Calculator calc;
 	double dist = calc.getDistanceBetween(locOne,locTwo);
 	cout << "distance between is " << dist << "km" << endl;
+}
+
+void Menu::saveFile(){
+	ReaderWriter rw;
+	rw.saveFile("bugger.txt",locT);
 }
 
 

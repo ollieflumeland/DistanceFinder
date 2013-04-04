@@ -124,4 +124,33 @@ void Location::minusNum() {
     locNum--;
 }
 
+string Location::serialise(){
+    stringstream output;
+
+	output << this->cityName;
+	output << "|";
+	output << this->countryName;
+	output << "|";
+	output << this->region;
+	output << "|";
+	output << this->cityLatDeg;
+	output << "|";
+	output << this->cityLatMin;
+	output << "|";
+	output << this->cityLatDirection;
+	output << "|";
+	output << this->cityLonDeg;
+	output << "|";
+	output << this->cityLonMin;
+	output << "|";
+	output << this->cityLonDirection;
+
+	if (Location::getDups() != NULL){
+	   output << "\n";
+	   output << dups->serialise();
+	}
+
+	return output.str();
+}
+
 
