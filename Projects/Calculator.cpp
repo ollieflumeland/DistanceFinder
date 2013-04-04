@@ -11,7 +11,7 @@
 Calculator::Calculator() {
 }
 
-double Calculator::getDistanceBetween(Location* firstLoc, Location* secondLoc) {
+double Calculator::getDistanceBetween(Location* firstLoc, Location* secondLoc, int inKm) {
 	this->loc1DecLat = convertToDec(firstLoc->getLatDeg(), firstLoc->getLatMin(),
 			firstLoc->getLatDirection());
 			cout << "loc1DecLat: "<< this->loc1DecLat << endl;
@@ -24,7 +24,7 @@ double Calculator::getDistanceBetween(Location* firstLoc, Location* secondLoc) {
 	this->loc2DecLon = convertToDec(secondLoc->getLonDeg(), secondLoc->getLonMin(),
 			secondLoc->getLonDirection());
 			cout << "loc2DecLon: "<< this->loc2DecLon << endl;
-	return calcDistBetween();
+	return calcDistBetween(inKm);
 }
 
 double Calculator::convertToDec(double deg, double min, string isNeg) {
@@ -36,7 +36,7 @@ double Calculator::convertToDec(double deg, double min, string isNeg) {
 
 }
 
-double Calculator::calcDistBetween() {
+double Calculator::calcDistBetween(int inKm) {
 	double dLat = M_PI*(loc2DecLat - loc1DecLat)/180;   //result is in radians
 	double dLon = M_PI*(loc2DecLon - loc1DecLon)/180;   //result is in radians
 	double latOne = M_PI*loc1DecLat/180;       //radians
@@ -45,6 +45,9 @@ double Calculator::calcDistBetween() {
 	double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 	double d = EARTH_RAD * c;
 
+	if (inKm == 0) {
+         d = d*0.62137;
+	}
 	return d;
 }
 

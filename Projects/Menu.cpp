@@ -233,10 +233,12 @@ Location* Menu::getExactLocation(Node* node, string city) {
 void Menu::findDistance() {
 	string cityOne;
 	string cityTwo;
+	int inKm;
 	Node* rootNode = locT->getRoot();
 
 	cout << "Enter the first City's Name: "; cin >> cityOne;
 	cout << "Enter the second City's Name: "; cin >> cityTwo;
+	cout << "Result in miles (1) or km (2)?: "; cin >> inKm;
 
 	Node* foundNodeOne = locT->getCity(rootNode, cityOne);
 	Node* foundNodeTwo = locT->getCity(rootNode,cityTwo);
@@ -244,8 +246,15 @@ void Menu::findDistance() {
 	Location* locTwo = foundNodeTwo->location;
 
 	Calculator calc;
-	double dist = calc.getDistanceBetween(locOne,locTwo);
-	cout << "distance between is " << dist << "km" << endl;
+	if (inKm == 1) {
+		double dist = calc.getDistanceBetween(locOne,locTwo,0);
+		cout << "distance between is " << dist << "miles" << endl;
+	}
+	else {
+		double dist = calc.getDistanceBetween(locOne,locTwo,1);
+		cout << "distance between is " << dist << "km" << endl;
+    }
+	
 }
 
 void Menu::saveFile(){
