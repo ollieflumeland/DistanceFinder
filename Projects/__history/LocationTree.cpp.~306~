@@ -74,7 +74,7 @@ void LocationTree::addNode (Location *loc) {
 // Function that adds nodes to the tree, finding the correct position
 void LocationTree::addNode(Location *loc, Node* test) {
 	string ident = loc->getCityName();
-	if (ident <= test->getIdent()) { // if left
+	if (ident < test->getIdent()) { // if left
 		test->plusCL(); // balancing info
 		cout << test->getIdent() << " Left Childs  = " << test->getCL() << endl;
 		cout << test->getIdent() << " Right Childs = " << test->getCR() << endl;
@@ -95,6 +95,14 @@ void LocationTree::addNode(Location *loc, Node* test) {
 				childTwo = L;
 				insertedNode = node;
 				cout << "childOne = " << childOne << ". childTwo = " << childTwo << endl;
+				if (childOne == childTwo) {  // Single rotation needed
+					LocationTree::rotateOne();
+				} else { // Two rotations required
+					cout << "Perform double rotation" << endl;
+					LocationTree::rotateTwo();
+					cout << "Begin second rotation" << endl;
+					LocationTree::rotateOne();
+				}
 			}
 
 		}
@@ -119,6 +127,15 @@ void LocationTree::addNode(Location *loc, Node* test) {
 				childTwo = R;
 				insertedNode = node;
 				cout << "childOne = " << childOne << ". childTwo = " << childTwo << endl;
+				if (childOne == childTwo) {  // Single rotation needed
+					cout << "Perform single rotation" << endl;
+					LocationTree::rotateOne();
+				} else { // Two rotations required
+					cout << "Perform double rotation" << endl;
+					LocationTree::rotateTwo();
+					cout << "Begin second rotation" << endl;
+					LocationTree::rotateOne();
+				}
 			}
 		}
 	}
@@ -443,7 +460,7 @@ void LocationTree::rotateOne() {
 
 	} else {
 		Node* newParent = balancePoint->getRight();
-		newParent->setParent(balancePoint->getRight();
+		newParent->setParent(balancePoint->getRight());
 		if (balancePoint->getIdent() < balancePoint->getParent()->getIdent()) {
 			balancePoint->getParent()->setLeft(newParent);
 		} else {
@@ -456,20 +473,23 @@ void LocationTree::rotateOne() {
 }
 
 void LocationTree::rotateTwo() {
-	if (childTwo = L) {
+	if (childTwo == L) {
+		cout << "childTwo = L = " << childTwo << endl;
 		insertedNode->setParent(balancePoint);
 		balancePoint->getRight()->setLeft(insertedNode->getRight());
 		insertedNode->setRight(balancePoint->getRight());
-		insertedNode->getRight->setParent(insertedNode);
+		insertedNode->getRight()->setParent(insertedNode);
 		balancePoint->setRight(insertedNode);
 	} else {
+	    cout << "childTwo = R = " << childTwo << endl;
 		insertedNode->setParent(balancePoint);
 		balancePoint->getLeft()->setRight(insertedNode->getLeft());
 		insertedNode->setLeft(balancePoint->getLeft());
-		insertedNode->getLeft->setParent(insertedNode);
+		insertedNode->getLeft()->setParent(insertedNode);
 		balancePoint->setLeft(insertedNode);
     }
 }
+
 
 
 

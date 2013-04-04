@@ -1,12 +1,3 @@
- //============================================================================
-// Name        : Calculator.h
-// Authors     : Bourgein, Oliver, Worth
-// Date        : Created on: Mar 14, 2013
-// Version     :
-// Copyright   : copyright reserved
-// Description : A Calculator Class to calculate distances
-//============================================================================/*
-
 #ifndef Calculator_H
 #define Calculator_H
 

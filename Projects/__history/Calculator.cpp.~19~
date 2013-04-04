@@ -1,15 +1,12 @@
-//============================================================================
-// Name        : Calculator.cpp
-// Authors     : Bourgein, Oliver, Worth
-// Date        : Created on: Mar 14, 2013
-// Version     :
-// Copyright   : copyright reserved
-// Description : A Calculator Class to calculate distances
-//============================================================================/*
+/*
+* Calculator.cpp
+*
+* Created on: Mar 14, 2013
+* Author: bourgein
+*/
+ #include "Calculator.h"
 
-#include "Calculator.h"
-
-using namespace std;
+ using namespace std;
 
 Calculator::Calculator() {
 }

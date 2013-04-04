@@ -1,0 +1,26 @@
+#ifndef Calculator_H
+#define Calculator_H
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include "Location.h"
+
+using namespace std;
+const int EARTH_RAD = 6371;
+
+class Calculator {
+public:
+	Calculator();
+	double getDistanceBetween(Location* firstLoc, Location* secondLoc);
+private:
+	double loc1DecLon;
+	double loc1DecLat;
+
+	double loc2DecLat;
+	double loc2DecLon;
+
+	double convertToDec(int deg, int min, string isNeg);
+	double calcDistBetween();
+};
+#endif
