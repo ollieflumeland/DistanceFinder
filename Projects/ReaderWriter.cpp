@@ -1,10 +1,10 @@
 //============================================================================
-// Name        : ReaderWriter.cpp
-// Authors     : Bourgein, Oliver, Worth
-// Date        : Created on: Mar 20, 2013
-// Version     :
-// Copyright   : copyright reserved
-// Description : A Read/Write Class to handle file  i/o
+// Name : ReaderWriter.cpp
+// Authors : Bourgein, Oliver, Worth
+// Date : Created on: Mar 20, 2013
+// Version :
+// Copyright : copyright reserved
+// Description : A Read/Write Class to handle file i/o
 //============================================================================/*
 
 
@@ -14,89 +14,79 @@ using namespace std;
 
 //Constructor
 ReaderWriter::ReaderWriter() {
-	};
+};
 
 LocationTree * ReaderWriter::createTreeFromFile(string fileName) {
-	LocationTree* locTree = new LocationTree();
-	fstream inf;
-	inf.open(fileName.c_str(),ios::in);
+LocationTree* locTree = new LocationTree();
+fstream inf;
+inf.open(fileName.c_str(),ios::in);
 
-	/*note this is not istream.getline() but
-	 * part of the std namespace <string> stuff
-	 */
-	while (!inf.eof()) {
+Location *tempLoc;
 
-		string name;
-		getline(inf,name,'|');
-	   //	cout << "name: " << name << endl;
-		Location *tempLoc;
+stringstream ss;
+string line;
+string name;
+string country;
+string region;
+string latDegString;
+string latMinString;
+string latDirection;
+string lonDegString;
+string lonMinString;
+string lonDirection;
+int latDeg;
+int latMin;
+int lonDeg;
+int lonMin;
 
-		string country;
-		string region;
-		string latDegString;
-		string latMinString;
-		string latDirection;
+/*note this is not istream.getline() but
+* part of the std namespace <string> stuff
+*/
+while (!inf.eof()) {
+getline(inf,line);
+ss.clear();
+ss.str(line);
 
-		getline(inf, country, '|');
-		getline(inf,region,'|');
-		//get lat stuff
-		getline(inf, latDegString, '|');
-		int latDeg = atoi(latDegString.c_str());
-		getline(inf, latMinString, '|');
-		int latMin = atoi(latMinString.c_str());
-		getline(inf, latDirection, '|');
+getline(ss,name,'|');
+// cout << "name: " << name << endl;
 
-		string lonDegString;
-		string lonMinString;
-		string lonDirection;
+getline(ss, country, '|');
+getline(ss,region,'|');
 
-		//get lon stuff
-		getline(inf, lonDegString, '|');
-		int lonDeg = atoi(lonDegString.c_str());
-		getline(inf, lonMinString, '|');
-		int lonMin = atoi(lonMinString.c_str());
-		getline(inf, lonDirection);
+//get lat stuff
+getline(ss, latDegString, '|');
+latDeg = atoi(latDegString.c_str());
+getline(ss, latMinString, '|');
+latMin = atoi(latMinString.c_str());
+getline(ss, latDirection, '|');
 
-		tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
-				lonDeg, lonMin, lonDirection);
-		locTree->addToTree(locTree, tempLoc, locTree->getRoot(), name);
-	}
-	inf.close();
-	return locTree;
+//get lon stuff
+getline(ss, lonDegString, '|');
+lonDeg = atoi(lonDegString.c_str());
+getline(ss, lonMinString, '|');
+lonMin = atoi(lonMinString.c_str());
+getline(ss, lonDirection);
+
+tempLoc = new Location(name, country, region, latDeg, latMin, latDirection,
+lonDeg, lonMin, lonDirection);
+locTree->addToTree(locTree, tempLoc, locTree->getRoot(), name);
+}
+inf.close();
+return locTree;
 }
 
 
 void ReaderWriter::saveFile(string fileName, LocationTree* locTree){
-	ofstream saveFile(fileName.c_str()); //ofstream should clear file
+ofstream saveFile(fileName.c_str()); //ofstream should clear file
 
-	if (saveFile.is_open()){
-		//for each node of the tree
-
-			//get location from node as tempLoc
-			Location tempLoc;
-			saveFile << tempLoc.getCityName();
-			saveFile << "|";
-			saveFile << tempLoc.getCountryName();
-			saveFile << "|";
-			saveFile << tempLoc.getRegion();
-			saveFile << "|";
-			saveFile << tempLoc.getLatDeg();
-			saveFile << "|";
-			saveFile << tempLoc.getLatMin();
-			saveFile << "|";
-			saveFile << tempLoc.getLatDirection();
-			saveFile << "|";
-			saveFile << tempLoc.getLonDeg();
-			saveFile << "|";
-			saveFile << tempLoc.getLonMin();
-			saveFile << "|";
-			saveFile << tempLoc.getLonDirection();
-			saveFile << "\n";
-		//end for each
-		saveFile.close();
-	}
-	else{
-		cout << "Unable to open file";
-	}
+if (saveFile.is_open()){
+saveFile << locTree->serialise(locTree->getRoot());
+//end for each
+saveFile.close();
+}
+else{
+cout << "Unable to open file to save";
+}
 
 }
+

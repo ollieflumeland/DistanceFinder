@@ -8,8 +8,8 @@
 //============================================================================/*
 
 
-#ifndef MENU_H
-#define MENU_H
+#ifndef Menu_H
+#define Menu_H
 
 #include "Location.h"
 #include "Node.h"
@@ -24,7 +24,6 @@ private:
 	Node* rootNode;
 	Node* foundNode;
 	Location* foundLoc;
-
 public:
 	//Constructor
 	Menu();
@@ -34,9 +33,8 @@ public:
 	//Function Prototypes
     void menuOptions(int &choice);
     void addRecord();
-	void administerRecord();
+    void administerRecord();
 	void findDistance();
-	void saveFile();
 	Location* getExactLocation(Node* node, string city);
 
 };

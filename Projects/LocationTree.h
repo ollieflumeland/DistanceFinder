@@ -12,6 +12,7 @@
 
 #include "Location.h"
 #include "Node.h"
+#include <string>
 
 # define L 0
 # define R 1
@@ -52,6 +53,7 @@ public:
 	Node* getFarRight(Node* node, string ident);
 	void rotateOne();
 	void rotateTwo();
+	string serialise(Node* node);
 
 };
 

@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 
 using namespace std;
@@ -64,6 +65,7 @@ public:
 	int getNum();
 	void plusNum();
 	void minusNum();
+	string serialise();
 
 };
 

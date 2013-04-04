@@ -490,6 +490,17 @@ void LocationTree::rotateTwo() {
     }
 }
 
+string LocationTree::serialise(Node* node){
+stringstream ss;
+ss << node->location->serialise() << "\n";
+if (node->getLeft() != NULL) {
+ss << serialise(node->getLeft());
+}
+if (node->getRight() != NULL) {
+ss << serialise(node->getRight());
+}
+return ss.str();
+}
 
 
 

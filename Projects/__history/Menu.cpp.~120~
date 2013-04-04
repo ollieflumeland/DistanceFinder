@@ -32,8 +32,9 @@ void Menu::menuOptions(int &choice) {
 
 	cout << "1. Add Record" << endl;
 	cout << "2. Administer Record" << endl;
-	cout << "3. Find Distance" << endl << endl;
-	cout << "4. Quit" << endl << endl;
+	cout << "3. Find Distance" << endl;
+	cout << "4. Save" << endl << endl;
+	cout << "5. Quit" << endl << endl;
 
 	cout << "Choose an Option: ";
     cin >> choice;
@@ -50,13 +51,16 @@ void Menu::menuOptions(int &choice) {
                 findDistance();
                 break;
             case 4:
+				saveFile();
+				break;
+			case 5:
                 cout << "Quit"; // PLACEHOLDER - REMOVE
                 exit(EXIT_SUCCESS);
 			default:
 				cout << endl << "Invalid Choice" <<endl << endl;
 				break;
         }
-    } while (choice != 4);
+    } while (choice != 5);
 }
 
 void Menu::addRecord() {
@@ -98,7 +102,7 @@ void Menu::addRecord() {
 
 void Menu::administerRecord() {
 
-	int choice;
+	int choice2;
 	string city;
 	string strTemp;
 	int intTemp;
@@ -131,19 +135,19 @@ void Menu::administerRecord() {
    foundLoc = Menu::getExactLocation(rootNode, city);
 
    cout << endl;
-
+   //cout << foundLoc->getCityName();
    cout << endl << "Do you want to Modify or Delete the record?";
    cout << endl << "1. Modify" << endl;
    cout << "2. Delete" << endl << endl;
    cout << "3. Quit to Main Menu" << endl << endl;
 
    cout << "Modify/Delete a Record - Choose an option: ";
-   cin >> choice;
+   cin >> choice2;
 
-   switch(choice){
+   switch(choice2){
 	case 1:
-        cout << "Editing " << foundLoc->getCityName << ", in " << foundLoc->getCountryName;
-		cout << endl << "Edit Country: (currently " << foundLoc->getCountryName << ") : ";
+		cout << "Editing " << foundLoc->getCityName() << ", in " << foundLoc->getCountryName();
+		cout << endl << "Edit Country: (currently " << foundLoc->getCountryName() << ") : ";
 		cin >> strTemp; foundLoc->setCountryName(strTemp);
 		cout << "Edit Region: "; cin >> strTemp; foundLoc->setRegion(strTemp);
 		cout << "Edit Latitude Degrees: "; cin >> intTemp; foundLoc->setLatDeg(intTemp);
@@ -157,15 +161,15 @@ void Menu::administerRecord() {
 		cout << endl << "DELETING ENTRY" << endl << endl;
 		if (foundNode->getDupsNo() == 0) {
 			if (locT->deleteNode(city)) {
-				cout << "City has been removed" << endl;
+				cout << "City has been removed" << endl << endl;
 			} else {
-				cout << "WARNING! Deletion unsuccessful" << endl;
+				cout << "WARNING! Deletion unsuccessful" << endl << endl;
 			}
 		} else {
 			if (locT->deleteDupNode(foundNode, foundLoc->getNum())) {
-				cout << "City has been removed" << endl;
+				cout << "City has been removed" << endl << endl;
 			} else {
-				cout << "WARNING! Deletion unsuccessful" << endl;
+				cout << "WARNING! Location Deletion unsuccessful" << endl << endl;
 			}
 		}
 		system("PAUSE");
@@ -223,25 +227,35 @@ Location* Menu::getExactLocation(Node* node, string city) {
 			}
 		}
 	}
+	return foundLoc;
 }
 
 void Menu::findDistance() {
 	string cityOne;
 	string cityTwo;
+	int inKm;
 	Node* rootNode = locT->getRoot();
 
 	cout << "Enter the first City's Name: "; cin >> cityOne;
+	Location* locOne = Menu::getExactLocation(rootNode, cityOne);
 	cout << "Enter the second City's Name: "; cin >> cityTwo;
-
-	Node* foundNodeOne = locT->getCity(rootNode, cityOne);
-	Node* foundNodeTwo = locT->getCity(rootNode,cityTwo);
-	Location* locOne = foundNodeOne->location;
-	Location* locTwo = foundNodeTwo->location;
+	Location* locTwo = Menu::getExactLocation(rootNode, cityTwo);
+	cout << "Result in miles (1) or km (2)?: "; cin >> inKm;
 
 	Calculator calc;
-	double dist = calc.getDistanceBetween(locOne,locTwo);
-	cout << "distance between is " << dist << "km" << endl;
+	if (inKm == 1) {
+		double dist = calc.getDistanceBetween(locOne,locTwo,0);
+		cout << "distance between is " << dist << "miles" << endl;
+	}
+	else {
+		double dist = calc.getDistanceBetween(locOne,locTwo,1);
+		cout << "distance between is " << dist << "km" << endl;
+    }
 }
 
+void Menu::saveFile(){
+	ReaderWriter rw;
+	rw.saveFile("bugger.txt",locT);
+}
 
 
