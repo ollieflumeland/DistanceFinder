@@ -189,14 +189,12 @@ using namespace std;
 	output << Node::getCR();
 	output << ", Lev: ";
 	output << Node::getLevel();
-
-	output << "\n\t L: ";
-	output << Node::getLeftId();
-	output << "\t P: ";
+	output << "\n P: ";
 	output << Node::getParId();
-	output << "\t R: ";
+	output << ", R: ";
 	output << Node::getRightId();
-
+	output << ", L: ";
+	output << Node::getLeftId();
 	output << "\n";
 	for (int i=0; i <= Node::getDupsNo(); i++) {
 		output << "\t";

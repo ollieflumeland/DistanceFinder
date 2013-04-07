@@ -34,8 +34,7 @@ void Menu::menuOptions(int &choice) {
 	cout << "2. Administer Record" << endl;
 	cout << "3. Find Distance" << endl;
 	cout << "4. Save Changes" << endl;
-	cout << "5. Display Locations" << endl;
-	cout << "6. Quit" << endl << endl;
+	cout << "5. Quit" << endl << endl;
 
 	cout << "Choose an Option: ";
     cin >> choice;
@@ -55,9 +54,7 @@ void Menu::menuOptions(int &choice) {
 				saveFile();
 				break;
 			case 5:
-				cout << endl;
 				displayLocations();
-				break;
 			case 6:
                 cout << "Quit"; // PLACEHOLDER - REMOVE
                 exit(EXIT_SUCCESS);
@@ -264,9 +261,9 @@ void Menu::saveFile(){
 }
 
 void Menu::displayLocations() {
-	string output = locT->displayTrav(locT->getRoot());
-	cout << output << endl;
+	Node* root = locT->getRoot()
+	string output = locT->serialise(root){
+	cout << ouput << endl;
 }
-
 
 

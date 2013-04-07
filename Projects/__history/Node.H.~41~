@@ -42,9 +42,6 @@ public:
 	void setParent(Node* parent);
 	void setDuplicate(Node* dups);
 	string getIdent();
-	string getParId();
-	string getLeftId();
-	string getRightId();
 	void setIdent(string id);
 	Node* getLeft();
 	Node* getRight();
@@ -64,10 +61,10 @@ public:
 	void plusCR();
 	void minusCR();
 	int getLevel();
-	int findLevel(Node* node);
+	int findLevel();
 	void setLevel(int level);
 	void plusLevel();
-	void minusLevel();
+	void minusLevel():
 	string displayLocs();
 
 };

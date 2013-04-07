@@ -189,17 +189,10 @@ using namespace std;
 	output << Node::getCR();
 	output << ", Lev: ";
 	output << Node::getLevel();
-
-	output << "\n\t L: ";
-	output << Node::getLeftId();
-	output << "\t P: ";
-	output << Node::getParId();
-	output << "\t R: ";
-	output << Node::getRightId();
-
+	//output << ", R: ";
+	//output << if (right->getIdent() != NULL) right->getIdent();
 	output << "\n";
 	for (int i=0; i <= Node::getDupsNo(); i++) {
-		output << "\t";
 		output << location->getCityName();
 		output << ", ";
 		output << location->getCountryName();

@@ -441,7 +441,6 @@ bool LocationTree::deleteNode(string ident) {
 		} else {
 			balancePoint->getParent()->setLeft(NULL);
 		}
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		delete balancePoint;
 		return true;
 	}
@@ -459,7 +458,6 @@ bool LocationTree::deleteNode(string ident) {
 		} else {
 			balancePoint->getParent()->setLeft(balancePoint->getRight()); // Reset parents left
 		}
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		delete balancePoint;
 		return true;
 	}
@@ -518,7 +516,6 @@ bool LocationTree::deleteNode(string ident) {
 		// Replacement node is now 'selected'
 		// Copy balancePoint's child & parent nodes to replacement
 		LocationTree::swapInSelected(selected);
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		return true;
 		}
 	else {

@@ -217,8 +217,6 @@ void LocationTree::balanceUpToRoot(Node* node) {
 			LocationTree::swapInSelected(selected);
 			selected->setCL(balancePoint->getCL());
 			selected->setCR(balancePoint->getCR());
-			balancePoint->setCL(0); // Reset
-			balancePoint->setCR(0); // Reset
 			reAddNode(balancePoint->getLocation(), root);
 		}
 		cout << "Bot T: " << test->getIdent() << ", BalFac: " << test->getBalance() << ", CL: " << test->getCL() <<  ", CR: " << test->getCR() << endl << endl;
@@ -441,7 +439,6 @@ bool LocationTree::deleteNode(string ident) {
 		} else {
 			balancePoint->getParent()->setLeft(NULL);
 		}
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		delete balancePoint;
 		return true;
 	}
@@ -459,7 +456,6 @@ bool LocationTree::deleteNode(string ident) {
 		} else {
 			balancePoint->getParent()->setLeft(balancePoint->getRight()); // Reset parents left
 		}
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		delete balancePoint;
 		return true;
 	}
@@ -518,7 +514,6 @@ bool LocationTree::deleteNode(string ident) {
 		// Replacement node is now 'selected'
 		// Copy balancePoint's child & parent nodes to replacement
 		LocationTree::swapInSelected(selected);
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		return true;
 		}
 	else {
@@ -531,10 +526,8 @@ bool LocationTree::deleteNode(string ident) {
 void LocationTree::swapInSelected(Node* selected) {
 	cout << "swapInSelected: selected: " << selected->getIdent() << ", balancePoint: " << balancePoint->getIdent() << endl;
 	selected->setLeft(balancePoint->getLeft());
-	selected->getLeft()->setParent(selected);
 	cout << selected->getIdent() << " selected left now points to: " << selected->getLeftId() << endl;
 	selected->setRight(balancePoint->getRight());
-	selected->getRight()->setParent(selected);
 	cout << selected->getIdent() << " selected right now points to: " << selected->getRightId() << endl;
 	// Check if root
 	if (balancePoint->getParent() == NULL) {
@@ -561,17 +554,38 @@ void LocationTree::swapInSelected(Node* selected) {
 
 // Function to detach previous node
 void LocationTree::detachPrevious(Node* previous) {
-	cout << "detatchPrevious() Detaching: " << previous->getIdent() << endl;
-    LocationTree::resetBalFactUpToRoot(previous);
+	Node* reBalTest = previous;
+	Node* reBalPar = previous->getParent();
+	cout << "detatchPrevious() Detaching: " << reBalTest->getIdent() << endl;
+	while (reBalPar->getParent() != NULL) {
+		if (reBalTest->getIdent() < reBalPar->getIdent()) {  // if test on left of parent
+			reBalPar->minusCL();
+			cout << "reBalPar: " << reBalPar->getIdent() << ", CL:" << reBalPar->getCL() << endl;
+		} else {
+			reBalPar->minusCR();
+			cout << "reBalPar: " << reBalPar->getIdent() << ", CR:" << reBalPar->getCR() << endl;
+		}
+		reBalTest = reBalTest->getParent();
+		reBalPar = reBalPar->getParent();
+	}
+	if (reBalTest->getIdent() < reBalPar->getIdent()) {  // if test on left of parent
+		reBalPar->minusCL();
+		cout << "reBalPar: " << reBalPar->getIdent() << ", CL:" << reBalPar->getCL() << endl;
+	} else {
+		reBalPar->minusCR();
+		cout << "reBalPar: " << reBalPar->getIdent() << ", CR:" << reBalPar->getCR() << endl;
+	}
 		if (previous->getIdent() > previous->getParent()->getIdent()) { // If parent left
 			if (previous->getLeft() == NULL) { // previous = leaf
 			previous->getParent()->setRight(NULL); // Reset parents right
+			cout << "Here we are 506" << endl;
 		} else {
 			previous->getParent()->setRight(previous->getLeft());
 		}
 	} else {  // Parent right
 		if (previous->getLeft() == NULL) { // previous = leaf
 			previous->getParent()->setLeft(NULL); // Reset parents right
+			cout << "Here we are 513" << endl;
 		} else {
 			previous->getParent()->setLeft(previous->getLeft());
 		}
@@ -579,26 +593,9 @@ void LocationTree::detachPrevious(Node* previous) {
 }
 
 void LocationTree::detachNext(Node* next) {
-	cout << "detatchNext() Detaching: " << next->getIdent() << endl;
-	LocationTree::resetBalFactUpToRoot(next);
-	if (next->getIdent() > next->getParent()->getIdent()) { // If parent left
-		if (next->getRight() == NULL) { // next = leaf
-			next->getParent()->setRight(NULL); // Reset parent's right
-		} else {
-			next->getParent()->setRight(next->getRight());
-		}
-	} else {
-		if (next->getRight() == NULL) {  // next = leaf
-			next->getParent()->setLeft(NULL);
-		} else {
-			next->getParent()->setLeft(next->getRight());
-		}
-	}
-}
-
- void LocationTree::resetBalFactUpToRoot(Node* node) {
-	Node* reBalTest = node;
-	Node* reBalPar = node->getParent();
+	Node* reBalTest = next;
+	Node* reBalPar = next->getParent();
+	cout << "detatchNext() Detaching: " << reBalTest->getIdent() << endl;
 	while (reBalPar->getParent() != NULL) {
 		if (reBalTest->getIdent() < reBalPar->getIdent()) {  // if test on left of parent
 			reBalPar->minusCL();
@@ -618,7 +615,20 @@ void LocationTree::detachNext(Node* next) {
 		reBalPar->minusCR();
 		cout << "reBalPar: " << reBalPar->getIdent() << ", CR:" << reBalPar->getCR() << endl;
 	}
- }
+	if (next->getIdent() > next->getParent()->getIdent()) { // If parent left
+		if (next->getRight() == NULL) { // next = leaf
+			next->getParent()->setRight(NULL); // Reset parent's right
+		} else {
+			next->getParent()->setRight(next->getRight());
+		}
+	} else {
+		if (next->getRight() == NULL) {  // next = leaf
+			next->getParent()->setLeft(NULL);
+		} else {
+			next->getParent()->setLeft(next->getRight());
+		}
+	}
+}
 
 
 // Remove node

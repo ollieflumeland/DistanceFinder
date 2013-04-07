@@ -518,7 +518,6 @@ bool LocationTree::deleteNode(string ident) {
 		// Replacement node is now 'selected'
 		// Copy balancePoint's child & parent nodes to replacement
 		LocationTree::swapInSelected(selected);
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		return true;
 		}
 	else {

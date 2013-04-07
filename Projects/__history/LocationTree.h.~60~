@@ -43,7 +43,6 @@ public:
 	bool addToTree(LocationTree* tree, Location* loc, Node* node, string city); // Adds loc to tree
 	void addNode (Location *loc); // To add first node
 	void addNode(Location *loc, Node* leaf);
-	void reAddNode(Location *loc, Node* test);
 	bool deleteNode (string ident);
 	bool deleteDupNode(Node* foundNode, int number);
 	void freeNode(Node* leaf);
@@ -56,12 +55,7 @@ public:
 	void rotateOne();
 	void rotateTwo();
 	void balanceUpToRoot(Node* node);
-	void resetBalFactUpToRoot(Node* node);
 	string serialise(Node* node);
-	string displayTrav(Node* node);
-	void detachNext(Node* next);
-	void detachPrevious(Node* previous);
-	void swapInSelected(Node* selected);
 
 };
 
