@@ -55,9 +55,7 @@ void Menu::menuOptions(int &choice) {
 				saveFile();
 				break;
 			case 5:
-				cout << endl;
 				displayLocations();
-				break;
 			case 6:
                 cout << "Quit"; // PLACEHOLDER - REMOVE
                 exit(EXIT_SUCCESS);

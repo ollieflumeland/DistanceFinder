@@ -6,8 +6,8 @@
 // Description : A Read/Write Class to handle file  i/o
 //============================================================================/*
 
-#ifndef READERWRITER_H_
-#define READERWRITER_H_
+#ifndef READERWRITER_H
+#define READERWRITER_H
 
 #include <iostream>
 #include <fstream>

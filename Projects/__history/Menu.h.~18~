@@ -7,8 +7,9 @@
 // Description : A Menu Class to handle command line interface
 //============================================================================/*
 
-#ifndef MENU_H_
-#define MENU_H_
+
+#ifndef MENU_H
+#define MENU_H
 
 #include "Location.h"
 #include "Node.h"
@@ -36,7 +37,6 @@ public:
 	void administerRecord();
 	void findDistance();
 	void saveFile();
-	void displayLocations();
 	Location* getExactLocation(Node* node, string city);
 
 };

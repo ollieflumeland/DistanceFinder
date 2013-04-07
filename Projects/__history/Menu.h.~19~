@@ -36,7 +36,6 @@ public:
 	void administerRecord();
 	void findDistance();
 	void saveFile();
-	void displayLocations();
 	Location* getExactLocation(Node* node, string city);
 
 };

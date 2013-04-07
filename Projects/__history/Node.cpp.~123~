@@ -55,20 +55,14 @@ using namespace std;
 		}
 	}
 
-	string Node::getLeftId(){
-		if (this->getLeft() != NULL) {
-			return this->getLeft()->getIdent();
+	string getLeftId(){
+		if (this->getParent() != NULL) {
+			return this->getParent()->getIdent();
 		} else {
 			return "empty";
 		}
 	}
-	string Node::getRightId() {
-		if (this->getRight() != NULL) {
-			return this->getRight()->getIdent();
-		} else {
-			return "empty";
-		}
-	}
+	string getRightId();
 
 	// Function to return left node
 	Node* Node::getLeft() {
@@ -189,17 +183,10 @@ using namespace std;
 	output << Node::getCR();
 	output << ", Lev: ";
 	output << Node::getLevel();
-
-	output << "\n\t L: ";
-	output << Node::getLeftId();
-	output << "\t P: ";
-	output << Node::getParId();
-	output << "\t R: ";
-	output << Node::getRightId();
-
+	//output << ", R: ";
+	//output << if (right->getIdent() != NULL) right->getIdent();
 	output << "\n";
 	for (int i=0; i <= Node::getDupsNo(); i++) {
-		output << "\t";
 		output << location->getCityName();
 		output << ", ";
 		output << location->getCountryName();
