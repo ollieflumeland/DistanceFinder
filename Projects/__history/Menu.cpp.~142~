@@ -30,31 +30,46 @@ void Menu::menuOptions(int &choice) {
 
     cout << endl << "Main Menu - Choose an Option below:" << endl << endl;
 
-	cout << "1. Add Record" << endl;
+	/*cout << "1. Add Record" << endl;
 	cout << "2. Administer Record" << endl;
-	cout << "3. Find Distance" << endl;
+	cout << "3. Find Distance" << endl; */
+	cout << "1. Find Distance" << endl;
+	cout << "2. Add Record" << endl;
+	cout << "3. Administer Record" << endl;
 	cout << "4. Save Changes" << endl;
-	cout << "5. Quit" << endl << endl;
+	cout << "5. Display Locations" << endl;
+	cout << "6. Quit" << endl << endl;
 
 	cout << "Choose an Option: ";
     cin >> choice;
 
 
-        switch(choice){
-            case 1:
-                addRecord();
-                break;
-            case 2:
-                administerRecord();
-                break;
-            case 3:
-                findDistance();
-                break;
-            case 4:
+		switch(choice){
+			/* case 1:
+				addRecord();
+				break;
+			case 2:
+				administerRecord();
+				break;
+			case 3:
+				findDistance();
+				break; */
+			case 1:
+				findDistance();
+				break;
+			case 2:
+				addRecord();
+				break;
+			case 3:
+				administerRecord();
+				break;
+			case 4:
 				saveFile();
 				break;
 			case 5:
+				cout << endl;
 				displayLocations();
+				break;
 			case 6:
                 cout << "Quit"; // PLACEHOLDER - REMOVE
                 exit(EXIT_SUCCESS);
@@ -151,13 +166,20 @@ void Menu::administerRecord() {
 		cout << "Editing " << foundLoc->getCityName() << ", in " << foundLoc->getCountryName();
 		cout << endl << "Edit Country: (currently " << foundLoc->getCountryName() << ") : ";
 		cin >> strTemp; foundLoc->setCountryName(strTemp);
-		cout << "Edit Region: "; cin >> strTemp; foundLoc->setRegion(strTemp);
-		cout << "Edit Latitude Degrees: "; cin >> intTemp; foundLoc->setLatDeg(intTemp);
-		cout << "Edit Latitude Minutes: "; cin >> intTemp; foundLoc->setLatMin(intTemp);
-		cout << "Edit Latitude Direction: "; cin >> strTemp; foundLoc->setLatDirection(strTemp);
-		cout << "Edit Longitude Degrees: "; cin >> intTemp; foundLoc->setLonDeg(intTemp);
-		cout << "Edit Longitude Minutes: "; cin >> intTemp; foundLoc->setLonMin(intTemp);
-		cout << "Edit Longitude Direction: "; cin >> strTemp; foundLoc->setLonDirection(strTemp);
+		cout << "Edit Region: (currently " << foundLoc->getRegion() << ") : ";
+		cin >> strTemp; foundLoc->setRegion(strTemp);
+		cout << "Edit Latitude Degrees: (currently " << foundLoc->getLatDeg() << ") : ";
+		cin >> intTemp; foundLoc->setLatDeg(intTemp);
+		cout << "Edit Latitude Minutes: (currently " << foundLoc->getLatMin() << ") : ";
+		cin >> intTemp; foundLoc->setLatMin(intTemp);
+		cout << "Edit Latitude Direction: (currently " << foundLoc->getLatDirection() << ") : ";
+		cin >> strTemp; foundLoc->setLatDirection(strTemp);
+		cout << "Edit Longitude Degrees: (currently " << foundLoc->getLonDeg() << ") : ";
+		cin >> intTemp; foundLoc->setLonDeg(intTemp);
+		cout << "Edit Longitude Minutes: (currently " << foundLoc->getLonMin() << ") : ";
+		cin >> intTemp; foundLoc->setLonMin(intTemp);
+		cout << "Edit Longitude Direction: (currently " << foundLoc->getLonDirection() << ") : ";
+		cin >> strTemp; foundLoc->setLonDirection(strTemp);
 		break;
 	case 2:
 		cout << endl << "DELETING ENTRY" << endl << endl;
@@ -261,9 +283,8 @@ void Menu::saveFile(){
 }
 
 void Menu::displayLocations() {
-	Node* root = locT->getRoot();
-	string output = locT->serialise(root);
-	cout << ouput << endl;
+	string output = locT->displayTrav(locT->getRoot());
+	cout << output << endl;
 }
 
 
