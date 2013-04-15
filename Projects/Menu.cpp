@@ -16,7 +16,7 @@ using namespace std;
 //Constructor
 Menu::Menu() {
 	ReaderWriter rw;
-	string filename = "newloc.txt";
+	string filename = "newlocol.txt";
 	locT = rw.createTreeFromFile(filename);
 	//int choice = -1;
 }
@@ -86,11 +86,14 @@ void Menu::addRecord() {
     cout << "\t\t\t-----------------------------" << endl << endl;
 
 	cout << "Add Record" << endl << endl;
+	cin.ignore();
+	cout << "Enter City: "; getline(cin,city);
+	cout << "Enter Country: "; getline(cin,country);
+	cout << "Enter Region: "; getline(cin,region);
 
-	cout << "Enter City: "; cin >> city;
-	cout << "Enter Country: "; cin >> country;
-	cout << "Enter Region: "; cin >> region;
+
 	cout << "Enter Latitude Degrees: "; cin >> latDeg;
+
 	cout << "Enter Latitude Minutes: "; cin >> latMin;
 	cout << "Enter Latitude Direction: "; cin >> latDir;
 	cout << "Enter Longitude Degrees: "; cin >> lonDeg;
@@ -248,9 +251,13 @@ void Menu::findDistance() {
 	int inKm;
 	Node* rootNode = locT->getRoot();
 
-	cout << "Enter the first City's Name: "; cin >> cityOne;
+	cin.ignore();
+
+	cout << "Enter the first City's Name: ";
+	getline(cin,cityOne);
 	Location* locOne = Menu::getExactLocation(rootNode, cityOne);
-	cout << "Enter the second City's Name: "; cin >> cityTwo;
+	cout << "Enter the second City's Name: ";
+	getline(cin,cityTwo);
 	Location* locTwo = Menu::getExactLocation(rootNode, cityTwo);
 	cout << "Result in miles (1) or km (2)?: "; cin >> inKm;
 
@@ -271,8 +278,10 @@ void Menu::saveFile(){
 }
 
 void Menu::displayLocations() {
-	string output = locT->displayTrav(locT->getRoot());
+	string output = locT->serialise(locT->getRoot());
 	cout << output << endl;
+	system("PAUSE");
+
 }
 
 

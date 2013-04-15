@@ -247,7 +247,8 @@ void LocationTree::balanceUpToRoot(Node* node) {
 			reAddNode(balancePoint->getLocation(), root);
 		}
 		cout << "Bot T: " << test->getIdent() << ", BalFac: " << test->getBalance() << ", CL: " << test->getCL() <<  ", CR: " << test->getCR() << endl << endl;
-}
+        balancePoint = NULL;
+		}
 
 /* Function to rebalance the tree up to the root
 void LocationTree::balanceUpToRoot(Node* node) {
@@ -741,15 +742,18 @@ void LocationTree::rotateTwo() {
 }
 
 string LocationTree::serialise(Node* node){
-stringstream ss;
-ss << node->location->serialise() << "\n";
-if (node->getLeft() != NULL) {
-ss << serialise(node->getLeft());
-}
-if (node->getRight() != NULL) {
-ss << serialise(node->getRight());
-}
-return ss.str();
+	stringstream ss;
+	string finalString;
+	ss << node->location->serialise() << "\n";
+	if (node->getLeft() != NULL) {
+		ss << serialise(node->getLeft());
+	}
+	if (node->getRight() != NULL) {
+		ss << serialise(node->getRight());
+	}
+	//finalString = ss.str();
+	//finalString = finalString.substr(0, finalString.size()-1);
+	return ss.str();
 }
 
 string LocationTree::displayTrav(Node* node){
