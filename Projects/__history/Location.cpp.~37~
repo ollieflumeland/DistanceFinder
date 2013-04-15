@@ -124,8 +124,8 @@ void Location::minusNum() {
     locNum--;
 }
 
-string Location::serialise(){
-	stringstream output;
+ string Location::serialise(){
+    stringstream output;
 
 output << this->cityName;
 output << "|";

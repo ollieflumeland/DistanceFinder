@@ -42,9 +42,6 @@ public:
 	void setParent(Node* parent);
 	void setDuplicate(Node* dups);
 	string getIdent();
-	string getParId();
-	string getLeftId();
-	string getRightId();
 	void setIdent(string id);
 	Node* getLeft();
 	Node* getRight();

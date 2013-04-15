@@ -30,6 +30,9 @@ void Menu::menuOptions(int &choice) {
 
     cout << endl << "Main Menu - Choose an Option below:" << endl << endl;
 
+	/*cout << "1. Add Record" << endl;
+	cout << "2. Administer Record" << endl;
+	cout << "3. Find Distance" << endl; */
 	cout << "1. Find Distance" << endl;
 	cout << "2. Add Record" << endl;
 	cout << "3. Administer Record" << endl;
@@ -42,6 +45,15 @@ void Menu::menuOptions(int &choice) {
 
 
 		switch(choice){
+			/* case 1:
+				addRecord();
+				break;
+			case 2:
+				administerRecord();
+				break;
+			case 3:
+				findDistance();
+				break; */
 			case 1:
 				findDistance();
 				break;

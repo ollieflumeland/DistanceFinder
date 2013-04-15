@@ -56,7 +56,6 @@ public:
 	void rotateOne();
 	void rotateTwo();
 	void balanceUpToRoot(Node* node);
-	void resetBalFactUpToRoot(Node* node);
 	string serialise(Node* node);
 	string displayTrav(Node* node);
 	void detachNext(Node* next);

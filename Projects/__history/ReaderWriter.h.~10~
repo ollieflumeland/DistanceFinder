@@ -1,13 +1,14 @@
 //============================================================================
-// Name        : ReaderWriter.H
+// Name        : ReaderWriter.cpp
 // Authors     : Bourgein, Oliver, Worth
-// Date        :
+// Date        : Created on: Mar 20, 2013
+// Version     :
 // Copyright   : copyright reserved
 // Description : A Read/Write Class to handle file  i/o
 //============================================================================/*
 
-#ifndef READERWRITER_H_
-#define READERWRITER_H_
+#ifndef READERWRITER_H
+#define READERWRITER_H
 
 #include <iostream>
 #include <fstream>
@@ -26,7 +27,6 @@ LocationTree * createTreeFromFile(string fileName);
 void saveFile(string fileName, LocationTree* locTree);
 
 private:
-
 };
 
 #endif
