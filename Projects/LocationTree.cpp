@@ -9,6 +9,7 @@
 
 
 #include <string>
+#include <algorithm>
 #include "LocationTree.h"
 #include "Menu.h"
 
@@ -633,10 +634,14 @@ void LocationTree::freeNode(Node* leaf) {
 
 Node* LocationTree::getCity(Node* node, string ident)  {
 	if (node != NULL) {
-		if (ident == node->getIdent()) {
+		//needed for uppercase
+		string s = node->getIdent();
+		transform(s.begin(), s.end(), s.begin(), toupper);
+
+		if (ident == s) {
 		return node;
 		}
-		if (ident < node->getIdent()) {
+		if (ident < s) {
 		return getCity(node->getLeft(), ident);
 		}
 		else {
@@ -751,8 +756,7 @@ string LocationTree::serialise(Node* node){
 	if (node->getRight() != NULL) {
 		ss << serialise(node->getRight());
 	}
-	//finalString = ss.str();
-	//finalString = finalString.substr(0, finalString.size()-1);
+	
 	return ss.str();
 }
 

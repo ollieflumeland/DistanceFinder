@@ -9,6 +9,7 @@
 
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include "Menu.h"
 
 using namespace std;
@@ -16,7 +17,7 @@ using namespace std;
 //Constructor
 Menu::Menu() {
 	ReaderWriter rw;
-	string filename = "newlocol.txt";
+	string filename = "newloc.txt";
 	locT = rw.createTreeFromFile(filename);
 	//int choice = -1;
 }
@@ -198,6 +199,7 @@ void Menu::administerRecord() {
 }
 
 Location* Menu::getExactLocation(Node* node, string city) {
+	transform(city.begin(), city.end(), city.begin(), toupper);
 	foundNode = locT->getCity(node, city);
 	if (foundNode == NULL) {
 		cout << endl << "This city is not in the database." << endl << endl;
