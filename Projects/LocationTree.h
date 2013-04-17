@@ -13,6 +13,7 @@
 #include "Location.h"
 #include "Node.h"
 #include <string>
+#include <algorithm>
 
 # define L 0
 # define R 1
@@ -53,8 +54,10 @@ public:
 	Node* getLast(Node* node);
 	Node* getFarLeft(Node* node, string ident);
 	Node* getFarRight(Node* node, string ident);
-	void rotateOne();
-	void rotateTwo();
+	void rotateLR();
+	void rotateRL();
+	void rotateRR();
+	void rotateLL();
 	void balanceUpToRoot(Node* node);
 	void resetBalFactUpToRoot(Node* node);
 	string serialise(Node* node);
@@ -62,6 +65,9 @@ public:
 	void detachNext(Node* next);
 	void detachPrevious(Node* previous);
 	void swapInSelected(Node* selected);
+	int findMinDepth(Node* root);
+	int findMaxDepth(Node* test);
+	int getBalanceFactor(Node* test);
 
 };
 

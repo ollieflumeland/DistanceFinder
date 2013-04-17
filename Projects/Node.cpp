@@ -24,7 +24,6 @@ using namespace std;
 		level = 0;
 		childLeft=0;
 		childRight=0;
-		cout << "Node object created with name: " << ident << endl;
 		};
 
 	// Function to set left node
@@ -153,9 +152,7 @@ using namespace std;
 
 	int Node::findLevel(Node* node) {
 		int i=0;
-		cout << node->getIdent() << ", " << node->getParent()->getIdent();
 		while (node->getParent() != NULL) {
-			cout << node->getIdent() << endl;
 			node = node->getParent();
 			i++;
 		}

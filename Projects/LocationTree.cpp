@@ -7,9 +7,8 @@
 // Description : A Binary Tree Class to store Nodes
 //============================================================================/*
 
-
-#include <string>
 #include <algorithm>
+#include <string>
 #include "LocationTree.h"
 #include "Menu.h"
 
@@ -17,7 +16,6 @@ using namespace std;
 
 // Constructor
 LocationTree::LocationTree() {
-	cout << "LocationTree object created" << endl;
 	root = NULL;
 }
 
@@ -42,6 +40,7 @@ Node* LocationTree::setRoot(Node* node) {
 *  Uses the 2 addNode methods specified below
 */
 bool LocationTree::addToTree(LocationTree* tree, Location* loc, Node* node, string city) {
+	balancePoint = NULL;
 	Node* duptest = getCity(node, city);
 	if (duptest != NULL ) {
 		Location* newDup = duptest->getLocation();
@@ -62,10 +61,8 @@ bool LocationTree::addToTree(LocationTree* tree, Location* loc, Node* node, stri
 // Function that adds nodes to the tree, used on the new tree to install root
 void LocationTree::addNode (Location *loc) {
    if ( root != NULL ) {
-		cout << "Tree established: adding a new node"<< endl;
 		addNode(loc, root);
 	} else {
-		cout << "creating the root node" << endl;
 		Node* node = new Node(loc);
 		node->setIdent(loc->getCityName());
 		node->setLevel(1);
@@ -76,91 +73,41 @@ void LocationTree::addNode (Location *loc) {
 // Function that adds nodes to the tree, finding the correct position
 void LocationTree::addNode(Location *loc, Node* test) {
 	string ident = loc->getCityName();
-	cout << "Add node function, adding: " << ident << endl;
 	if (ident < test->getIdent()) { // if left
 		test->plusCL(); // balancing info
-		cout << test->getIdent() << " Left Childs  = " << test->getCL() << endl;
-		cout << test->getIdent() << " Right Childs = " << test->getCR() << endl;
-		if (test->getBalance() < -1 || test->getBalance() > 1) {
-			balancePoint = test;
-			cout << "balancePoint created: " << balancePoint->getIdent() << endl;
-			childOne = L;
-		}
-		if (test->getLeft() != NULL )
+		if (test->getLeft() != NULL ) {
 			addNode(loc, test->getLeft());
-		else {
+		} else {
 			Node* node = new Node(loc);
 			node->setIdent(ident);
 			node->setParent(test);
 			test->setLeft(node);
 			node->setLevel(node->findLevel(node));
-			if (balancePoint != NULL) {
-				cout << node->getIdent() << " created, now perform balancing at " << balancePoint->getIdent() << endl;
-				childTwo = L;
-				insertedNode = node;
-				midNode = node->getParent();
-				cout << "childOne = " << childOne << ". childTwo = " << childTwo << endl;
-				if (childOne == childTwo) {  // Single rotation needed
-					LocationTree::rotateOne();
-				} else { // Two rotations required
-					cout << "Perform double rotation" << endl;
-					LocationTree::rotateTwo();
-					cout << "Begin second rotation" << endl;
-					LocationTree::rotateOne();
-				}
-			}
-
+			LocationTree::balanceUpToRoot(node->getParent());
 		}
 	} else {
 		test->plusCR(); // balancing info
-		cout << test->getIdent() << " Left Childs  = " << test->getCL() << endl;
-		cout << test->getIdent() << " Right Childs = " << test->getCR() << endl;
-		if (test->getBalance() < -1 || test->getBalance() > 1) {
-			balancePoint = test;
-			cout << "balancePoint created: " << balancePoint->getIdent() << endl;
-			childOne = R;
-		}
-		if ( test->getRight() != NULL )
+		if ( test->getRight() != NULL ) {
 			addNode(loc, test->getRight());
-		else {
+		} else {
 			Node* node = new Node(loc);
 			node->setIdent(ident);
 			node->setParent(test);
 			test->setRight(node);
-			if (balancePoint != NULL) {
-				cout << node->getIdent() << " created, now perform balancing at " << balancePoint->getIdent() << endl;
-				childTwo = R;
-				insertedNode = node;
-				midNode = node->getParent();
-				cout << "childOne = " << childOne << ". childTwo = " << childTwo << endl;
-				if (childOne == childTwo) {  // Single rotation needed
-					cout << "Perform single rotation" << endl;
-					LocationTree::rotateOne();
-				} else { // Two rotations required
-					cout << "Perform double rotation" << endl;
-					LocationTree::rotateTwo();
-					cout << "Begin second rotation" << endl;
-					LocationTree::rotateOne();
-				}
-			}
+			node->setLevel(node->findLevel(node));
+			LocationTree::balanceUpToRoot(node->getParent());
 		}
 	}
-	if (balancePoint != NULL) {
-		balanceUpToRoot(balancePoint);
-    }
 }
 
-// Function that adds nodes to the tree, finding the correct position
+
+// Function that RE-adds nodes to the tree, finding the correct position
 void LocationTree::reAddNode(Location *loc, Node* test) {
 	string ident = loc->getCityName();
-	cout << "Add node function, adding: " << ident << endl;
 	if (ident < test->getIdent()) { // if left
 		test->plusCL(); // balancing info
-		cout << test->getIdent() << " Left Childs  = " << test->getCL() << endl;
-		cout << test->getIdent() << " Right Childs = " << test->getCR() << endl;
 		if (test->getBalance() < -1 || test->getBalance() > 1) {
 			balancePoint = test;
-			cout << "balancePoint created: " << balancePoint->getIdent() << endl;
 			childOne = L;
 		}
 		if (test->getLeft() != NULL )
@@ -174,11 +121,8 @@ void LocationTree::reAddNode(Location *loc, Node* test) {
 		}
 	} else {
 		test->plusCR(); // balancing info
-		cout << test->getIdent() << " Left Childs  = " << test->getCL() << endl;
-		cout << test->getIdent() << " Right Childs = " << test->getCR() << endl;
 		if (test->getBalance() < -1 || test->getBalance() > 1) {
 			balancePoint = test;
-			cout << "balancePoint created: " << balancePoint->getIdent() << endl;
 			childOne = R;
 		}
 		if ( test->getRight() != NULL )
@@ -194,65 +138,34 @@ void LocationTree::reAddNode(Location *loc, Node* test) {
 
 // Function to rebalance the tree up to the root
 void LocationTree::balanceUpToRoot(Node* node) {
-	Node* test = node;
-	Node* previous;
-	Node* next;
-	Node* selected;
-	cout << "test: " << test->getIdent() << endl;
-	while (test->getParent() != NULL) {
-		cout << "Top T: " << test->getIdent() << ", BalFac: " << test->getBalance() << ", CL: " << test->getCL() <<  ", CR: " << test->getCR() << endl;
-		if (test->getBalance() < -1 || test->getBalance() > 1) {
-			balancePoint = test;
-			if (balancePoint->getCL()*(-1) > balancePoint->getCR()) {
-				previous = getPrevious(balancePoint, balancePoint->getIdent());
-				LocationTree::detachPrevious(previous);
-				selected = previous;
-				test = selected;
-
-			} else {
-				next = getNext(balancePoint, balancePoint->getIdent());
-				LocationTree::detachNext(next);
-				selected = next;
-				test = selected;
+	Node* temp = node;
+	while (temp->getParent()!= NULL) {
+		temp = temp->getParent();
+		if (LocationTree::getBalanceFactor(temp) <= -2 || LocationTree::getBalanceFactor(temp) >=2) {
+				balancePoint = temp;
+				int balancePointBF = LocationTree::getBalanceFactor(balancePoint);
+				if (balancePointBF == -2 && (LocationTree::getBalanceFactor(balancePoint->getRight()) == -1 || LocationTree::getBalanceFactor(balancePoint->getRight()))) {
+					rotateRR();
+				} else if (balancePointBF == -2 && LocationTree::getBalanceFactor(balancePoint->getRight()) == 1) {
+					rotateRL();
+					rotateRR();
+				} else if (balancePointBF == 2 && LocationTree::getBalanceFactor(balancePoint->getLeft()) == 1 || LocationTree::getBalanceFactor(balancePoint->getLeft()) == 0) {
+					rotateLL();
+				} else if (balancePointBF == 2 && LocationTree::getBalanceFactor(balancePoint->getLeft()) == -1) {
+					rotateLR();
+					rotateLL();
+				} else {
+					cout << "error " << endl;
+				}
 			}
-			LocationTree::swapInSelected(selected);
-			selected->setCL(balancePoint->getCL());
-			selected->setCR(balancePoint->getCR());
-			balancePoint->setCL(0); // Reset
-			balancePoint->setCR(0); // Reset
-			reAddNode(balancePoint->getLocation(), root);
-		}
-		cout << "Bot T: " << test->getIdent() << ", BalFac: " << test->getBalance() << ", CL: " << test->getCL() <<  ", CR: " << test->getCR() << endl << endl;
-		if (test->getParent() != NULL) {
-			test = test->getParent();
-		}
-	}
-	cout << "Top T: " << test->getIdent() << ", BalFac: " << test->getBalance() << ", CL: " << test->getCL() <<  ", CR: " << test->getCR() << endl;
-		if (test->getBalance() < -1 || test->getBalance() > 1) {
-			balancePoint = test;
-			if (balancePoint->getCL()*(-1) > balancePoint->getCR()) {
-				previous = getPrevious(balancePoint, balancePoint->getIdent());
-				LocationTree::detachPrevious(previous);
-				selected = previous;
-				test = selected;
 
-			} else {
-				next = getNext(balancePoint, balancePoint->getIdent());
-				LocationTree::detachNext(next);
-				selected = next;
-				test = selected;
-			}
-			LocationTree::swapInSelected(selected);
-			selected->setCL(balancePoint->getCL());
-			selected->setCR(balancePoint->getCR());
-			reAddNode(balancePoint->getLocation(), root);
-		}
-		cout << "Bot T: " << test->getIdent() << ", BalFac: " << test->getBalance() << ", CL: " << test->getCL() <<  ", CR: " << test->getCR() << endl << endl;
-        balancePoint = NULL;
 		}
 
-/* Function to rebalance the tree up to the root
-void LocationTree::balanceUpToRoot(Node* node) {
+}
+
+
+//Function to rebalance the tree up to the root
+/*void LocationTree::balanceUpToRoot(Node* node) {
 	Node* bottom = node;
 	Node* middle = node->getParent();
 	Node* top = middle->getParent();
@@ -261,34 +174,33 @@ void LocationTree::balanceUpToRoot(Node* node) {
 	} else {
 		childOne = R;
 	}
-	cout << "Bot: " << bottom->getIdent() << ", Mid: " << middle->getIdent() << ", Top:" << top->getIdent() << endl;
 	while (top->getParent() != NULL) {
-		cout << "T: " << top->getIdent() << ", BalFac: " << top->getBalance() << ", CL: " << top->getCL() <<  ", CR: " << top->getCR() << endl;
+		//cout << "T: " << top->getIdent() << ", BalFac: " << top->getBalance() << ", CL: " << top->getCL() <<  ", CR: " << top->getCR() << endl;
 		if (top->getBalance() < -1 || top->getBalance() > 1) {
 			balancePoint = top;
-			cout << "BalPt: " << balancePoint->getIdent() << ", BalFac: " << balancePoint->getBalance() << endl;
+			//cout << "BalPt: " << balancePoint->getIdent() << ", BalFac: " << balancePoint->getBalance() << endl;
 			midNode = middle;
-			cout << "Performing balancing at: " << balancePoint->getIdent() << endl;
+			//cout << "Performing balancing at: " << balancePoint->getIdent() << endl;
 			if (midNode->getCL() < -1 || midNode->getCL() > 1) {
 				childTwo = L;
 				insertedNode = midNode->getLeft();
-				cout << "rotateTwo" << endl;
+				//cout << "rotateTwo" << endl;
 				rotateTwo();
-				cout << "rotateOne" << endl;
+				//cout << "rotateOne" << endl;
 				rotateOne();
 			} else if (midNode->getCR() < -1 || midNode->getCR() > 1) {
 				childTwo = R;
 				insertedNode = midNode->getRight();
-				cout << "rotateTwo" << endl;
+				//cout << "rotateTwo" << endl;
 				rotateTwo();
-				cout << "rotateOne" << endl;
+				//cout << "rotateOne" << endl;
 				rotateOne();
 			} else {
-				cout << "rotateOne" << endl;
+				//cout << "rotateOne" << endl;
 				rotateOne();
 			}
 		}
-		cout << "BalPt: " << balancePoint->getIdent() << ", BalFac: " << balancePoint->getBalance() << ", CL: " << top->getCL() <<  ", CR: " << top->getCR() << endl << endl;
+		//cout << "BalPt: " << balancePoint->getIdent() << ", BalFac: " << balancePoint->getBalance() << ", CL: " << top->getCL() <<  ", CR: " << top->getCR() << endl << endl;
 		bottom = middle;
 		middle = top;
 		top = top->getParent();
@@ -356,7 +268,7 @@ Node* LocationTree::getPrevious(Node* node, string ident) {
 }
 
 
-// Function that finds the closest larger node the balancePoint node
+// Function that finds the closest larger node to the balancePoint node
 Node* LocationTree::getNext(Node* node, string ident) {
 	balancePoint = getCity(node, ident);
 	if (balancePoint != NULL) {
@@ -372,23 +284,18 @@ Node* LocationTree::getNext(Node* node, string ident) {
 *	if location is within list join before and after then delete
 */
 bool LocationTree::deleteDupNode(Node* foundNode, int number) {
-	// cout << foundNode->getIdent() << foundNode->getDupsNo() << " " << number << endl;
 	Location* foundLoc = foundNode->getLocation();
 	Location* toRemove;
 	Location* preceding;
-	// cout << foundLoc->getNum() << foundLoc->getCityName() << foundLoc->getCountryName() << endl;
 	if (number == 1) {
 		toRemove = foundLoc;
 		foundLoc = foundLoc->getDups();
-		// cout << "toRemove = " << toRemove->getCountryName() << ". foundLoc = " << foundLoc->getCountryName() << endl;
 		foundNode->setLocation(foundLoc);
-		// cout << foundNode->getLocation()->getCountryName() << endl;
 		foundNode->minusDups();
 		foundLoc->minusNum();
 		while (foundLoc->getDups() != NULL) {
 			foundLoc = foundLoc->getDups();
 			foundLoc->minusNum();
-			// cout << foundLoc->getNum() << foundLoc->getCountryName() << endl;
 		}
 		delete toRemove;
 		return true;
@@ -396,7 +303,6 @@ bool LocationTree::deleteDupNode(Node* foundNode, int number) {
 		preceding = foundLoc;
 		while (preceding->getNum() != number-1) { // find preceding loc
 		preceding = preceding->getDups();
-		// cout << preceding->getNum() << preceding->getCityName() << preceding->getCountryName() << endl;
 		}
 		if (number == foundNode->getDupsNo()+1) {  // if last
 			toRemove = preceding->getDups();
@@ -451,7 +357,6 @@ bool LocationTree::deleteNode(string ident) {
 	else if (balancePoint->getLeft() == NULL && balancePoint->getRight() != NULL) { //if leaf right
 		// Check if root
 		if (balancePoint->getParent() == NULL) {
-			cout << "Creating new root" << endl;
 			root = balancePoint->getRight();
 			balancePoint->getRight()->setParent(NULL);
 		}
@@ -468,7 +373,6 @@ bool LocationTree::deleteNode(string ident) {
 	else if (balancePoint->getLeft() != NULL && balancePoint->getRight() == NULL) { //if leaf left
 		 // Check if root
 		if (balancePoint->getParent() == NULL) {
-			cout << "Creating new root" << endl;
 			root = balancePoint->getLeft();
 			balancePoint->getLeft()->setParent(NULL);
 			}
@@ -484,10 +388,8 @@ bool LocationTree::deleteNode(string ident) {
 	else if (balancePoint->getLeft() != NULL && balancePoint->getRight() != NULL) { //if two leaves
 		// Find nearest previous node
 		Node* previous = getPrevious(balancePoint, ident);
-		cout << "Previous: " << previous->getIdent() << endl;
 		// Find nearest next node
 		Node* next = getNext(balancePoint, ident);
-		cout << "Next: " << next->getIdent() << endl;
 		// create char arrays for comparison
 		char * cstrCurr = new char[balancePoint->getIdent().length()+1];
 		strcpy (cstrCurr, balancePoint->getIdent().c_str());
@@ -495,7 +397,6 @@ bool LocationTree::deleteNode(string ident) {
 		strcpy (cstrPrev, previous->getIdent().c_str());
 		char * cstrNext = new char[next->getIdent().length()+1];
 		strcpy (cstrNext, next->getIdent().c_str());
-		// char[] copies of names made
 		// find the nearest previous or next
 		int prevDist, nextDist;
 		int totPrev, totNext;
@@ -507,20 +408,17 @@ bool LocationTree::deleteNode(string ident) {
 			totNext = (cstrNext[i]-cstrCurr[i]);
 			if (totPrev < totNext || i == comLngth-1) {
 				selected = previous;
-				cout << "previous is closer: " << selected->getIdent() << endl;
 				LocationTree::detachPrevious(previous);
-				//break;
+				break;
 			} else {
 				selected = next;
-				cout << "next is closer: " << selected->getIdent() << endl;
 				LocationTree::detachNext(next);
-				//break;
+				break;
 			}
 		}
 		// Replacement node is now 'selected'
 		// Copy balancePoint's child & parent nodes to replacement
 		LocationTree::swapInSelected(selected);
-		LocationTree::resetBalFactUpToRoot(balancePoint);
 		return true;
 		}
 	else {
@@ -531,21 +429,25 @@ bool LocationTree::deleteNode(string ident) {
 
 // Function to swap selected with balancePoint
 void LocationTree::swapInSelected(Node* selected) {
-	cout << "swapInSelected: selected: " << selected->getIdent() << ", balancePoint: " << balancePoint->getIdent() << endl;
-	selected->setLeft(balancePoint->getLeft());
-	selected->getLeft()->setParent(selected);
-	cout << selected->getIdent() << " selected left now points to: " << selected->getLeftId() << endl;
-	selected->setRight(balancePoint->getRight());
-	selected->getRight()->setParent(selected);
-	cout << selected->getIdent() << " selected right now points to: " << selected->getRightId() << endl;
+	if (balancePoint->getLeft() == selected || balancePoint->getLeft() == NULL) {
+		selected->setLeft(NULL);
+	} else {
+		selected->setLeft(balancePoint->getLeft());
+		selected->getLeft()->setParent(selected);
+	}
+
+	if (balancePoint->getRight() == selected || balancePoint->getRight() == NULL) {
+		selected->setRight(NULL);
+	} else {
+		selected->setRight(balancePoint->getRight());
+		selected->getRight()->setParent(selected);
+	}
+
 	// Check if root
 	if (balancePoint->getParent() == NULL) {
-		cout << "Creating new root: " << endl;
 		selected->setParent(NULL);
 		// Set root to selected);
 		root = selected;
-		cout << selected->getIdent() << " will be the root" << endl;
-		cout << root->getIdent() << " is the new root node" << endl;
 		selected->setLevel(1);
 	}
 	// Determine if parent is on a right or left leaf
@@ -556,15 +458,11 @@ void LocationTree::swapInSelected(Node* selected) {
 		balancePoint->getParent()->setLeft(selected); // Reset parents left
 		selected->setParent(balancePoint->getParent());
 	}
-	cout << selected->getIdent() << " selected parent now points to: " << selected->getParId() << endl;
-
 }
-
 
 // Function to detach previous node
 void LocationTree::detachPrevious(Node* previous) {
-	cout << "detatchPrevious() Detaching: " << previous->getIdent() << endl;
-    LocationTree::resetBalFactUpToRoot(previous);
+	LocationTree::resetBalFactUpToRoot(previous);
 		if (previous->getIdent() > previous->getParent()->getIdent()) { // If parent left
 			if (previous->getLeft() == NULL) { // previous = leaf
 			previous->getParent()->setRight(NULL); // Reset parents right
@@ -581,7 +479,6 @@ void LocationTree::detachPrevious(Node* previous) {
 }
 
 void LocationTree::detachNext(Node* next) {
-	cout << "detatchNext() Detaching: " << next->getIdent() << endl;
 	LocationTree::resetBalFactUpToRoot(next);
 	if (next->getIdent() > next->getParent()->getIdent()) { // If parent left
 		if (next->getRight() == NULL) { // next = leaf
@@ -604,21 +501,16 @@ void LocationTree::detachNext(Node* next) {
 	while (reBalPar->getParent() != NULL) {
 		if (reBalTest->getIdent() < reBalPar->getIdent()) {  // if test on left of parent
 			reBalPar->minusCL();
-			cout << "reBalPar: " << reBalPar->getIdent() << ", CL:" << reBalPar->getCL() << endl;
 		} else {
 			reBalPar->minusCR();
-			cout << "reBalPar: " << reBalPar->getIdent() << ", CR:" << reBalPar->getCR() << endl;
 		}
 		reBalTest = reBalTest->getParent();
 		reBalPar = reBalPar->getParent();
 	}
-	cout << "reBalPar: " << reBalPar->getIdent() << ", reBalTest: " << reBalTest->getIdent() << endl;
 	if (reBalTest->getIdent() < reBalPar->getIdent()) {  // if test on left of parent
 		reBalPar->minusCL();
-		cout << "reBalPar: " << reBalPar->getIdent() << ", CL:" << reBalPar->getCL() << endl;
 	} else {
 		reBalPar->minusCR();
-		cout << "reBalPar: " << reBalPar->getIdent() << ", CR:" << reBalPar->getCR() << endl;
 	}
  }
 
@@ -634,14 +526,10 @@ void LocationTree::freeNode(Node* leaf) {
 
 Node* LocationTree::getCity(Node* node, string ident)  {
 	if (node != NULL) {
-		//needed for uppercase
-		string s = node->getIdent();
-		transform(s.begin(), s.end(), s.begin(), toupper);
-
-		if (ident == s) {
+		if (ident == node->getIdent()) {
 		return node;
 		}
-		if (ident < s) {
+		if (ident < node->getIdent()) {
 		return getCity(node->getLeft(), ident);
 		}
 		else {
@@ -654,64 +542,58 @@ Node* LocationTree::getCity(Node* node, string ident)  {
 }
 
 // Function rotation for LL/RR rotation or pt2 of LR/RL rotation
-void LocationTree::rotateOne() {
+void LocationTree::rotateLL() {
 	Node* newParent;
-	if (childOne == L) {
-		newParent = balancePoint->getLeft();
-		newParent->setParent(balancePoint->getParent());
-		// Check if root
-		if (newParent->getParent() == NULL) {
-			cout << "Swapping the root" << endl;
-			root = newParent;
-		} else if (balancePoint->getIdent() < balancePoint->getParent()->getIdent()) {
-			balancePoint->getParent()->setLeft(newParent);
-		} else {
-			balancePoint->getParent()->setRight(newParent);
-		}
-		balancePoint->setParent(newParent);
-		balancePoint->setLeft(newParent->getRight());
-		if (balancePoint->getLeft() != NULL ) {
-			balancePoint->getLeft()->setParent(balancePoint);
-		}
-		newParent->setRight(balancePoint);
-		balancePoint->minusCL();
-		balancePoint->minusCL();
-		newParent->plusCR();
-
+	newParent = balancePoint->getLeft();
+	newParent->setParent(balancePoint->getParent());
+	// Check if root
+	if (balancePoint->getParent() == NULL) {
+		root = newParent;
+	} else if (balancePoint->getIdent() < balancePoint->getParent()->getIdent()) {
+		balancePoint->getParent()->setLeft(newParent);
 	} else {
-		newParent = balancePoint->getRight();
-		newParent->setParent(balancePoint->getParent());
-		// Check if root
-		if (newParent->getParent() == NULL) {
-			cout << "Swapping the root" << endl;
-			root = newParent;
-		} else if (balancePoint->getIdent() < balancePoint->getParent()->getIdent()) {
-			balancePoint->getParent()->setLeft(newParent);
-		} else {
-			balancePoint->getParent()->setRight(newParent);
-		}
-		balancePoint->setParent(newParent);
-		balancePoint->setRight(newParent->getLeft());
-		if (balancePoint->getRight() != NULL ) {
-			balancePoint->getRight()->setParent(balancePoint);
-		}
-		newParent->setLeft(balancePoint);
-		balancePoint->minusCR();
-        balancePoint->minusCR();
-		newParent->plusCL();
+		balancePoint->getParent()->setRight(newParent);
 	}
-	cout << balancePoint->getIdent() << " parent now points to: " << balancePoint->getParId() << endl;
-	cout << balancePoint->getIdent() << " left now points to: " << balancePoint->getLeftId() << endl;
-	cout << balancePoint->getIdent() << " right now points to: " << balancePoint->getRightId() << endl;
-	cout << newParent->getIdent() << " parent now points to: " << newParent->getParId() << endl;
-	cout << newParent->getIdent() << " left now points to: " << newParent->getLeftId() << endl;
-	cout << newParent->getIdent() << " right now points to: " << newParent->getRightId() << endl;
-	cout << "finished RotateOne" << endl;
+	balancePoint->setParent(newParent);
+	balancePoint->setLeft(newParent->getRight());
+	if (balancePoint->getLeft() != NULL ) {
+		balancePoint->getLeft()->setParent(balancePoint);
+	}
+	newParent->setRight(balancePoint);
+
+	balancePoint->minusCL();
+	balancePoint->minusCL();
+	newParent->plusCR();
 }
 
-void LocationTree::rotateTwo() {
-	if (childTwo == L) { // rotate clockwise, LR case pt1
-		cout << "childTwo = L = " << childTwo << endl;
+void LocationTree::rotateRR() {
+	Node* newParent;
+	newParent = balancePoint->getRight();
+	newParent->setParent(balancePoint->getParent());
+	// Check if root
+	if (newParent->getParent() == NULL) {
+		root = newParent;
+	} else if (balancePoint->getIdent() < balancePoint->getParent()->getIdent()) {
+		balancePoint->getParent()->setLeft(newParent);
+	} else {
+		balancePoint->getParent()->setRight(newParent);
+	}
+	balancePoint->setParent(newParent);
+	balancePoint->setRight(newParent->getLeft());
+	if (balancePoint->getRight() != NULL ) {
+		balancePoint->getRight()->setParent(balancePoint);
+	}
+
+	newParent->setLeft(balancePoint);
+	balancePoint->minusCR();
+	balancePoint->minusCR();
+	newParent->plusCL();
+}
+
+void LocationTree::rotateRL() {
+	// rotate clockwise, RL case pt1
+		midNode = balancePoint->getRight();
+		insertedNode = midNode->getLeft();
 		insertedNode->setParent(balancePoint); // 1 (8 ->A)
 		midNode->setLeft(insertedNode->getRight()); // 2 (7 ->12)
 		insertedNode->setRight(midNode); // 3 (10 ->C)
@@ -724,9 +606,12 @@ void LocationTree::rotateTwo() {
 		insertedNode->plusCR();
 		insertedNode->setCR(insertedNode->getCR() + midNode->getCR());
 		midNode->minusCL();
+		}
 
-	} else { // rotate anticlockwise, RL case pt1
-	    cout << "childTwo = R = " << childTwo << endl;
+void LocationTree::rotateLR() {
+	// rotate anticlockwise, LR case pt1
+		midNode = balancePoint->getLeft();
+		insertedNode = midNode->getRight();
 		insertedNode->setParent(balancePoint); // 1 (
 		midNode->setRight(insertedNode->getLeft()); // 2
 		insertedNode->setLeft(midNode); // 3
@@ -736,28 +621,21 @@ void LocationTree::rotateTwo() {
 			midNode->getRight()->setParent(midNode); // 6
 		}
 		// adjust balance factors
-		insertedNode->plusCL();
-		insertedNode->setCL(insertedNode->getCL() + midNode->getCR());
-		midNode->minusCR();
-	}
-	cout << midNode->getIdent() << " parent now points to: " << midNode->getParId() << endl;
-	cout << midNode->getIdent() << " left now points to: " << midNode->getLeftId() << endl;
-	cout << midNode->getIdent() << " right now points to: " << midNode->getRightId() << endl;
-	cout << "finished RotateTwo" << endl;
+		//insertedNode->plusCL();
+		//insertedNode->setCL(insertedNode->getCL() + midNode->getCR());
+		//midNode->minusCR();
 }
 
 string LocationTree::serialise(Node* node){
-	stringstream ss;
-	string finalString;
-	ss << node->location->serialise() << "\n";
-	if (node->getLeft() != NULL) {
-		ss << serialise(node->getLeft());
-	}
-	if (node->getRight() != NULL) {
-		ss << serialise(node->getRight());
-	}
-	
-	return ss.str();
+stringstream ss;
+ss << node->location->serialise() << "\n";
+if (node->getLeft() != NULL) {
+ss << serialise(node->getLeft());
+}
+if (node->getRight() != NULL) {
+ss << serialise(node->getRight());
+}
+return ss.str();
 }
 
 string LocationTree::displayTrav(Node* node){
@@ -772,6 +650,43 @@ if (node->getRight() != NULL) {
 return ss.str();
 }
 
+ // Finding the Smallest
+int LocationTree::findMinDepth(Node* test) {
+	int leftHeight = 1;
+	int rightHeight = 1;
+	if (test->getLeft() != NULL) {
+		leftHeight += findMinDepth(test->getLeft());
+	}
+	if (test->getRight()  != NULL) {
+		leftHeight += findMinDepth(test->getRight());
+	}
+	return min(leftHeight, rightHeight);
+}
+
+// Finding the Largest node
+int LocationTree::findMaxDepth(Node* test) {
+	if (test == NULL) {
+		return 0;
+	} else {
+		return 1 + max(findMaxDepth(test->getLeft()), findMaxDepth(test->getRight()));
+	}
+}
+
+// Finding the balance factor
+int LocationTree::getBalanceFactor(Node* test) {
+	int lbf, rbf;
+	if (test->getLeft() == NULL) {
+		lbf = 0;
+	} else {
+		lbf = findMaxDepth(test->getLeft());
+	}
+	if (test->getRight() == NULL) {
+		rbf = 0;
+	} else {
+		rbf = findMaxDepth(test->getRight());
+	}
+	return (lbf - rbf);
+}
 
 
 

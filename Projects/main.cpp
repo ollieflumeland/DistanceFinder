@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <windows.h>
 #include "LocationTree.h"
 #include "Location.h"
 #include "Menu.h"
@@ -19,6 +20,7 @@
 using namespace std;
 
 int main() {
+	SetConsoleTitle(TEXT ("World Distances Calculator"));
 	Menu men;
 	int choice =-1;
 	men.menuOptions(choice);

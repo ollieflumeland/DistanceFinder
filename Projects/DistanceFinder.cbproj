@@ -79,9 +79,6 @@
         <None Include="Calculator.h">
             <BuildOrder>10</BuildOrder>
         </None>
-        <PCHCompile Include="DistanceFinder.h">
-            <BuildOrder>0</BuildOrder>
-        </PCHCompile>
         <CppCompile Include="Location.cpp">
             <BuildOrder>2</BuildOrder>
         </CppCompile>

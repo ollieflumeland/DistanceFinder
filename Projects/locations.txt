@@ -3,18 +3,18 @@ Adelaide| Australia |Australasia|34|55|S|138|36|E
 Algiers| Algeria|Africa|36|50|N|3|0|E
 Amsterdam| Netherlands|Europe|52|22|N|4|53|E
 Ankara| Turkey |Asia|39|55|N|32|55|E
-Asunci—n| Paraguay |South America|25|15|S|57|40|W
+Asuncion| Paraguay |South America|25|15|S|57|40|W
 Athens| Greece|Europe|37|58|N|23|43|E
 Auckland| New Zealand |Australasia|36|52|S|174|45|E
 Bangkok| Thailand |Asia|13|45|N|100|30|E
 Barcelona| Spain|Europe|41|23|N|2|9|E
 Beijing| China|Asia|39|55|N|116|25|E
-BelŽm| Brazil |South America|1|28|S|48|29|W
+Belem| Brazil |South America|1|28|S|48|29|W
 Belfast| Northern Ireland |Europe|54|37|N|5|56|W
 Belgrade| Serbia |Europe|44|52|N|20|32|E
 Berlin| Germany|Europe|52|30|N|13|25|E
 Birmingham| England |Europe|52|25|N|1|55|W
-Bogot‡| Colombia |South America|4|32|N|74|15|W
+Bogota| Colombia |South America|4|32|N|74|15|W
 Bombay| India|Asia|19|0|N|72|48|E
 Bordeaux| France |Asia|44|50|N|0|31|W
 Bremen| Germany |Europe|53|5|N|8|49|E
@@ -33,7 +33,7 @@ Cayenne| French Guiana |South America|4|49|N|52|18|W
 Chihuahua| Mexico |North America|28|37|N|106|5|W
 Chongqing| China |Asia|29|46|N|106|34|E
 Copenhagen| Denmark|Europe|55|40|N|12|34|E
-C—rdoba| Argentina |South America|31|28|S|64|10|W
+Cordoba| Argentina |South America|31|28|S|64|10|W
 Dakar| Senegal |Africa|14|40|N|17|28|W
 Darwin| Australia |Australasia|12|28|S|130|51|E
 Djibouti| Djibouti|Africa|11|30|N|43|3|E
@@ -69,7 +69,7 @@ Madrid| Spain|Europe|40|26|N|3|42|W
 Manchester| England |Europe|53|30|N|2|15|W
 Manila| Philippines|Asia|14|35|N|120|57|E
 Marseilles| France |Europe|43|20|N|5|20|E
-Mazatl‡n| Mexico |North America|23|12|N|106|25|W
+Mazatlan| Mexico |North America|23|12|N|106|25|W
 Mecca| Saudi Arabia |Asia|21|29|N|39|45|E
 Melbourne| Australia|Australasia|37|47|S|144|58|E
 Mexico City| Mexico|North America|19|26|N|99|7|W
@@ -80,7 +80,7 @@ Munich| Germany |Europe|48|8|N|11|35|E
 Nagasaki| Japan |Asia|32|48|N|129|57|E
 Nagoya| Japan |Asia|35|7|N|136|56|E
 Nairobi| Kenya |Africa|1|25|S|36|55|E
-Nanjing (Nanking)| China |Asia|32|3|N|118|53|E
+Nanjing| China |Asia|32|3|N|118|53|E
 Naples| Italy |Europe|40|50|N|14|15|E
 New Delhi| India|Asia|28|35|N|77|12|E
 Newcastle-on-Tyne| England |Europe|54|58|N|1|37|W
@@ -95,13 +95,13 @@ Plymouth| England |Europe|50|25|N|4|5|W
 Port Moresby| Papua New Guinea |Asia|9|25|S|147|8|E
 Prague| Czech Republic|Europe|50|5|N|14|26|E
 Rangoon| Myanmar|Asia|16|50|N|96|0|E
-Reykjav’k| Iceland |Europe|64|4|N|21|58|W
+Reykjavik| Iceland |Europe|64|4|N|21|58|W
 Rio de Janeiro| Brazil|South America|22|57|S|43|12|W
 Rome| Italy|Europe|41|54|N|12|27|E
 Salvador| Brazil |South America|12|56|S|38|27|W
 Santiago| Chile |South America|33|28|S|70|45|W
 St. Petersburg| Russia|Europe|59|56|N|30|18|E
-S‹o Paulo| Brazil |South America|23|31|S|46|31|W
+Sao Paulo| Brazil |South America|23|31|S|46|31|W
 Shanghai| China |Asia|31|10|N|121|28|E
 Singapore| Singapore|Asia|1|14|N|103|55|E
 Sofia| Bulgaria |Europe|42|40|N|23|20|E
@@ -117,4 +117,4 @@ Vienna| Austria|Europe|48|14|N|16|20|E
 Vladivostok| Russia |Europe|43|10|N|132|0|E
 Warsaw| Poland|Europe|52|14|N|21|0|E
 Wellington| New Zealand |Australasia|41|17|S|174|47|E
-ZŸrich| Switzerland|Europe|47|21|N|8|31|E
+Zurich| Switzerland|Europe|47|21|N|8|31|E
