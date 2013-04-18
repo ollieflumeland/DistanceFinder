@@ -68,7 +68,7 @@ void Menu::menuOptions(int &choice) {
 				Menu:menuOptions(defChoice);
 				break;
 		}
-		cin.ignore();
+	   //	cin.ignore();
 	} while (choice != 6);
 }
 
@@ -137,7 +137,7 @@ void Menu::addRecord() {
 	while (cinFailed);
 
 	while ((lonDir != "W") && (lonDir != "w") && (lonDir != "E") && (lonDir != "e")){
-	cout << "Enter Longitude Direction (W or E): "; cin >> lonDir; cin.ignore();
+	cout << "Enter Longitude Direction (W or E): "; cin >> lonDir;   //REMOVED CIN.IGNORE FOR HIT ENTER TWICE BUG
 	}
 
 	newLoc = new Location(city, country, region, latDeg, latMin, latDir,
@@ -161,7 +161,9 @@ void Menu::administerRecord() {
 
 	cout << "Administer Record:" << endl << endl;
 
-   cout << "Enter City Name: "; cin.ignore(); getline(cin,city);
+   cout << "Enter City Name: "; 
+   cin.ignore(); 
+   getline(cin,city);
    rootNode = locT->getRoot();
    foundLoc = Menu::getExactLocation(rootNode, city);
 
@@ -172,7 +174,7 @@ void Menu::administerRecord() {
    cout << "3. Quit to Main Menu" << endl << endl;
 
    cout << "Modify/Delete a Record - Choose an option: ";
-   cin >> choice2; cin.ignore();
+   cin >> choice2; //cin.ignore();
 
    switch(choice2){
 	case 1:
@@ -261,9 +263,11 @@ void Menu::administerRecord() {
 				cout << "WARNING! Deletion unsuccessful" << endl << endl;
 			}
 		}
+        
 		system("PAUSE");
 		break;
 	case 3:
+		Menu::menuOptions(choice2); //ADDED TO FIX BUG WHERE HIT ENTER TWICE
 		break;
 	default:
 		cout << endl << "Invalid Choice" <<endl << endl;
@@ -313,9 +317,12 @@ Location* Menu::getExactLocation(Node* node, string city) {
 			do {
 			   cout << "Enter a choice (number): ";
 			   cin >> citySelect;
+			   cin.ignore();
 			   cinFailed = cin.fail();
-			   cin.clear();
-			   cin.ignore(INT_MAX,'\n');
+			   if(cinFailed){
+					cin.clear();
+					cin.ignore(INT_MAX,'\n');
+			   }
 			}
 			while (citySelect < 1 || citySelect > totalDups + 2 || cinFailed);
 
@@ -338,6 +345,7 @@ void Menu::findDistance() {
 	string cityTwo;
 	int inKm;
 	int cinFailed;
+	int choice = -1;
 	Node* rootNode = locT->getRoot();
 
 	cout << endl << "\t\t\t-----------------------------" << endl;
@@ -346,29 +354,21 @@ void Menu::findDistance() {
 
 	cout << "Find Distance" << endl << endl;
 	cout << "Enter the First City's Name: ";
+	cin.ignore();                           //ADDED TO FIX BUG WHERE HIT ENTER TWICE
 	getline(cin,cityOne);
 	Location* locOne = Menu::getExactLocation(rootNode, cityOne);
 	cout << "Enter the Second City's Name: ";
+	//cin.ignore();  							//ADDED TO FIX BUG WHERE IT WOULD SKIP
+											//ENTERING SECOND CITY
 	getline(cin,cityTwo);
 	Location* locTwo = Menu::getExactLocation(rootNode, cityTwo);
-	do {
-	cout << "Result in Miles (1) or Km (2)?: ";
-	cin >> inKm;
-	cinFailed = cin.fail();
-	cin.clear();
-	cin.ignore(INT_MAX,'\n');
-	}
-	while (inKm < 1 || inKm > 2 || cinFailed);
-
+	
 	Calculator calc;
-	if (inKm == 1) {
-		double dist = calc.getDistanceBetween(locOne,locTwo,0);
-		cout << "Distance between is: " << dist << " Miles" << endl;
-	}
-	else {
-		double dist = calc.getDistanceBetween(locOne,locTwo,1);
-		cout << "Distance between is: " << dist << "Km" << endl;
-	}
+	
+	double distInMiles = calc.getDistanceBetween(locOne,locTwo,0);
+	double distInKm = calc.getDistanceBetween(locOne,locTwo,1);
+	cout << "Distance between is: " << distInKm << " Km / " << distInMiles << " Miles" << endl;
+	Menu:menuOptions(choice);   //ADDED TO FIX BUG WHERE HIT ENTER TWICE
 }
 
 void Menu::saveFile(){
@@ -380,10 +380,8 @@ void Menu::saveFile(){
 void Menu::displayLocations() {
 	string output = locT->serialise(locT->getRoot());
 	cout << output << endl;
-
-	cout << "Press any key to continue...";
-	cin.get();
-
+	system("PAUSE");
+	
 	int choice = -1;
 	Menu:menuOptions(choice);
 
