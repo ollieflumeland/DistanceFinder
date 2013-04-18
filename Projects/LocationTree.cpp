@@ -51,8 +51,6 @@ bool LocationTree::addToTree(LocationTree* tree, Location* loc, Node* node, stri
 		newDup->setDups(loc);
 		loc->plusNum();
 		duptest->plusDups();
-		cout << "Adding new duplicate, locNum: " << loc->getNum() << " noDups: " << duptest->getDupsNo() <<
-		endl;
 	} else {
 		tree->addNode(loc);
 	}
@@ -163,50 +161,6 @@ void LocationTree::balanceUpToRoot(Node* node) {
 
 }
 
-
-//Function to rebalance the tree up to the root
-/*void LocationTree::balanceUpToRoot(Node* node) {
-	Node* bottom = node;
-	Node* middle = node->getParent();
-	Node* top = middle->getParent();
-	if (middle < top) {
-		childOne = L;
-	} else {
-		childOne = R;
-	}
-	while (top->getParent() != NULL) {
-		//cout << "T: " << top->getIdent() << ", BalFac: " << top->getBalance() << ", CL: " << top->getCL() <<  ", CR: " << top->getCR() << endl;
-		if (top->getBalance() < -1 || top->getBalance() > 1) {
-			balancePoint = top;
-			//cout << "BalPt: " << balancePoint->getIdent() << ", BalFac: " << balancePoint->getBalance() << endl;
-			midNode = middle;
-			//cout << "Performing balancing at: " << balancePoint->getIdent() << endl;
-			if (midNode->getCL() < -1 || midNode->getCL() > 1) {
-				childTwo = L;
-				insertedNode = midNode->getLeft();
-				//cout << "rotateTwo" << endl;
-				rotateTwo();
-				//cout << "rotateOne" << endl;
-				rotateOne();
-			} else if (midNode->getCR() < -1 || midNode->getCR() > 1) {
-				childTwo = R;
-				insertedNode = midNode->getRight();
-				//cout << "rotateTwo" << endl;
-				rotateTwo();
-				//cout << "rotateOne" << endl;
-				rotateOne();
-			} else {
-				//cout << "rotateOne" << endl;
-				rotateOne();
-			}
-		}
-		//cout << "BalPt: " << balancePoint->getIdent() << ", BalFac: " << balancePoint->getBalance() << ", CL: " << top->getCL() <<  ", CR: " << top->getCR() << endl << endl;
-		bottom = middle;
-		middle = top;
-		top = top->getParent();
-    }
-}*/
-
 // Function that finds the furthest left entry
 Node* LocationTree::getFirst(Node* node) {
 	if (node == NULL) {
@@ -219,6 +173,7 @@ Node* LocationTree::getFirst(Node* node) {
 		return node;
 	}
 }
+
 
 // Function that finds the furthest right entry
 Node* LocationTree::getLast(Node* node) {
@@ -233,8 +188,8 @@ Node* LocationTree::getLast(Node* node) {
 	}
 }
 
-// Function that finds the furthest left entry (min) from a defined node
-Node* LocationTree::getFarLeft(Node* node, string ident) {
+// Function that finds the furthest left entry (min) from the defined node
+/*Node* LocationTree::getFarLeft(Node* node, string ident) {
 	balancePoint = getCity(node, ident);
 	if (balancePoint->getLeft() != NULL) {
 		return getFirst(balancePoint->getLeft());
@@ -242,10 +197,11 @@ Node* LocationTree::getFarLeft(Node* node, string ident) {
 		return balancePoint;
 	}
 }
+*/
 
 
-// Function that finds the furthest right entry (max) from the current balancePoint node
-Node* LocationTree::getFarRight(Node* node, string ident) {
+// Function that finds the furthest right entry (max) from the defined node
+/*Node* LocationTree::getFarRight(Node* node, string ident) {
 	balancePoint = getCity(node, ident);
 	if (balancePoint->getRight() != NULL) {
 		return getLast(balancePoint->getRight());
@@ -254,6 +210,7 @@ Node* LocationTree::getFarRight(Node* node, string ident) {
 	}
 
 }
+*/
 
 /**
 *	Function that finds the closest smaller node to the defined node
@@ -276,10 +233,10 @@ Node* LocationTree::getNext(Node* node, string ident) {
 	} else {
 		return balancePoint;
 	}
-
 }
+
 /**
-*   Function to delete a duplicate location
+*   Function to delete a duplicate Location
 *	if location is last in list delete
 *	if location is within list join before and after then delete
 */
@@ -350,6 +307,7 @@ bool LocationTree::deleteNode(string ident) {
 			balancePoint->getParent()->setLeft(NULL);
 		}
 		LocationTree::resetBalFactUpToRoot(balancePoint);
+		LocationTree::balanceUpToRoot(balancePoint->getParent());
 		delete balancePoint;
 		return true;
 	}
@@ -367,6 +325,7 @@ bool LocationTree::deleteNode(string ident) {
 			balancePoint->getParent()->setLeft(balancePoint->getRight()); // Reset parents left
 		}
 		LocationTree::resetBalFactUpToRoot(balancePoint);
+		LocationTree::balanceUpToRoot(balancePoint->getParent());
 		delete balancePoint;
 		return true;
 	}
@@ -478,6 +437,7 @@ void LocationTree::detachPrevious(Node* previous) {
 	}
 }
 
+// Function to detach previous node
 void LocationTree::detachNext(Node* next) {
 	LocationTree::resetBalFactUpToRoot(next);
 	if (next->getIdent() > next->getParent()->getIdent()) { // If parent left
@@ -495,6 +455,10 @@ void LocationTree::detachNext(Node* next) {
 	}
 }
 
+/**
+*  Function that resets values of childs left or right
+*  Used for debugging purposes only
+*/
  void LocationTree::resetBalFactUpToRoot(Node* node) {
 	Node* reBalTest = node;
 	Node* reBalPar = node->getParent();
@@ -524,6 +488,8 @@ void LocationTree::freeNode(Node* leaf) {
 	}
 }
 
+
+// Function returns location if found
 Node* LocationTree::getCity(Node* node, string ident)  {
 	if (node != NULL) {
 		if (ident == node->getIdent()) {
@@ -626,6 +592,7 @@ void LocationTree::rotateLR() {
 		//midNode->minusCR();
 }
 
+// Function to serialise all locations
 string LocationTree::serialise(Node* node){
 stringstream ss;
 ss << node->location->serialise() << "\n";
@@ -638,7 +605,9 @@ ss << serialise(node->getRight());
 return ss.str();
 }
 
-string LocationTree::displayTrav(Node* node){
+// Pre-Order Traversal of the tree for printing
+// not in use
+/*string LocationTree::displayTrav(Node* node){
 stringstream ss;
 ss << node->displayLocs() << "\n";
 if (node->getLeft() != NULL) {
@@ -649,6 +618,25 @@ if (node->getRight() != NULL) {
 }
 return ss.str();
 }
+*/
+
+/*Node LocationTree::inOrderSearch(Node root, string ident) {
+	if (node != NULL) {
+		if (ident == node->getL()) {
+		return node;
+		}
+		if (ident < node->getIdent()) {
+		return getCity(node->getLeft(), ident);
+		}
+		else {
+		return getCity(node->getRight(), ident);
+		}
+	}
+	else {
+		return NULL;
+	}
+}
+*/
 
  // Finding the Smallest
 int LocationTree::findMinDepth(Node* test) {
@@ -687,6 +675,5 @@ int LocationTree::getBalanceFactor(Node* test) {
 	}
 	return (lbf - rbf);
 }
-
 
 
