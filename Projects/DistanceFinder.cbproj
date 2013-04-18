@@ -72,6 +72,7 @@
         <Defines>NDEBUG;$(Defines)</Defines>
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
+    <Import Project="OptionSet1.optset" Condition="'$(Cfg_2)'!='' And Exists('OptionSet1.optset')"/>
     <ItemGroup>
         <CppCompile Include="Calculator.cpp">
             <BuildOrder>9</BuildOrder>
@@ -84,10 +85,6 @@
         </CppCompile>
         <None Include="Location.h">
             <BuildOrder>3</BuildOrder>
-        </None>
-        <None Include="LocationClass(Array).cpp">
-            <Exclude>True</Exclude>
-            <BuildOrder>4</BuildOrder>
         </None>
         <None Include="locations.txt"/>
         <CppCompile Include="LocationTree.cpp">

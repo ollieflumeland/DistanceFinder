@@ -20,7 +20,7 @@
 using namespace std;
 
 int main() {
-	SetConsoleTitle(TEXT ("World Distances Calculator"));
+	SetConsoleTitle(TEXT ("World Distance Calculator"));
 	Menu men;
 	int choice =-1;
 	men.menuOptions(choice);
